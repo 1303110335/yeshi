@@ -1,0 +1,111 @@
+<include file="Public:head"/>
+
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+
+        <dl class="left-menu shop_2 sub_commodity">
+            <dt>
+                <i class="icon-menu commodity"></i>
+                <span id="shop_2" data-id="2">营销管理</span>
+            </dt>
+            <dd class="subshop_0 active">
+                <a href="{:U('/Admin/Marketing/index')}">优惠券管理</a>
+            </dd>
+        </dl>
+        
+        
+
+</div>
+  <!-- end content-left -->
+  
+  <div class="content-right fl">
+    <h1 class="content-right-title">优惠券管理</h1>
+    <a href="{:U('/Admin/Marketing/add')}" class="btn btn-success">新建优惠券</a>
+    <form action="" method="post">
+      <div class="tables-searchbox newcearchbox">
+        <input type="text" placeholder="优惠券名称" class="input" name="title" value="" >
+        <button class="btn btn-primary" style="line-height:26px;"> <i class="gicon-search white"></i>查询 </button>
+        <!--<a href="/Item/item_export" class="btn btn-warning"><i class="gicon-share white"></i>--> 
+        <!--产品导出</a>--> 
+      </div>
+      <div class="tabs clearfix mgt10"> 
+      <a href="{:U('/Admin/Marketing/index/is_show/1')}" class="<eq name="is_show" value="1">active</eq> tabs_a fl">优惠券({$count1})</a> 
+        <a href="{:U('/Admin/Marketing/index/is_show/2')}" class="<eq name="is_show" value="2">active</eq> tabs_a fl">作废优惠券({$count2})</a>
+        <!--<a href="{:U('/Admin/Goods/warn')}" class=" tabs_a fl">警戒(0)</a>--> 
+        
+      </div>
+    </form>
+    <!-- end tabs -->
+    
+    <table class="wxtables mgt10">
+      <colgroup>
+      <col width="2%">
+      <col width="21%">
+      <col width="13%">
+      <col width="20%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="25%">
+      </colgroup>
+      <thead>
+        <tr class="po_list">
+          <td><i class="icon_check"></i></td>
+          <td>优惠券名称<span></span></td>
+          <td>面值</td>
+          <td>有效期<span></span></td>
+          <td>剩余<span></span></td>
+          <td>已领取<span></span></td>
+          <td>已使用</td>
+          <td>操作<span></span></td>
+        </tr>
+      </thead>
+      <tbody>
+        <foreach name="goodslist" item="vo">
+          <tr>
+            <td><input type="checkbox" class="checkbox table-ckbs" data-id=""></td>
+            <td>{$vo.title}</td>
+            <td>￥{$vo.price}</td>
+            <td>{$vo.start_time}<br />至<br />{$vo.end_time}</td>
+            <td>{$vo.kucun}</td>
+            <td>{$vo.receive}</td>
+            <td>{$vo.use}</td>
+            <td>
+            <a href="{:U('/Admin/Marketing/edit/id')}/{$vo.id}" class="btn btn-primary j-editClass" title="修改">编辑</a> 
+            <eq name="is_show" value="2">
+            <a href="{:U('/Admin/Marketing/delmarketing/ids')}/{$vo.id}" onclick="{if(confirm('确定删除优惠券吗?')){this.document.formname.submit();return true;}return false;} " class="btn j-delClass btn-warning" title="删除" data-id="2151938">删除</a></eq>
+            <neq name="is_show" value="2">
+            <a href="{:U('/Admin/Marketing/delmarketing/id')}/{$vo.id}" onclick="{if(confirm('确定作废优惠券吗?')){this.document.formname.submit();return true;}return false;} " class="btn j-delClass btn-warning" title="作废" data-id="2151938">作废</a>
+            </neq>
+            </td>
+          </tr>
+        </foreach>
+      </tbody>
+    </table>
+    <!-- end wxtables -->
+    <div class="tables-btmctrl clearfix">
+      <div class="fl"> <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a> <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_offshelf">下架</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_delAll">删除</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_groupAll">分组</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_setLevel">开/关折扣</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary j_alibaba">导入1688</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary j_postfee">运费</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary batch_update_price">修改价格</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary batch_update_class">分类</a></div>-->
+        
+        <div class="fr">
+          <div class="pages"> {$page} </div>
+          <!-- end paginate --> 
+        </div>
+      </div>
+      <!-- end tables-btmctrl --> 
+      
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+<include file="Public:foot"/>

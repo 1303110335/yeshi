@@ -1,0 +1,114 @@
+<include file="Public:head"/>
+
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+    <dl class="left-menu shop_9 sub_cw">
+        <dt>
+            <i class="icon-menu cw"></i>
+            <span id="shop_9" data-id="9">分销财务</span>
+        </dt>
+        <dd class="subshop_0 ">
+            <a href="{:U('/Admin/Cash/cashapply')}">提现申请管理</a>
+        </dd><dd class="subshop_2 active">
+        <a href="{:U('/Admin/Cash/cashlist')}">提现记录</a>
+    </dd>
+        <dd class="subshop_4 ">
+            <a href="{:U('/Admin/Cash/cashrecharge')} ">账号充值记录</a>
+        </dd>
+        <!--<dd class="subshop_5 ">-->
+        <!--<a href="/Dist/commission_list">分销商佣金列表</a>-->
+        <!--</dd>-->
+        <!--<dd class="subshop_14 ">-->
+        <!--<a href="/Dist/capital_log">资金监控日志</a>-->
+        <!--</dd><dd class="subshop_15 ">-->
+        <!--<a href="/Dist/rebate">返利统计</a>-->
+        <!--</dd>-->
+        <dd class="subshop_16 ">
+            <a href="{:U('/Admin/Cash/yongjintocash')} ">佣金转余额审核列表</a>
+        </dd>
+    </dl>
+</div>
+<!-- end content-left -->
+
+<div class="content-right fl">
+ 
+
+    <h1 class="content-right-title">提现记录</h1>
+    
+    
+
+    <div class="tablesWrap">
+        <form action="" method="GET" name="form1">
+            <div class="tables-searchbox">
+                <input type="text" class="input" name="mobile" value="" placeholder="昵称/手机号">
+                <input type="text" class="input" name="alipay_account" value="" placeholder="帐号">
+                <input type="text" autocomplete="off" name="start_time" value="" placeholder="支付日期" class="input Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd H:mm:ss&#39;})">
+                <span class="mgr5">至</span>
+                <input type="text" autocomplete="off" name="end_time" value="" placeholder="支付日期" class="input Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd H:mm:ss&#39;})">
+                <button class="btn btn-primary"><i class="gicon-search white"></i>查询</button>
+                <button class="btn btn-success J_export"><i class="gicon-share white"></i>导出</button>
+                <input type="hidden" name="action" value="">
+            </div>
+        </form>
+        <!-- end tables-searchbox -->
+        <table class="wxtables">
+            <colgroup>
+                <col width="10%">
+                <col width="12%">
+                <col width="8%">
+                <col width="10%">
+                <col width="9%">
+                <col width="11%">
+                <col width="12%">
+                <col width="8%">
+                <col width="9%">
+            </colgroup>
+            <thead>
+            <tr>
+                <td>昵称/手机号</td>
+                <td>申请时间</td>
+                <td>提现金额（元）</td>
+                <td>帐号</td>
+                <td>收款人</td>
+                <td>流水号</td>
+                <td>支付日期</td>
+                <td>支付类型</td>
+                <td>备注</td>
+            </tr>
+            </thead>
+            <tbody>
+                            <tr>
+                        <td>
+                                                        <p>13336096376</p>                        </td>
+                        <td>2015-08-24 16:54:09</td>
+                        <td>200.00</td>
+                        <td></td>
+                        <td>戚建尔</td>
+                        <td>333</td>
+                        <td>2015-08-24 16:54:46</td>
+                        <td>微信支付</td>
+                        <td>佣金提现</td>
+                    </tr>            </tbody>
+        </table>
+        <!-- end wxtables -->
+        <div class="tables-btmctrl clearfix">
+                <div class="fr">
+                    <div class="paginate">
+                                            </div>
+                    <!-- end paginate -->
+                </div>
+            </div>        <!-- end tables-btmctrl -->
+    </div>
+
+
+
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<include file="Public:foot"/>

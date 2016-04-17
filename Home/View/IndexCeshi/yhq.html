@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>优惠券</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/css.css">
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+<link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+
+
+</head>
+<body id="scroll_top">
+<!-- top -->
+<include file="Public:top" />
+<!-- top --> 
+<!-- main_div -->
+<div class="jf_nr">
+<div class="yhq_lb" style="padding-bottom:100px; padding-top:70px;">
+
+<volist name="couponlist" id="value">
+  <div class="yhq_list1">
+    <div class="yhq_top">
+        <div class="yhq_logo"><img src="__IMAGES__/yhq_logo.png" width="100%"></div>
+          <div class="yhq_ljsy"><a href="javascript:void(0);">立即使用<span>></span></a></div>
+          <div class="clear"></div>
+          <div class="yhq_by yhq_by1"></div>
+          <div class="yhq_by yhq_by2"></div>
+      </div>
+      <div class="yhq_yhxx">
+        <div class="yhq_yhje">
+            <div class="yhq_edu">￥<span>{$value.price}</span></div>
+              <div class="yhq_yhyh">{$value.title}</div>
+          </div>
+          <div class="yhq_date">
+            <div class="yhq_ljlq"><a href="javascript:receive({$value.id})">立即领取</a></div>
+              <div class="yhq_qx">截止日期：{$value.end_time}</div>
+          </div>
+          <div class="clear"></div>
+      </div>
+  </div>
+</volist>
+
+<neq name="couponlist" value="">
+<div class="gwc_js">
+      <div class="gwc_jsnav">
+        <div class="gwc_jsleft" style="float:none;width:auto;margin:0 auto;">
+        	
+          <p style="margin-top:5px;text-align:center;">暂无优惠券...</p>
+        </div>
+        <div class="gwc_jsright" style="float:none;margin-top:30px;"> <a href="{:U('Index/index')}" >
+          <p style="color:#fff">返回</p>
+          </a> </div>
+      </div>
+    </div>
+</neq>
+</div>
+</div>
+
+
+<!-- main_div -->
+<div class="scorll_top"><a href="#scroll_top"><img src="__IMAGES__/scorll_top.png"></a></div>
+<!-- footer -->
+<include file="Public:foot" />
+<!-- footer --> 
+<!-- dizhi --> 
+<!-- dizhi -->
+
+<!-- dizhi --> 
+<!-- dizhi -->
+<!--统计流量-->
+<div style="display:none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257387489'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257387489%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<!--统计流量-->
+</body>
+<script src="__JS__/jquery.min.js"></script>
+<!-- banner -->
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // Enable debugger
+        debugger: true
+    });
+    </script>
+<!-- banner -->
+<script src="__JS__/js.js"></script>
+
+<script type="text/javascript">
+  function receive(id){
+    $.ajax({
+      url:"{:U('Home/Index/receiveYhq')}",
+      type:"post",
+      dataType:"json",
+      data:{id:id},
+      success:function(ret){
+        console.log(ret);
+        if(1==ret){
+          alert("领取成功");
+          window.location.href=window.location.href;
+        }else{
+          alert("领取失败");
+        }
+      }
+    });
+  }
+</script>
+</html>

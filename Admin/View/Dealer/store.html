@@ -1,0 +1,101 @@
+<include file="Public:head"/>
+
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<div class="container">
+  <div class="inner clearfix">
+    <div class="content-left fl">
+      <dl class="left-menu shop_7 sub_users">
+        <dt> <i class="icon-menu users"></i> <span id="shop_7" data-id="7">经销商</span> </dt>
+        <dd class="subshop_1"> <a href="{:U('/Admin/Dealer/index')}">经销商管理</a> </dd>
+        <dd class="subshop_1 active"> <a href="{:U('/Admin/Dealer/store')}">门店管理</a> </dd>
+      </dl>
+    </div>
+    <!-- end content-left -->
+    
+    <div class="content-right fl">
+      <h1 class="content-right-title">门店管理</h1>
+      <div class="alert alert-info disable-del">共有 <span style="font-size:16px;">{$count}</span> 个门店。<a href="javascript:;" class="alert-delete" title="隐藏"><i class="gicon-remove"></i></a></div>
+      <a href="{:U('/Admin/Dealer/addstore')}" class="btn btn-success">添加门店</a>
+      <div class="tablesWrap">
+        
+          <form action="" method="post">
+          <div class="tables-searchbox"> 
+            <input type="text" class="input" name="keyword" id="keyword" placeholder="门店名称">
+            <button class="btn btn-primary"><i class="gicon-search white"></i>查询</button>
+          </div>
+          </form>
+        
+        <!-- end tables-searchbox -->
+        <table class="wxtables">
+          <colgroup>
+          <col width="4%">
+          <col width="10%">
+          <col width="8%">
+          <col width="8%">
+          <col width="8%">
+          <col width="10%">
+          <col width="8%">
+          <col width="20%">
+          <col width="8%">
+          </colgroup>
+          <thead>
+            <tr>
+              <td><i class="icon_check"></i></td>
+              <td>门店名称</td>
+              <td>经销商</td>
+              <td>联系人</td>
+              <td>手机</td>
+              <td align="center">操作</td>
+            </tr>
+          </thead>
+          <tbody>
+          <foreach name="storelist" item="vo">
+            <tr>
+              <td><input type="checkbox" class="checkbox table-ckbs" data-id="3646068" data-name=""></td>
+              <td>{$vo.storename}</td>
+              <td>{$vo.dealer}</td>
+              <td>{$vo.truename}</td>
+              <td>{$vo.mobilephone}</td>
+              <td align="right"><p style=" text-align:center"> 
+                  <a href="{:U('/Admin/Dealer/editstore/id')}/{$vo.id}" class="btn btn-primary j-editClass">编辑</a> 
+				  <a href="/Admin/Dealer/delstore/id/{$vo.id}" onclick="{if(confirm('确定删除吗?')){this.document.formname.submit();return true;}return false;} " class="btn j-delClass btn-warning" title="删除" >删除</a>
+			  </td>
+            </tr>
+            </foreach>
+          </tbody>
+        </table>
+        <!-- end wxtables -->
+        <div class="tables-btmctrl clearfix">
+          <div class="fl"> <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a> <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a> <!--<a href="javascript:;" class="btn btn-warning j-setGroup" data-type="1">批量设置分组</a> <a href="javascript:;" class="btn btn-warning j-setAgentLevel">批量设置等级</a> --></div>
+          <div class="fr">
+                        <div class="pages">
+                            {$page}
+                        </div>
+                        <!-- end paginate -->
+                    </div>
+        </div>
+        <!-- end tables-btmctrl --> 
+      </div>
+      <!-- end tablesWrap --> 
+      
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+<script>
+function search_m(){
+	var title=$('#title').val();
+	var dengji=$('#dengji').val();
+	if(title != '' &&  dengji == ''){
+		location.href="{:U('/Admin/Member/agent_list')}/title/"+title;
+		}else if(dengji != '' &&  title == ''){
+			location.href="{:U('/Admin/Member/agent_list')}/dengji/"+dengji;
+			}else if (title != '' && dengji != ''){
+				location.href="{:U('/Admin/Member/agent_list')}/title/"+title+"/dengji/"+dengji;
+				}else{
+					location.href="{:U('/Admin/Member/agent_list')}";
+					}
+	}
+</script>
+<include file="Public:foot"/>

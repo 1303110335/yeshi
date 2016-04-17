@@ -1,0 +1,112 @@
+<include file="Public:head"/>
+
+
+<div class="container">
+<div class="inner clearfix">
+  <include file="Public:indexleft"/>
+  <!-- end content-left -->
+  
+  <div class="content-right fl">
+    <h1 class="content-right-title">活动商品管理</h1>
+    <a href="{:U('/Admin/Activity/add')}" class="btn btn-success">新增活动商品</a>
+    <form action="" method="post">
+      <div class="tables-searchbox newcearchbox">
+        <input type="text" placeholder="标题名称" class="input" name="title" value="" >
+        <button class="btn btn-primary" style="line-height:26px;"> <i class="gicon-search white"></i>查询 </button>
+        <!--<a href="/Item/item_export" class="btn btn-warning"><i class="gicon-share white"></i>--> 
+        <!--产品导出</a>--> 
+      </div>
+      <div class="tabs clearfix mgt10"> <a href="javascript:void (0)" class="active tabs_a fl">活动商品({$count})</a> 
+        <!--<a href="{:U('/Admin/Goods/onsku')}" class=" tabs_a fl">仓库中(0)</a>--> 
+        <!--<a href="{:U('/Admin/Goods/outstock')}" class=" tabs_a fl">已售罄(1)</a>--> 
+        <!--<a href="{:U('/Admin/Goods/warn')}" class=" tabs_a fl">警戒(0)</a>--> 
+        
+      </div>
+    </form>
+    <!-- end tabs -->
+    
+    <table class="wxtables mgt10">
+      <colgroup>
+      <col width="2%">
+      <col width="20%">
+      <col width="20%">
+      <col width="15%">
+      <col width="10%">
+      <col width="10%">
+      </colgroup>
+      <thead>
+        <tr class="po_list">
+          <td><i class="icon_check"></i></td>
+          <td>标题<span></span></td>
+          <td>副标题</td>
+          <td>图片浏览</td>
+          <td>显示状态</td>
+          <td>操作<span></span></td>
+        </tr>
+      </thead>
+      <tbody>
+        <foreach name="goodslist" item="vo">
+          <tr>
+            <td><input type="checkbox" class="checkbox table-ckbs" data-id=""></td>
+            <td>{$vo.title}<neq name="vo.guige" value="">/{$vo.guige}</neq></td>
+            <td>{$vo.subtitle}</td>
+            <td><img src="{$vo.pic}" height="60" /></td>
+            <td>
+            <div class="serialwrap">
+             <a style='color:#<if condition="($vo.is_show eq 1) ">0C0<else />c00</if>;font-size:20px;text-align:center;cursor:pointer;' id="recommend_g{$vo.id}" onclick="recommend_g({$vo.id})" ><if condition="($vo.is_show eq 1) ">√<else />×</if></a>
+              
+           </div>
+            </td>
+            <td>
+            <a href="{:U('/Admin/Activity/edit/id')}/{$vo.id}" class="btn btn-primary j-editClass" title="修改">编辑</a> 
+            <!--<a href="{:U('/Admin/Activity/delgoods/id')}/{$vo.id}" onclick="{if(confirm('确定删除产品吗?')){this.document.formname.submit();return true;}return false;} " class="btn j-delClass btn-warning" title="删除" data-id="2151938">作废</a>--></td>
+          </tr>
+        </foreach>
+      </tbody>
+    </table>
+    <!-- end wxtables -->
+    <div class="tables-btmctrl clearfix">
+      <div class="fl"> <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a> <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_offshelf">下架</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_delAll">删除</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_groupAll">分组</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary btn_table_setLevel">开/关折扣</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary j_alibaba">导入1688</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary j_postfee">运费</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary batch_update_price">修改价格</a>--> 
+        <!--<a href="javascript:;" class="btn btn-primary batch_update_class">分类</a></div>-->
+        
+        <div class="fr">
+          <div class="pages"> {$page} </div>
+          <!-- end paginate --> 
+        </div>
+      </div>
+      <!-- end tables-btmctrl --> 
+      
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+<include file="Public:foot"/>
+<script type="text/javascript">
+  function recommend_g(e){
+    $.ajax({
+                url: "{:U('/Admin/Activity/ajaxUpdateShop')}",
+                type: "post",
+                dataType: "json",
+                data: {
+          goodsid: e
+                }
+            }).done(function (g) {
+                if (g.info == 1) {
+          $('#recommend_g'+e).text('×');
+          $('#recommend_g'+e).css('color','#c00');
+                } else {
+                    $('#recommend_g'+e).text('√');
+          $('#recommend_g'+e).css('color','#0c0');
+                }
+
+            })
+    }
+</script>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>订单详情</title>
+<meta name="keywords" content="果易得"/>
+<meta name="description" content="果易得"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/bootstrap.css"/>
+<link rel="stylesheet" href="__CSS__/css.css">
+<link href="__CSS__iconfont/iconfont.css" rel="stylesheet" type="text/css">
+<style>
+.wizard {
+    padding: 0px 20px 15px 0;
+    color: #666;
+	margin-left:-10px;
+    text-align: center
+}
+
+.wizard-ic-desc, .wizard-ic-step, .wizard-item {
+    display: inline-block
+}
+
+.wizard-ic-step {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px
+}
+
+.wizard-icstp-num {
+    display: block;
+    width: 65px;
+    height: 65px;
+    line-height: 40px;
+    border-radius: 65px;
+    border: 2px solid #999;
+    text-align: center;
+    background-color: #fff;
+    font-size: 20px;
+    color: #999
+}
+
+.wizard-icstp-date, .wizard-icstp-title {
+    position: absolute;
+    bottom: -27px;
+    left: 3px;
+    display: block;
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+	
+    text-align: center
+}
+
+.wizard-icstp-date {
+    bottom: -45px
+}
+
+.wizard-ic-desc {
+    width: 50px;
+    content: " ";
+    height: 5px;
+    background-color: #999;
+    border-radius: 7px;
+	margin-left:35px;
+    vertical-align: -12px
+}
+.complete .wizard-icstp-title {
+    color: #fff;
+    font-weight: 700
+}
+
+.complete .wizard-icstp-num {
+    border-color: #f78f1e;
+    background: #f78f1e;
+    color: #fff
+}
+
+.process .wizard-icstp-num {
+    border-color: #f78f1e;
+    color: #f78f1e
+}
+
+.complete .wizard-ic-desc {
+    background-color: #f78f1e
+}
+</style>
+</head>
+<body>
+<!-- warp -->
+<div class="warp" style="background:#fff;"> 
+  <!-- jf_top -->
+  <div class="jf_top pttop">
+    <div class="jf_cen">
+      <div class="jf_jt"><a href="{:U('Index/index')}"><i class="icon iconfont">&#xe61b;</i></a>果易得商城</div>
+      <div class="jf_gb"><a href="javascript:history.back(-1)">关闭</a></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!-- jf_top -->
+  <div class="trade_order">
+  <ul class="wizard">
+        <li class="wizard-item <eq name="order_det.orderstate" value="1">process
+          </eq>
+          <gt name="order_det.orderstate" value="1">complete</gt>
+          " >
+          <dl class="wizard-item-content">
+            <dt class="wizard-ic-step"> <span class="wizard-icstp-num">1</span> <span class="wizard-icstp-title">提交订单</span> </dt>
+            <dd class="wizard-ic-desc"></dd>
+          </dl>
+        </li>
+        <li class="wizard-item <eq name="order_det.orderstate" value="2">process
+          </eq>
+          <gt name="order_det.orderstate" value="2">complete</gt>
+          ">
+          <dl class="wizard-item-content">
+            <dt class="wizard-ic-step"> <span class="wizard-icstp-num">2</span> <span class="wizard-icstp-title">配送中</span> </dt>
+            <dd class="wizard-ic-desc"></dd>
+          </dl>
+        </li>
+        <li class="wizard-item <eq name="order_det.orderstate" value="4">process
+          </eq>
+          <gt name="order_det.orderstate" value="4">complete</gt>
+          ">
+          <dl class="wizard-item-content">
+            <dt class="wizard-ic-step"> <span class="wizard-icstp-num">3</span> <span class="wizard-icstp-title">签收成功</span></span> </dt>
+            
+          </dl>
+        </li>
+        
+      </ul>
+  
+  
+    <!--<div class="jf_cen">
+      <div class="trade_line">
+        <div class="trade_liuc">
+          <ul>
+            <li style="margin-left:0; float:left;">
+              <div class="liuc_tb" style="margin-left:0;">
+                <div class="liuc_n"> <i class="icon iconfont">&#xe62b;</i>
+                  <div class="liuc_nmz">提交订单</div>
+                </div>
+              </div>
+            </li>
+            <li style="margin:0px 2%;">
+              <div class="liuc_tb">
+                <div class="liuc_n"> <i class="icon iconfont">&#xe654;</i>
+                  <div class="liuc_nmz">配送中</div>
+                </div>
+              </div>
+            </li>
+            <li style=" float:right;">
+              <div class="liuc_tb" style="margin-right:0;">
+                <div class="liuc_n"> <i class="icon iconfont">&#xe637;</i>
+                  <div class="liuc_nmz">签收成功</div>
+                </div>
+              </div>
+            </li>
+            <div class="clear"></div>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+  </div>
+  <!-- trade_nr -->
+  <div class="trade_nr">
+    <div class="jiyaoyi_xx">
+      <ul>
+        <li>
+          <div class="order_left">订单状态：</div>
+          <div class="order_right"><span>
+          <switch name="order_det.orderstate">
+          <case value="1">待付款</case>
+       		 <case value="2">待发货</case>
+        	<case value="3">待收货</case>
+        	<case value="4">交易成功</case>
+      	  <case value="5">退货订单</case>
+          <case value="6">取消订单</case>
+          <default/>
+                default </switch>
+          </span></div>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <div class="order_left">总&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：</div>
+          <div class="order_right"><span>{$order_det.total_price}</span></div>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <div class="order_left">送&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至：</div>
+          <div class="order_right">{$order_det.province} {$order_det.city} {$order_det.district} {$order_det.address}</div>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <div class="order_left">收&nbsp;&nbsp;货&nbsp;&nbsp;人：</div>
+          <div class="order_right">{$order_det.consignee} {$order_det.telephone}</div>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <div class="order_left">订单编号：</div>
+          <div class="order_right">{$order_det.orderno}</div>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <div class="order_left">下单时间：</div>
+          <div class="order_right">{$order_det.addtime}</div>
+          <div class="clear"></div>
+        </li>
+        <eq name="card_id" value="1">
+        <li>
+          <div class="order_left">优&nbsp;&nbsp;惠&nbsp;&nbsp;券：</div>
+          <div class="order_right"><span>{$order_det.coupon_fee}</span></div>
+          <div class="clear"></div>
+        </li>
+        </eq>
+        <if condition="$order_det.is_delivery eq 0">
+        <li>
+          <div class="order_left">配送方式：</div>
+          <div class="order_right">{$order_det.expressname}&nbsp;&nbsp;&nbsp;运费：<span>{$order_det.shipping_fee}</span></div>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <div class="order_left">&nbsp;</div>
+          <div class="order_right">{$order_det.expressno}</div>
+          <div class="clear"></div>
+        </li>
+        <else/>
+
+			<if condition="$order_det.is_delivery eq 1 and $order_det.is_groupbuy eq 0">
+				<li>
+				  <div class="order_left">提货码：</div>
+				  <div class="order_right">{$order_det.code}</div>
+				  <div class="clear"></div>
+				</li>
+			</if>
+			
+			<if condition="$order_det.is_delivery eq 1 and $order_det.is_groupbuy eq 1 and $order_det.groupbuy_ok eq 1">
+				<li>
+				  <div class="order_left">提货码：</div>
+				  <div class="order_right">{$order_det.code}</div>
+				  <div class="clear"></div>
+				</li>
+			</if>
+			
+		
+        <li>
+          <div class="order_left">配送方式：</div>
+          <div class="order_right">自提</div>
+          <div class="clear"></div>
+        </li>
+        
+        </if>
+        
+
+        
+        
+      </ul>
+      
+    </div>
+    
+    <if condition="$order_det.orderstate eq 1">
+    <div class="order_zhif">
+      <div class="jf_cen">
+        <div class="order_zhif01"><a href="javascript:cancelOrder({$order_det.id})">取消订单</a></div>
+        <div class="order_zhif02"><a href="{:U('Home/Order/jsapi')}/type/1/id/{$order_det.id}">去支付</a></div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    </if>
+    <div  style="border-bottom: 1px solid #dedede;position:relative;top:<if condition="$order_det.orderstate eq 1">30px<else />-30px</if>"></div>
+    <div class="shop_xx" <if condition="$order_det.orderstate neq 1">style="margin-top:0px"</if>>
+      <div class="jf_cen" style="width:85%">
+        <div class="shop_nm">商品信息</div>
+        <ul>
+        <volist name="order_det.orderdet" id="vo" >
+          <li>
+            <div class="shop_tp"><a href="javascript:void(0);"><img src="{$vo.img}" width="100%"></a></div>
+            <div class="shop_wznr">
+              <div class="shopnm"><a href="javascript:void(0);">{$vo.goodsname}</a></div>
+              <div class="shopnm">规格：{$vo.guige}/件</div>
+              <div class="shopsljg">
+                <div class="shopsljg01">数量：{$vo.num}</div>
+                <div class="shopsljg02">￥<span>{$vo.good_nowprice}</span></div>
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </li>
+          </volist>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="shop_cltxq">
+      <div class="shop_cltxq1"><if condition="$order_det.is_groupbuy eq 1"><a href="{:U('Order/pintuan/orderid')}/{$order_det.id}">查看团详情<span>></span></a></if></div>
+      <div class="clear"></div>
+    </div>
+    
+  </div>
+  <!-- trade_nr -->
+  <div class="scorll_top"><a href="#scroll_top"><img src="__IMAGES__/scorll_top.png"></a></div>
+  <!-- footer -->
+  <include file="Public:foot" />
+  <!-- footer --> 
+</div>
+<!-- warp -->
+</body>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/js.js"></script>
+<script>
+
+$(document).ready(function(){
+	
+$(".adcy_mc").click(function(){
+	var name = $(this).find("a").html();
+	$('#show_city').find("a").html(name);
+})	
+
+})
+function cancelOrder(id){
+      $.ajax({
+        url:"{:U('Home/Order/cancelOrder')}",
+        type:"post",
+        dataType:"json",
+        data:{id:id},
+        success:function(ret){
+          if(ret==1){
+            alert("订单已取消");
+            window.location.href="{:U('Home/Member/orderlist')}";
+          }else{
+            alert("订单取消失败");
+          }
+        }
+      });
+    }
+
+</script>
+</html>

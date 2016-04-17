@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>果易得</title>
+<meta name="keywords" content="果易得"/>
+<meta name="description" content="果易得"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/bootstrap.css"/>
+<link rel="stylesheet" href="__CSS__/css.css">
+<link href="__CSS__/iconfont/iconfont.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+<link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+<style>
+/** wyyct_div **/
+.wyyct_div{
+	width:100%;
+	height:auto;
+	position:fixed;
+	bottom:0;
+	left:0;
+	background:rgba(0,0,0,0.6);
+	z-index:99999;
+	}
+.wyyct_div1{
+	height:auto;
+	padding:15px 10px 15px 10px;
+	text-align:center
+	}
+	
+.wyyct_home{
+	float:left;
+	width:19%;
+	height:50px;
+	margin-right:2%;
+	}
+.wyyct_home a{
+	display:block;
+	color:#fff;
+	background:#777777;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	}
+.wyyct_fx{
+	float:left;
+	height:50px;
+	width:19%;
+	margin-right:2%;
+	}
+.wyyct_fx a{
+	display:block;
+	color:#fff;
+	background:#777777;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	}
+.wyyct_ct{
+	float:right;
+	height:50px;
+	width:78%;
+	}
+.wyyct_ct a{
+	display:block;
+	background:#DF2127;
+	color:#fff;
+	line-height:50px;
+	width:100%;
+	height:50px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	font-size:16px;
+	letter-spacing:1px;
+	}
+	
+.wyyct_div span{
+	font-size:36px;
+	}
+	
+.wyyct_div1 a:hover{
+	text-decoration:none;
+	}
+/** wyyct_div **/
+.ptnumnr p {
+    font-size: 14px;
+}
+
+</style>
+</head>
+<body>
+<!-- warp -->
+<div class="warp" style="background:#fff;"> 
+  <!-- jf_top -->
+  <div class="jf_top pttop">
+    <div class="jf_cen">
+      <div class="jf_jt"><a href="javascript:void(0);"><i class="icon iconfont">&#xe61b;</i></a>果易得拼团</div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!-- jf_top -->
+  <div class="pt_cg">
+    <div class="ptcg_nm1"><i class="icon iconfont">&#xe623;</i>开团成功</div>
+    <div class="ptcg_nm2">快去邀请好友加入吧</div>
+  </div>
+  <!-- pt_nr -->
+  <div class="pt_nr">
+    <div class="pt_th">
+      <div class="pt_th01"><a href="javascript:void(0);"><img src="{$orderinfo.detail.0.img}" width="100%"></a>
+      </div>
+      <div class="pt_th02">
+        <div class="pthnm"><a href="javascript:void(0);">{$orderinfo.detail.0.goodsname}</a></div>
+        <div class="pth_trs">{$orderinfo.detail.0.group_num}人团：<span class="pthtrs01">￥</span><span class="pthtrs02">{$orderinfo.detail.0.good_nowprice}</span><span class="pthtrs01">/件</span></div>
+      </div>
+      <div class="clear"></div>
+      <eq name="end" value="6">
+      <div class="zucgtb"><img src="__IMAGES__/zucgtbshu.png" width="100%"></div>
+      </eq>
+    </div>
+    <div class="pt_rens">
+      <ul>
+<foreach name="member_list" item="vo">
+        <li>
+          <div class="rttx"><img src="{$vo.touimg}" width="100%">
+            <eq name="vo.is_head" value="1"><div class="rttx_bz rttx_bz01">团</div></eq>
+          </div>
+        </li>
+</foreach>
+<?php for($i=1;$i<=$count;$i++){?>
+        <li>
+          <div class="rttx"><img src="__IMAGES__/rttx.jpg" width="100%"></div>
+        </li>
+<?php }?>
+        <li></li>
+        <div class="clear"></div>
+      </ul>
+      <div class="pt_rswz">还差<span>{$count}</span>人，盼你如南方人盼暖气～</div>
+      <neq name="end" value="6">
+      <div class="pt_time">
+        <div class="pt_time1">
+          <div class="time"> 剩余 <span id="t_d">00</span> 天 <span id="t_h">00</span> 时 <span id="t_m">00</span> 分 <span id="t_s">00</span> 秒
+            结束 </div>
+        </div>
+      </div>
+      </neq>
+    </div>
+<foreach name="member_list" item="vo">
+<if condition="$key eq 0">
+    <div class="pttz_js">
+      <div class="pttz_js1">
+        <div class="rttx"><img src="{$vo.touimg}" width="100%"></div>
+      </div>
+      <div class="pttz_js2">团长 {$vo.truename}</div>
+      <div class="pttz_js3">{$vo.addtime} 开团</div>
+      <div class="clear"></div>
+      <span></span> </div>
+
+    <div class="ptptjies">
+      <div class="pttztb_left">
+        <div class="pr_sline"></div>
+        <div class="pttb"><img src="__IMAGES__/pttb01.png" width="100%"></div>
+      </div>
+      <div class="pttztb_right">
+        <p style="color:#888">点击右上角分享到朋友圈</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="tzryuan">
+      <ul>
+<else />
+        <li>
+          <div class="tzryu_tx">
+            <div class="tzryu_txxian"></div>
+            <div class="tzryu_tximg">
+              <div class="rttx"><img src="{$vo.touimg}" width="100%"></div>
+            </div>
+          </div>
+          <div class="tzryu_kuang">
+            <div class="tzryu_ku1">{$vo.truename}</div>
+            <div class="tzryu_ku2">{$vo.addtime} 参团</div>
+            <div class="clear"></div>
+          </div>
+        </li>
+</if>
+</foreach>
+	</ul>
+    </div>
+    <div class="buy_tg" style="margin-bottom:30px;">
+    <div class="buy_tg_xq">
+    <h2><a href="{:U('Goods/ctwf')}" style="font-size:14px;">参团玩法</a><a href="{:U('Goods/ctwf')}" style="float:right;font-size:14px;position:relative;top:-5px;">查看详情</a></h2>
+      <ul>
+        <li>
+          <h1><span class="iconfont" style=" font-size:20px;">&#xe602;</span>选择<br/>
+            心仪商品</h1>
+        </li>
+        <li>
+          <h1><span class="iconfont" style=" font-size:20px;">&#xe61f;</span>支付<br/>
+            参团/建团</h1>
+        </li>
+        <li>
+          <h1 style=" color:#d12227;"><span class="iconfont" style=" font-size:20px;">&#xe603;</span>邀请好友<br/>
+            参团支付</h1>
+        </li>
+        <li>
+          <h1><span class="iconfont" style=" font-size:20px;">&#xe604;</span>达到人数<br/>
+            参团支付</h1>
+        </li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+  </div>
+   <!-- <div class="ptpaly">
+      <div class="phhwdt"><a class="phhwdt01" href="javascript:void(0);">拼好团</a><span>|</span><a class="phhwdt02" href="javascript:void(0);">我的团</a></div>
+    </div>-->
+    
+    <!--<div class="ptzusfcg">
+      <div class="ptzusfcg2"><a href="javascript:void(0);">还差{$count}人组团成功</a></div>
+      <div class="clear"></div>
+    </div>-->
+  </div>
+  <!-- pt_nr -->
+  <!-- footer -->
+  
+  <!-- footer --> 
+  <neq name="end" value="6">
+  <div class="wyyct_div">
+    <div class="wyyct_div1">
+      <div class="wyyct_home"><a href="{:U('Index/index')}"><span class="iconfont">&#xe608;</span></a></div>
+      <!-- <div class="wyyct_fx"><a href="javascript:void(0);"><span class="iconfont">&#xe608;</span></a></div>-->
+      <div class="wyyct_ct"><if condition="$type neq 1"><a href="{:U('Order/addorder2/orderid')}/{$orderinfo.0.id}">我也要参团</a><else /><a href="javascript:void(0);">还差{$count}人组团成功</a></if></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  </neq>
+  <eq name="end" value="6">
+  <div class="wyyct_div">
+    <div class="wyyct_div1">
+      <div class="wyyct_home"><a href="{:U('Index/index')}"><span class="iconfont">&#xe608;</span></a></div>
+      <!-- <div class="wyyct_fx"><a href="javascript:void(0);"><span class="iconfont">&#xe608;</span></a></div>-->
+      <div class="wyyct_ct"><a href="{:U('Order/addorder3/orderid')}/{$orderinfo.0.id}">我也开个团，点此开团</a></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  </eq>
+  <div class="footer" style="padding: 25px 0 5px 0;">
+    	<ul>
+        	<li>
+            	<a href="javascript:void(0);">
+                	<div class="footer_tb footer_tb01 iconfont">&#xe608;</div>
+                    <p>&nbsp;</p>
+                </a>
+            </li>
+            <li>
+            	<a href="javascript:void(0);">
+                	<div class="footer_tb footer_tb02 iconfont">&#xe62e;</div>
+                    <p>&nbsp;</p>
+                </a>
+            </li>
+            <li> <a href="javascript:void(0);">
+              <div class="footer_tb footer_tb03 iconfont1 more_m">&#xe62a;</div>
+              <p>&nbsp;</p>
+              </a> </li>
+            
+            <li>
+            	<a href="javascript:void(0);">
+                	<div class="footer_tb footer_tb04 iconfont">&#xe61c;</div>
+                    <p>&nbsp;</p>
+                </a>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>
+<!-- warp -->
+<!--统计流量-->
+<div style="display:none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257387489'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257387489%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<!--统计流量-->
+</body>
+
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/js.js"></script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>   
+  var timestamp = "{$confinfo[timestamp]}";
+  var nonceStr = "{$confinfo[nonceStr]}";
+  var signature = "{$confinfo[signature]}";
+  var appId = "{$confinfo[appId]}";
+    var title = "拼团{$orderinfo.detail.0.good_nowprice}元！{$orderinfo.detail.0.goodsname}";
+  var desc = "叶氏兄弟 {$orderinfo.detail.0.group_num}人成团享全网最低价！和小伙伴一起拼~";
+  
+  wx.config({
+    debug:false,
+    appId:appId,
+    timestamp:timestamp,
+    nonceStr:nonceStr, 
+    signature:signature,
+    jsApiList:[
+      'onMenuShareAppMessage',
+      'onMenuShareTimeline'
+    ]
+  });
+  
+  wx.ready(function () {
+    
+
+    wx.onMenuShareAppMessage({
+      title: title, // 分享标题
+      desc: desc, // 分享描述
+      link: 'http://goead.ysxdgy.com/Order/pintuan/orderid/{$orderid}', // 分享链接
+      imgUrl: 'http://goead.ysxdgy.com{$goodsurl}', // 分享图标
+      type: '', // 分享类型,music、video或link，不填默认为link
+      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+      success: function () { 
+        // 用户确认分享后执行的回调函数
+      },
+      cancel: function () { 
+        // 用户取消分享后执行的回调函数
+      }
+    });
+        
+      wx.onMenuShareTimeline({
+    title: title, // 分享标题
+    link: 'http://goead.ysxdgy.com/Order/pintuan/orderid/{$orderid}', // 分享链接
+    imgUrl: 'http://goead.ysxdgy.com{$goodsurl}', // 分享图标
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+    },
+    cancel: function () { 
+        // 用户取消分享后执行的回调函数
+    }
+});
+    
+  
+    });
+  
+
+  
+</script>
+<script>
+
+$(document).ready(function(){
+	
+$(".adcy_mc").click(function(){
+	var name = $(this).find("a").html();
+	$('#show_city').find("a").html(name);
+})	
+
+})
+</script>
+
+<script>
+   function GetRTime(){
+       var EndTime= new Date('{$endtime}');
+       var NowTime = new Date();
+       var t =EndTime.getTime() - NowTime.getTime();
+       var d=Math.floor(t/1000/60/60/24);
+       var h=Math.floor(t/1000/60/60%24);
+       var m=Math.floor(t/1000/60%60);
+       var s=Math.floor(t/1000%60);
+
+       document.getElementById("t_d").innerHTML = d;
+       document.getElementById("t_h").innerHTML = h;
+       document.getElementById("t_m").innerHTML = m;
+       document.getElementById("t_s").innerHTML = s;
+   }
+   setInterval(GetRTime,0);
+</script>
+</html>

@@ -1,0 +1,209 @@
+<include file="Public:head"/>
+
+<style>
+    .ftnormal {line-height: 25px!important;}
+    .btn{vertical-align: baseline;}
+    .newinput{ width:145px;}
+    .select.mini{width: 110px;}
+    .vtal-2{vertical-align: -2px;}
+</style>
+<script type="text/javascript" src="__LHG__/lhgcore.min.js"></script>
+<script type="text/javascript" src="__LHG__/lhgcalendar.min.js"></script>
+
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+    <dl class="left-menu shop_5 sub_signup">
+            <dt>
+                <i class="icon-menu signup"></i>
+                <span id="shop_5" data-id="5">订单管理</span>
+            </dt>
+            <dd class="subshop_0 "><a href="{:U('Admin/Order/lists')}">所有订单</a></dd>
+            <dd class="subshop_1 "><a href="{:U('Admin/Order/lists/dealerid/0')}">总部</a></dd>
+            
+      <foreach name="dealerlist" item="vo" >
+              <dd class="subshop_{$key+2} <eq name="dealerid" value="$vo.id">active</eq>"><a href="{:U('Admin/Order/lists/dealerid/')}/{$vo.id}">{$vo.username}</a></dd>
+            </foreach>
+            
+            
+            
+            
+        <!--<dd class="subshop_13 ">-->
+                    <!--<a href="/Order/export">导出订单</a>-->
+                                    <!--</dd><dd class="subshop_14 ">-->
+                    <!--<a href="/Order/del_log">删除日志</a>-->
+                                    <!--</dd><dd class="subshop_16 ">-->
+                    <!--<a href="/Order/order_import">备份订单导入</a>-->
+                                    <!--</dd> -->
+    </dl>
+    <dl class="left-menu shop_6 sub_shield">
+    <dt>
+        <i class="icon-menu shield"></i>
+        <span id="shop_6" data-id="6">售后服务</span>
+    </dt>
+    <dd class="subshop_0 active"><a href="{:U('Admin/Order/goodsRefund')}">退款审核</a></dd>
+    </dl>
+    
+    <!--
+    <dl class="left-menu shop_6 sub_shield">
+        <dt>
+            <i class="icon-menu shield"></i>
+            <span id="shop_6" data-id="6">售后服务</span>
+        </dt>
+        <dd class="subshop_0 ">
+            <a href="{:U('/Admin/Order/exchange')}">退/换货审核</a>
+        </dd>
+        <dd class="subshop_3 ">-->
+            <!--<a href="/Comment/lists">商品评价</a>-->
+        <!--</dd>-->
+        <!--<dd class="subshop_8 ">-->
+            <!--<a href="/Comment/custom_comment">自定义评价</a>-->
+        <!--</dd>-->
+    </dl>
+</div>
+<!-- end content-left -->
+
+<div class="content-right fl">
+
+
+    <h1 class="content-right-title">所有退款</h1>
+
+    <form action="" method="get">
+            <div class="tables-searchbox">
+                <input type="text" placeholder="手机号" class="input newinput" name="telephone" value="">
+                <input type="text" placeholder="输入订单号" class="input newinput" name="orderno" value="">
+                <input type="hidden" placeholder="输入订单号" class="input newinput" name="p" value="1">
+                <button class="btn btn-primary vtal-2"><i class="gicon-search white"></i>查询</button>
+            </div>
+        </form>
+
+        <table class="wxtables table-order mgt20">
+            <colgroup>
+                <col width="30%">
+                <col width="10%">
+                <col width="16%">
+                <col width="10%">
+                <col width="24%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td align="center">商品</td>
+                    <td align="center">收货人</td>
+                    <td align="center">总价</td>
+                    <td align="center">经销商</td>
+                    <td align="center">退款原因</td>
+                    <td align="center">操作</td>
+                </tr>
+            </thead>
+                    </table>
+
+
+      <table class="wxtables table-order mgt20">
+                <colgroup>
+                    <col width="30%">
+                    <col width="10%">
+                    <col width="16%">
+                    <col width="10%">
+                    <col width="24%">
+                    <col width="10%">
+                </colgroup>
+
+            <volist name="orderlist" id="vo" empty="$empty">
+                <thead>
+
+                    <tr>
+                        <td colspan="6" class="ftnormal" style="background-color:#F2F8FC;">
+                            
+                            
+                            <span>订单编号：<b>{$vo.orderno}</b></span>
+                            <span class="mgl15">{$vo.addtime}</span>
+                            <span class="mgl15 colorRed">
+                                <switch name="vo.orderstate">
+                                    <case value="1">待付款</case>
+                                    <case value="2">待发货</case>
+                                    <case value="3">待收货</case>
+                                    <case value="4">交易成功</case>
+                                    <case value="5">已退款</case>
+                                    <case value="6">已取消</case>
+                                    <case value="7">已取消</case>
+                                </switch>
+                            </span>
+                         </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pd0">
+                            <volist name="vo.orderdatail" id="vod" empty="$empty">
+                                    <!--{$vo.orderdatail.0.id}-->
+                    <div class="table-item">
+                                <a href="{:U('/Admin/Order/orderdetail/id')}/{$vo.id}" class="block" target="_blank" title="{$vod.goodsname}">
+                                    <div class="table-item-img">
+                                            <img src="{$vod.img}" alt="">
+                                                                                                                          </div>
+                                    <div class="table-item-info">
+                                        <p>{$vod.goodsname}</p>
+                                        <span class="price">单价：¥{$vod.good_nowprice}</span>
+                                        <span class="number">数量：{$vod.num}</span>
+                                    </div>
+                                </a>
+                      </div>
+                            </volist>
+                        </td>
+                        <td valign="top" class="txtCenter" style="padding-top:15px;">
+                            <p>{$vo.consignee}</p>
+                            <p>{$vo.telephone}</p>
+                      </td>
+                        <td valign="top" class="txtCenter" style=" <eq name="vo.is_delivery" value="0">padding-top:10px;</eq> <eq name="vo.is_delivery" value="1">padding-top:15px;</eq> ">
+                            <p><b>¥{$vo.total_price}</b></p>
+                            <p><b><eq name="vo.is_delivery" value="0">配送</eq><eq name="vo.is_delivery" value="1">自提</eq></b></p>
+                            <eq name="vo.is_delivery" value="0"><p class="colorGray">(含运费 ¥{$vo.shipping_fee})</p></eq>
+                        </td>
+                        <td valign="top" class="txtCenter" style="padding-top:30px;">
+                            <p><b>{$vo.dealername}</b></p>
+                        </td>
+                        
+                        <td valign="top" style="padding-top:30px;">
+                        <p>{$vo.reason}</p>
+                        </td>
+                        <td valign="top">
+                           <p><a href="{:U('Admin/Order/goodsRefundDetail')}/id/{$vo.id}" id="refund" class="btn btn-mini btn-primary refund">审核退款</a></p>
+
+                        </td>
+                    </tr>
+                </tbody>
+ </volist>
+
+            </table>
+
+        <!-- end wxtables -->
+               <!-- end tables-btmctrl -->
+<div class="tables-btmctrl clearfix mgt10">
+            <div class="fl" style="float:none;">
+                <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a>
+                <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a>
+                <!-- <a href="javascript:void(0)" onclick="del()" class="btn btn-danger J_batch_del">删除订单</a> -->
+            </div>
+
+                <div class="pages" style="float:none;width:100%;text-align:left;padding-top:10px;">
+                    {$page}
+                </div>
+                <!-- end paginate -->
+
+        </div>   
+
+    <!-- <form action="" method="post" id="ids">
+        <input type="hidden" name="ids" value="">
+    </form> -->
+
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<!--gonggao-->
+<include file="Public:foot"/>

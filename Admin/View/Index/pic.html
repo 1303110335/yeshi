@@ -1,0 +1,112 @@
+<include file="Public:head"/>
+<div class="container">
+  <div class="inner clearfix">
+    <include file="Public:indexleft"/>
+    <!-- end content-left -->
+    
+    <div class="content-right fl">
+      <h1 class="content-right-title">图片列表</h1>
+      <div class="alert alert-info disable-del">共有 <span style="font-size:16px;">{$count}</span> 张图片。<a href="javascript:;" class="alert-delete" title="隐藏"><i class="gicon-remove"></i></a></div>		
+      <div class="tablesWrap">
+        
+        <!-- end tables-searchbox -->
+        <table class="wxtables">
+          <colgroup>
+          <col width="4%">
+          <col width="10%">
+          <col width="13%">
+          <col width="8%">
+          <col width="30%">
+          <col width="10%">
+          <col width="10%">
+          <col width="15%">
+          </colgroup>
+          <thead>
+            <tr>
+              <td><i class="icon_check"></i></td>
+              <td>图片名称</td>
+              <td>图片分类</td>
+              <td>浏览图片</td>
+              <td>图片链接</td>
+              <td>排序</td>
+              <td>显示状态</td>
+              <td align="center">操作</td>
+            </tr>
+          </thead>
+          <tbody>
+          <foreach name="piclist" item="vo">
+            <tr>
+              <td><input type="checkbox" class="checkbox table-ckbs" data-id="3646068" data-name=""></td>
+              <td>{$vo.title}</td>
+              <td><?php if($urlname=='indexpic'){?>首页切换图<?php }else{?>首页二屏展示图<?php }?></td>
+              <td><img src="{$vo.pic}" width="100px" /></td>
+              <td>{$vo.urls}&nbsp;{$vo.is_urls_title}</td>
+              <td>{$vo.sequence}</td>
+              <td><div class="serialwrap">
+             <a style='color:#<if condition="($vo.is_show eq 1) ">0C0<else />c00</if>;font-size:20px;text-align:center;cursor:pointer;' id="recommend_g{$vo.id}" onclick="recommend_g({$vo.id})" ><if condition="($vo.is_show eq 1) ">√<else />×</if></a>
+              
+           </div></td>
+              <td align="right"><p style=" text-align:center"> 
+                  <a href="{:U('/Admin/Index/editpic/id')}/{$vo.id}" class="btn btn-primary j-editClass">编辑</a> 
+				  <a href="/Admin/Index/delpic/id/{$vo.id}" onclick="{if(confirm('确定删除吗?')){this.document.formname.submit();return true;}return false;} " class="btn j-delClass btn-warning" title="删除" >删除</a>
+			  </td>
+            </tr>
+            </foreach>
+          </tbody>
+        </table>
+        <!-- end wxtables -->
+        <div class="tables-btmctrl clearfix">
+          <div class="fl"> <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a> <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a> <!--<a href="javascript:;" class="btn btn-warning j-setGroup" data-type="1">批量设置分组</a> <a href="javascript:;" class="btn btn-warning j-setAgentLevel">批量设置等级</a> --></div>
+          <div class="fr">
+                        <div class="pages">
+                            {$page}
+                        </div>
+                        <!-- end paginate -->
+                    </div>
+        </div>
+        <!-- end tables-btmctrl --> 
+      </div>
+      <!-- end tablesWrap --> 
+      
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+<script>
+function search_m(){
+	var title=$('#title').val();
+	var dengji=$('#dengji').val();
+	if(title != '' &&  dengji == ''){
+		location.href="{:U('/Admin/Member/agent_list')}/title/"+title;
+		}else if(dengji != '' &&  title == ''){
+			location.href="{:U('/Admin/Member/agent_list')}/dengji/"+dengji;
+			}else if (title != '' && dengji != ''){
+				location.href="{:U('/Admin/Member/agent_list')}/title/"+title+"/dengji/"+dengji;
+				}else{
+					location.href="{:U('/Admin/Member/agent_list')}";
+					}
+	}
+</script>
+<include file="Public:foot"/>
+<script type="text/javascript">
+  function recommend_g(e){
+    $.ajax({
+                url: "{:U('/Admin/Index/ajaxUpdateShop')}",
+                type: "post",
+                dataType: "json",
+                data: {
+          goodsid: e
+                }
+            }).done(function (g) {
+                if (g.info == 1) {
+          $('#recommend_g'+e).text('×');
+          $('#recommend_g'+e).css('color','#c00');
+                } else {
+                    $('#recommend_g'+e).text('√');
+          $('#recommend_g'+e).css('color','#0c0');
+                }
+
+            })
+    }
+</script>

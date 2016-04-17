@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>果易得</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/css.css">
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+<link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+<style>
+.gonggao{
+  width:100%;
+  height:60px;
+  background:#9fcf66;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index:99999;
+  display:none;
+}
+
+
+.main_div01{
+  margin-top:50px !important;
+}
+.top{
+  top:0px;
+}
+</style>
+</head>
+<body id="scroll_top">
+<include file="Public:guanzhu" /> 
+  <!-- prompt -->
+<!--  <div class="prompt" style="top:0px; z-index:9999999">
+      <div class="prompt_wz">
+          <p id="effect" style="color:#fff;">叶氏兄弟于1月31-2月14日起只支持同城配送，不支持物流配送</p>
+        </div>
+    </div> -->
+  
+  <div class="gonggao">
+    <p style="color:#fff; text-align:center;font-size:14px;margin-bottom:5px;padding-top:5px;">春节发货通知</p>
+    <p style="color:#fff; text-align:center;">叶氏兄弟于2月3-2月14日起只支持门店自提，不支持物流配送</p>
+  </div>
+    <!-- prompt -->
+<!-- top -->
+<include file="Public:top" />
+
+<script src="__JS__/jquery.min.js"></script>
+<!-- <script src="__JS__/jquery.LoadImage.js"></script> -->
+<!-- <script>
+$(function(){
+  $("img").LoadImage(true,"__IMAGES__/loading.gif");
+});
+</script>
+ -->
+
+
+
+
+<!-- top --> 
+<!-- main_div -->
+<div class="main_div main_div01"> 
+  <!-- banner -->
+  <div class="banner">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+    <foreach name="pic1" item="vo">
+            <div class="swiper-slide">
+              <eq name="vo.is_urls" value="2" >
+                    <a href="{$vo.urls}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </eq>
+                
+        <if condition="($vo.is_urls eq 1) AND ($vo.is_urls_type eq 1) "> 
+                    <a href="{:U('Index/yhq')}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </if>
+                
+        <if condition="($vo.is_urls eq 1) AND ($vo.is_urls_type eq 2) "> 
+                    <a href="{:U('Goods/category')}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </if>
+                
+        <if condition="($vo.is_urls eq 1) AND ($vo.is_urls_type eq 3) "> 
+                    <a href="{:U('Goods/buy/id/')}/{$vo.goodsid}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </if>
+            </div>
+        </foreach>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+  <!-- banner --> 
+  <!-- content_main -->
+  <div class="content_main"> 
+    <!-- sy_div1 -->
+    <div class="sy_div1">
+      <ul>
+        <li>
+          <div class="div1_tb"><a class="iconfont" style=" font-size:30px; border-radius:8px; width:50px; height:50px; line-height:60px; color:#fff; background:url(__IMAGES__/tbbj.png) no-repeat;" href="{:U('Goods/pro_isnew')}">&#xe600;</a></div>
+          <div class="dvi1_name"><a href="{:U('Goods/pro_isnew')}">新品尝鲜</a></div>
+        </li>
+        <li>
+          <div class="div1_tb"><a class="iconfont" style=" font-size:22px;border-radius:8px;  width:50px; height:50px; line-height:65px; color:#fff; background:url(__IMAGES__/tbbj1.png) no-repeat;" href="{:U('Member/orderlist')}">&#xe601;</a></div>
+          <div class="dvi1_name"><a href="{:U('Member/orderlist')}">我的订单</a></div>
+        </li>
+        <li>
+          <div class="div1_tb"><a class="iconfont" style=" font-size:30px;border-radius:8px;  width:50px; height:50px; line-height:60px; color:#fff; background:url(__IMAGES__/tbbj2.png) no-repeat;" href="{:U('Member/main')}">&#xe63f;</a></div>
+          <div class="dvi1_name"><a href="{:U('Member/main')}">会员专区</a></div>
+        </li>
+        <li>
+          <div class="div1_tb"><a class="iconfont" style=" font-size:30px;border-radius:8px;  width:50px; height:50px; line-height:60px; color:#fff; background:url(__IMAGES__/tbbj3.png) no-repeat;" href="{:U('Index/yhq')}">&#xe610;</a></div>
+          <div class="dvi1_name"><a href="{:U('Index/yhq')}">优惠券</a></div>
+        </li>
+        <div class="clear"></div>
+      </ul>
+    </div>
+    
+    <!-- sy_div1 --> 
+  </div>
+  <!-- content_main --> 
+  <!-- sy_div5 -->
+  <div class="sy_div5 sy_div5a">
+    <div class="content_main content_main01">
+        <foreach name="pic2" item="vo">
+              <eq name="vo.is_urls" value="2" >
+                    <a href="{$vo.urls}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </eq>
+                
+        <if condition="($vo.is_urls eq 1) AND ($vo.is_urls_type eq 1) "> 
+                    <a href="{:U('Index/yhq')}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </if>
+                
+        <if condition="($vo.is_urls eq 1) AND ($vo.is_urls_type eq 2) "> 
+                    <a href="{:U('Goods/category')}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </if>
+                
+        <if condition="($vo.is_urls eq 1) AND ($vo.is_urls_type eq 3) "> 
+                    <a href="{:U('Goods/buy/id/')}/{$vo.goodsid}"  title="{$vo.title}" alt="{$vo.title}">
+                    <img src="{$vo.pic}" width="100%" title="{$vo.title}" alt="{$vo.title}" class="scrollLoading" >
+                    </a>
+                </if>
+
+        </foreach>
+
+
+     </div>
+  </div>
+  <!-- sy_div5 --> 
+  <!-- sy_div4 -->
+  <div class="sy_div4 sy_div4a">
+  
+  <div class="content_main content_main01">
+      <div class="div4_div">
+      
+      
+        <div class="div4_div1"> <a href="{:U('Goods/buy/id/')}/{$hd1.0.goodsid}"><img src="{$hd1.0.pic}" width="100%" class="scrollLoading" ></a> 
+          <!-- div4_wzjs -->
+          <div class="div4_wzjs">
+            <div class="cp_bizi cp_bizi01" style="background: url(__IMAGES__/tbbj3.png) no-repeat;">
+              <p>￥<span>{$hd1.0.price}</span></p>
+            </div>
+            <div class="cp_mc cp_mc01"><a href="{:U('Goods/buy/id/')}/{$hd1.0.goodsid}">{$hd1.0.title}</a></div>
+            <div class="cp_p">{$hd1.0.subtitle}</div>
+          </div>
+          <!-- div4_wzjs --> 
+        </div>
+        
+        <div class="div4_div2">
+        
+          <div class="div4_div2a"> <a href="{:U('Goods/buy/id/')}/{$hd1.1.goodsid}"><img src="{$hd1.1.pic}" width="100%" class="scrollLoading" ></a> 
+            <!-- div4_wzjs -->
+            <div class="div4_wzjs1">
+              <div class="cp_bizi cp_bizi02" style="background: url(__IMAGES__/tbbj1.png) no-repeat;">
+                <p>￥<span>{$hd1.1.price}</span></p>
+              </div>
+              <div class="cp_mc cp_mc02"><a href="{:U('Goods/buy/id/')}/{$hd1.1.goodsid}">{$hd1.1.title}</a></div>
+              <div class="cp_p">{$hd1.1.subtitle}</div>
+            </div>
+            <!-- div4_wzjs --> 
+          </div>
+          
+          <div class="div4_div2b div4_div2b01"> <a href="{:U('Goods/buy/id/')}/{$hd1.2.goodsid}"><img src="{$hd1.2.pic}" width="100%" class="scrollLoading" ></a> 
+            <!-- div4_wzjs -->
+            <div class="div4_wzjs1">
+              <div class="cp_bizi cp_bizi03" style="background: url(__IMAGES__/tbbj2.png) no-repeat;">
+                <p>￥<span>{$hd1.2.price}</span></p>
+              </div>
+              <div class="cp_mc cp_mc03"><a href="{:U('Goods/buy/id/')}/{$hd1.2.goodsid}">{$hd1.2.title}</a></div>
+              <div class="cp_p">{$hd1.2.subtitle}</div>
+            </div>
+            <!-- div4_wzjs --> 
+          </div>
+          
+        </div>
+        
+        
+        <div class="clear"></div>
+      </div>
+    </div>
+  
+    
+  </div>
+  <!-- sy_div4 -->
+  <div class="sy_div5" id="sy_div5b">
+    <div class="content_main content_main01"> <a href="{:U('Goods/buy/id/')}/{$hd2.0.goodsid}"><img src="{$hd2.0.pic}" width="100%" class="scrollLoading" ></a> </div>
+  </div>
+  
+  <!-- sy_div4 -->
+  <div class="sy_div4 sy_div4b">
+  
+  <div class="content_main content_main01">
+      <div class="div4_div">
+        <div class="div4_div1"> <a href="{:U('Goods/buy/id/')}/{$hd2.1.goodsid}"><img src="{$hd2.1.pic}" width="100%" class="scrollLoading" ></a> 
+          <!-- div4_wzjs -->
+          <div class="div4_wzjs">
+            <div class="cp_mc cp_mc04"><a href="{:U('Goods/buy/id/')}/{$hd2.1.goodsid}">{$hd2.1.title}</a></div>
+            <div class="cp_p cp_p01"><a href="{:U('Goods/buy/id/')}/{$hd2.1.goodsid}">{$hd2.1.subtitle}</a></div>
+            <div class="cp_p1"><a href="{:U('Goods/buy/id/')}/{$hd2.1.goodsid}"><span class="jqfh">￥</span><span class="jqsz">{$hd2.1.price}</span></a></div>
+          </div>
+          <!-- div4_wzjs --> 
+        </div>
+        <div class="div4_div2">
+          <div class="div4_div2a"> <a href="{:U('Goods/buy/id/')}/{$hd2.2.goodsid}"><img src="{$hd2.2.pic}" width="100%" class="scrollLoading" ></a> 
+            <!-- div4_wzjs -->
+            <div class="div4_wzjs1">
+              <div class="cp_mc cp_mc05"><a href="{:U('Goods/buy/id/')}/{$hd2.2.goodsid}">{$hd2.2.title}</a></div>
+              <div class="cp_p"><a href="{:U('Goods/buy/id/')}/{$hd2.2.goodsid}">{$hd2.2.subtitle}</a></div>
+              <div class="jgmsys"><a href="{:U('Goods/buy/id/')}/{$hd2.2.goodsid}">￥<span>{$hd2.2.price}</span></a></div>
+            </div>
+            <!-- div4_wzjs --> 
+          </div>
+          <div class="div4_div2b div4_div2b02"> <a href="{:U('Goods/buy/id/')}/{$hd2.3.goodsid}"><img src="{$hd2.3.pic}" width="100%" class="scrollLoading" ></a> 
+            <!-- div4_wzjs -->
+            <div class="div4_wzjs1">
+              <div class="cp_mc cp_mc05"><a href="{:U('Goods/buy/id/')}/{$hd2.3.goodsid}">{$hd2.3.title}</a></div>
+              <div class="cp_p"><a href="{:U('Goods/buy/id/')}/{$hd2.3.goodsid}">{$hd2.3.subtitle}</a></div>
+              <div class="jgmsys"><a href="{:U('Goods/buy/id/')}/{$hd2.3.goodsid}">￥<span>{$hd2.3.price}</span></a></div>
+            </div>
+            <!-- div4_wzjs --> 
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    
+    
+  </div>
+  <!-- sy_div4 --> 
+  <!-- sy_div3 -->
+  <div class="sy_div3">
+  
+  
+    <ul>
+              
+                
+            <foreach name="hd3" item="vo" >    
+
+            <li class=" <lt name="key" value="10">sy3li{$key}</lt> <egt name="key" value="10">sy3li{$key}</egt>">
+                <div class="div3_tp">
+                    <a href="{:U('Goods/buy/id/')}/{$vo.goodsid}"><img src="{$vo.pic}" width="100%" class="scrollLoading" ></a>
+                </div>
+                <div class="div3_nr">
+                    <div class="div3_nr1">
+                        <div class="div3_name"><a href="{:U('Goods/buy/id/')}/{$vo.goodsid}">{$vo.title}</a></div>
+                        <div class="div3_name1">{$vo.subtitle}</div>
+                       
+                       <div class="div3_scjnav">
+                        <div class="div3_scj">
+                        <a href="{:U('Goods/buy/id/')}/{$vo.goodsid}"><p>￥{$vo.price}<neq name="vo.guige" value="">/{$vo.guige}</neq></p></a>
+                        </div>
+                        <div class="div3_scj1"><a href="{:U('Goods/buy/id/')}/{$vo.goodsid}">我要抢鲜</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </li>
+
+            
+            </foreach>
+
+        </ul>
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  </div>
+  <!-- sy_div3 --> 
+</div>
+<!-- main_div -->
+<div class="scorll_top"><a href="#scroll_top"><img src="__IMAGES__/scorll_top.png" width="30" class="scrollLoading" /></a></div>
+<!-- footer -->
+<include file="Public:foot" />
+<!-- footer --> 
+
+</body>
+
+<!-- banner -->
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+    autoplay:4000,
+        // Enable debugger
+        debugger: true
+    });
+    </script>
+<!-- banner -->
+<!--<script src="__JS__/js.js"></script>
+<script src="__JS__/jquery-2.1.1.min.js" type="text/javascript"></script>-->
+
+
+
+
+<script src="__JS__/js.js"></script>
+<script src="__JS__/jquery.easing.1.3.js.js"></script> 
+<script src="__JS__/core_plugin.js"></script> 
+<script src="__JS__/custom_effect.js.js"></script>
+
+
+
+</html>

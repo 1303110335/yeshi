@@ -1,0 +1,54 @@
+<div class="footer">
+    	<ul>
+        	<li <eq name="foottype" value="1"> id="foot_current"</eq>>
+            	<a href="{:U('/Index')}">
+                	<div class="footer_tb footer_tb01 iconfont" <eq name="foottype" value="1">style="color:#1e8250;"</eq>>
+                        <if condition="($foottype eq 1)"> 
+                            <img src="__IMAGES__/iconfont-shouye01.svg" width="100%">
+                        <else />
+                            <img src="__IMAGES__/iconfont-shouye.svg" width="100%">
+                        </if>
+                    </div>
+                    <p>首页</p>
+                </a>
+            </li>
+            <li <eq name="foottype" value="2"> id="foot_current"</eq>>
+            	<a href="{:U('Goods/category')}">
+                	<div class="footer_tb footer_tb02 iconfont" <eq name="foottype" value="2">style="color:#1e8250;"</eq>>
+                        <if condition="($foottype eq 2)"> 
+                            <img src="__IMAGES__/iconfont-fenlei01.svg" width="100%">
+                        <else />
+                            <img src="__IMAGES__/iconfont-fenlei.svg" width="100%">
+                        </if>  
+                    </div>
+                    <p>分类</p>
+                </a>
+            </li>
+            <li <eq name="foottype" value="3"> id="foot_current"</eq>> <a href="{:U('Member/shopping')}">
+              <div class="footer_tb footer_tb03 iconfont1 more_m" <eq name="foottype" value="3">style="color:#1e8250;"</eq>>
+                    <if condition="($foottype eq 3)"> 
+                        <img src="__IMAGES__/iconfont-gouwuche01.svg" width="100%">
+                    <else />
+                        <img src="__IMAGES__/iconfont-gouwuche.svg" width="100%">
+                    </if>  
+              </div>
+              	<p>购物车</p>
+              </a> </li>
+            
+            <li <eq name="foottype" value="4"> id="foot_current"</eq>>
+            	<a href="{:U('Member/main')}">
+                	<div class="footer_tb footer_tb04 iconfont" <eq name="foottype" value="4">style="color:#1e8250;"</eq>>
+                        <if condition="($foottype eq 4)"> 
+                            <img src="__IMAGES__/iconfont-jikediancanicon01.svg" width="100%">
+                        <else />
+                            <img src="__IMAGES__/iconfont-jikediancanicon.svg" width="100%">
+                        </if>   
+                    </div>
+                    <p>个人中心</p>
+                </a>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    
+ 

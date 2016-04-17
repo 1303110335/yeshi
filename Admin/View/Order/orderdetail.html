@@ -1,0 +1,185 @@
+<include file="Public:head"/>
+<div class="container">
+  <div class="inner clearfix">
+    <div class="content-left fl">
+      <dl class="left-menu shop_5 sub_signup">
+        <dt> <i class="icon-menu signup"></i> <span id="shop_5" data-id="5">订单管理</span> </dt>
+                
+        <dd class="subshop_0  <eq name="dealerid" value="">active</eq>"><a href="{:U('Admin/Order/lists')}">所有订单</a></dd>
+        <dd class="subshop_1  <eq name="dealerid" value="0">active</eq>"><a href="{:U('Admin/Order/lists/dealerid/0')}">总部</a></dd>
+        
+        <foreach name="dealerlist" item="vo" >
+            <dd class="subshop_{$key+2} <eq name="dealerid" value="$vo.id">active</eq>"><a href="{:U('Admin/Order/lists/dealerid/')}/{$vo.id}">{$vo.username}</a></dd>
+        </foreach>
+
+
+      </dl>
+      <dl class="left-menu shop_6 sub_shield">
+        <dt>
+            <i class="icon-menu shield"></i>
+            <span id="shop_6" data-id="6">售后服务</span>
+        </dt>
+        <dd class="subshop_0 "><a href="{:U('Admin/Order/goodsRefund')}">退款审核</a></dd>
+     </dl>
+     </div>
+    <!-- end content-left -->
+    
+    <div class="content-right fl">
+      <h1 class="content-right-title">订单详情</h1>
+      <div class="panel-single panel-single-light">订单编号： <span class="order-title">{$orderdetail.orderno}</span></div>
+      
+      <ul class="wizard"> 
+      <li class="wizard-item <eq name="orderdetail.orderstate" value="1">process</eq> <gt name="orderdetail.orderstate" value="1">complete</gt>" > 
+      <dl class="wizard-item-content"> 
+      <dt class="wizard-ic-step"> 
+      <span class="wizard-icstp-num">1</span> 
+      <span class="wizard-icstp-title">创建订单</span> 
+      <span class="wizard-icstp-date">{$orderdetail.addtime}</span> 
+      </dt> 
+      <dd class="wizard-ic-desc"></dd> 
+      </dl> 
+      </li> 
+      <li class="wizard-item <eq name="orderdetail.orderstate" value="2">process</eq> <gt name="orderdetail.orderstate" value="2">complete</gt>"> 
+      <dl class="wizard-item-content"> 
+      <dt class="wizard-ic-step"> 
+      <span class="wizard-icstp-num">2</span> 
+      <span class="wizard-icstp-title">买家付款</span> 
+      <span class="wizard-icstp-date">{$orderdetail.paytime}</span> 
+      </dt> 
+      <dd class="wizard-ic-desc"></dd> 
+      </dl> 
+      </li> 
+      <li class="wizard-item <eq name="orderdetail.orderstate" value="3">process</eq> <gt name="orderdetail.orderstate" value="3">complete</gt>"> 
+      <dl class="wizard-item-content"> 
+      <dt class="wizard-ic-step"> 
+      <span class="wizard-icstp-num">3</span> 
+      <span class="wizard-icstp-title">卖家发货</span> 
+      <span class="wizard-icstp-date">{$orderdetail.shippingtime}</span> 
+      </dt> 
+      <dd class="wizard-ic-desc"></dd> 
+      </dl> 
+      </li> 
+      <li class="wizard-item <eq name="orderdetail.orderstate" value="4">complete</eq>"> 
+      <dl class="wizard-item-content"> 
+      <dt class="wizard-ic-step"> 
+      <span class="wizard-icstp-num">4</span> 
+      <span class="wizard-icstp-title">确认收货</span> 
+      <span class="wizard-icstp-date">{$orderdetail.confirmtime}</span> 
+      </dt> 
+      </dl> 
+      </li> 
+      </ul>
+      
+      <div class="chartBox mgt30">
+        <div class="cb-title">订单信息</div>
+        <div class="cb-contain">
+          <ul class="info-table mgl15">
+            <li class="long"> <span class="bold">订单状态：</span> <span> <span class="colorRed">
+              <switch name="orderdetail.orderstate">
+              	<case value="1">待付款</case>
+                <case value="2">待发货</case>
+                <case value="3">待收货</case>
+                <case value="4">成功</case>
+                <case value="5">退款</case>
+                <case value="6">取消</case>
+                <default/>
+                default </switch>
+              </span> </span> 
+            </li>
+            <eq name="orderdetail.orderstate" value="5">
+              <li class="long"> <span class="bold">退款金额：</span> <span><a href=""> {$orderdetail.refund_fee}</a> </span> </li>
+            </eq>
+            <li class="long"> <span class="bold">姓　　名：</span> <span><a href=""> {$orderdetail.consignee}</a> </span> </li>
+            <li class="long"> <span class="bold">联系方式：</span> <span><a href=""> {$orderdetail.telephone}</a> </span> </li>
+            <li class="long"> <span class="bold">收货信息：</span> <span>{$orderdetail.province}－{$orderdetail.city}－{$orderdetail.district}{$orderdetail.address} </span> </li>
+            
+            <eq name="orderdetail.is_delivery" value="0">
+            <li class="long"> <span class="bold">配送方式：</span> <span>{$orderdetail.expressname}</span> </li>
+            <li class="long"> <span class="bold">　　　　　</span> <span>{$orderdetail.expressno}</span> </li>
+            </eq>
+
+            <eq name="orderdetail.is_delivery" value="1">
+            <li class="long"> <span class="bold">配送方式：</span> <span>自提</span> </li>
+            </eq>
+            
+            <eq name="orderdetail.orderstate" value="6">
+            <li class="long"> <span class="bold">取消原因：</span> <span>{$orderdetail.reason}</span> </li>
+            </eq>
+            
+            
+          </ul>
+        </div>
+        <div class="cb-contain feedback">
+          <p class="bold">买家留言:</p>
+          <div class="feedback-txt mgt5"> <span>{$orderdetail.comment}</span> 
+            <!--<a href="javascript:;" class="a_hover" id="j-feedback-mdf">修改留言</a>--> 
+          </div>
+          <!--<div class="feedback-modifyPanel mgt5">--> 
+          <!--<textarea>{$orderdetail.comment}</textarea>--> 
+          <!--<p class="mgt5">--> 
+          <!--<a href="javascript:;" class="btn btn-primary btn-small" id="j-feedback-mdf-save" data-id="2197883">保存</a>--> 
+          <!--<a href="javascript:;" class="btn btn-primary btn-small" id="j-feedback-mdf-cancel">取消</a>--> 
+          <!--</p>--> 
+          <!--</div>--> 
+        </div>
+        
+      </div>
+      
+      <table class="wxtables mgt15">
+        <colgroup>
+        <col width="55%">
+        <col width="10%">
+        <col width="15%">
+        <col width="10%">
+        <col width="15%">
+        </colgroup>
+        <thead>
+          <tr>
+            <td>商品</td>
+            <td>单价（元）</td>
+            <td>规格</td>
+            <td>数量</td>
+            <td>小计</td>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="orderdetail.orderdatails" id="vo" >
+            <tr>
+              <td><a href="javascript:void(0)" class="block" target="_blank" title="叶氏水果">
+                <div class="table-item-img"> <img src="{$vo.img}" alt=""> </div>
+                <div class="table-item-info">
+                  <p>{$vo.goodsname}</p>
+                   </div>
+                </a></td>
+              <td>¥{$vo.good_nowprice}</td>
+              <td>{$vo.guige}</td>
+              <td>{$vo.num}</td>
+              <td>¥{$vo.allprice}</td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="clearfix">
+        <ul class="order-statistics fr">
+          <li class="formitems" style="text-align:right">
+            
+            <div class="form-controls" style="text-align:right;margin-right:10px;"><b>商品小计： </b>¥{$orderdetail.total_price}</div>
+          </li>
+          <li class="formitems" style="text-align:right">
+            
+            <div class="form-controls" style="text-align:right;margin-right:10px;"><b>运费： </b>￥{$orderdetail.shipping_fee}</div>
+          </li>
+          <li class="formitems" style="text-align:right">
+            
+            <div class="form-controls realPrice" style="text-align:right;margin-right:10px;"><b>实际支付： </b>¥{$orderdetail.total_price}</div>
+          </li>
+          <li class="txtCenter" style="text-align:right;margin-right:10px;"> <a href="javascript:;" data-id="2197883" class="btn btn-primary" style=" visibility:hidden" id="j-order-modify">修改价格</a> <a href="javascript:history.back(-1);" data-id="2197883" class="btn btn-primary" id="j-order-close">返回</a> </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+
+<include file="Public:foot"/>

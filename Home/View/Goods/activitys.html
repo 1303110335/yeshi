@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>果易得</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/css.css">
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+<link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+<style>
+.listdot{
+	padding-top:10%;}
+</style>
+</head>
+<body id="scroll_top">
+<!-- top -->
+<include file="Public:top" />
+<!-- top -->
+<!-- main_div -->
+
+<div class="mtjul">
+    <ul>
+		<li style="display:block;" >
+			<!-- main_div0 -->
+			<div class="main_div" id="0">
+				<div class="listdot">
+						<img src="{$activitysImg}" width="100%" class="scrollLoading" style="margin-top:20px;">
+					<foreach name="goods" item="v" key="k">
+						<div class="listdot_left"  <?php if(($k%2)==1){?> style=" float:right;"<?php }?> >
+						<div class="listdot_left_wz">
+						<a href="{:U('Goods/buy/id')}/{$v.id}"><!--<p>YANGCHENGHU HAIRY</p>-->
+						<h1>{$v.good_name}</h1>
+						<img src="{$v.pic}" width="100%">
+						<h2><span class="price">¥{$v.price}</span></h2>
+					   <!-- <h2><font style=" text-decoration:line-through;line-height:24px">¥{$vo.old_price}</font> <span class="price">¥{$vo.price}</span>({$vo.weight}KG<neq name="vo.nums1" value="">&nbsp;/ {$vo.nums1}个</neq>)</h2>-->
+						
+						</a>
+						</div>
+						</div>
+					</foreach>
+		
+				<div class="clear"></div>  
+				</div>    
+			</div>
+			<!-- main_div0 -->
+        </li>
+    </ul>
+	
+    </div>
+
+
+
+<!-- main_div -->
+<div class="scorll_top"><a href="#scroll_top"><img src="__IMAGES__/scorll_top.png"></a></div>
+<!-- footer -->
+<include file="Public:foot"/> 
+<!-- footer --> 
+<!-- dizhi --> 
+<!-- dizhi -->
+<!--统计流量-->
+<div style="display:none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257387489'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257387489%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<!--统计流量-->
+</body>
+<script src="__JS__/jquery-1.9.1.min.js"></script>
+<!-- banner -->
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // Enable debugger
+        debugger: true
+    });
+    </script>
+<!-- banner -->
+<script src="__JS__/js.js"></script>
+
+<!-- top_menu_js -->
+<script type="text/javascript" src="__JS__/jquery.easing.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.lavalamp.min.js"></script>
+<script type="text/javascript">
+        $(function() {
+            $("#2").lavaLamp({
+                fx: "backout", 
+                speed: 700,
+                click: function(event, menuItem) {
+                    return false;
+                }
+            });
+        }); 
+    </script>
+
+<!-- top_menu_js -->
+<script>
+$(window).load(function(){
+	 $('.topmenu2>li').width($('#menu2').width()/3)
+	 var linum=$('.topmenu2>li').size()-1;
+	 $('.topmenu2').width($('.topmenu2>li').width()*linum)
+	 }) 
+
+
+$(".topmenu2 li").click(function(){
+	
+	var w = $(window).width();
+	var num = $(this).attr("id");
+//	var num1 = $("#list"+num).offset().top-10;
+//	$('html,body').animate({scrollTop:num1},500,'linear')
+	
+	$('.mtjul ul>li').stop(true).fadeOut(0);	
+	$('.mtjul ul>li').eq(num).stop(true).fadeIn(500)
+})
+
+
+
+var isdrag=false;   
+var tx,x;    
+$(function(){  
+    document.getElementById("2").addEventListener('touchend',function(){  
+        sdrag = false;  
+    });  
+    document.getElementById("2").addEventListener('touchstart',touchStart);  
+    document.getElementById("2").addEventListener('touchmove',touchMove);  
+});  
+function touchMove(e){  
+  var left=$("#2").offset().left;
+  var leftW=$('.topmenu2').width()/2;
+  if (isdrag){
+	  e.preventDefault(); 
+    var n = tx + e.touches[0].pageX - x;
+	if(n>0){
+		if(left>30){
+			$("#2").stop(true).animate({left:0},500,'linear')
+			}else{
+				$("#2").css("left",n);  
+                return false; 
+				}
+		}else{
+			if(left<-(leftW+30)){
+			$("#2").stop(true).animate({left:-leftW},500,'linear')
+			}else{
+				$("#2").css("left",n);  
+                return false; 
+				}
+		}
+   }   
+}   
+ 
+function touchStart(e){   
+   isdrag = true;  
+   tx = parseInt(document.getElementById("2").style.left+0);   
+   x = e.touches[0].pageX;    
+   return false;   
+} 
+
+
+
+
+
+</script>  
+
+
+</html>

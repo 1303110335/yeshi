@@ -1,0 +1,18 @@
+<?php
+	$retJson = file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx00dc312216f31fad&secret=0dad1ca43940dfc356d47d29052fcc25&code=".$_GET['code']."&grant_type=authorization_code");
+	$json_obj = json_decode($retJson,true);
+	$retJson = file_get_contents('https://api.weixin.qq.com/sns/userinfo?access_token='.$json_obj['access_token'].'&openid='.$json_obj['openid'].'&lang=zh_CN');  
+	$ret = json_decode($retJson,true);
+	//var_dump($retJson);exit;
+?>
+<script type="text/javascript" src="__JS__/jquery-1.8.2.min.js"></script>
+<form action="{:U('Home/User/weixinLogin')}" method="post">
+	<input type="hidden" name="openid" value="{$ret['openid']}">
+	<input type="hidden" name="truename" value="{$ret['nickname']}">
+	<input type="hidden" name="touimg" value="{$ret['headimgurl']}">
+</form>
+<script type="text/javascript">
+	$(function(){
+		$('form').submit();
+	});
+</script>

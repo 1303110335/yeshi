@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>会员卡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/css.css">
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+<link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+</head>
+<body id="scroll_top">
+<!-- top --> 
+
+<!-- top --> 
+<!-- main_div -->
+<div class="main_div">
+  <div class="yhq">
+    <div class="yhq_nav"> <a href="#">会员卡</a> </div>
+    <div class="clear"></div>
+  </div>
+  <eq name="is_vip" value="0">
+  <div class="yhq_lb">
+    <p>尊敬的{$Memberone.0.truename}：<br/>
+      欢迎来到果易得，您还没有绑定会员卡，绑定会员卡后，本店指定会员商品可享受会员价格。赶紧绑定，成为果易得会员吧！ </p>
+    <div class="xgmm_btn"> <a href="hyk2.html">
+      <p>立即绑定</p>
+      </a> </div>
+  </div>
+  </eq>
+
+  <eq name="is_vip" value="1">
+    <div class="yhq_lb">
+    <p>尊敬的{$Memberone.0.truename}：<br/>恭喜您手机号绑定成功，您已经成为果易得会员，赶紧进店选购吧！
+    </p>
+    <div class="yhq_list">
+    <img src="__IMAGES__/yhq2.png" width="100%">
+    <div class="yhkh_shuzi">NO.{$Memberone.0.vipcard}</div>
+    </div>
+    </div>
+  </eq>
+  
+
+  
+</div>
+
+<!-- main_div -->
+<!-- footer -->
+<include file="Public:foot" />
+<!-- footer --> 
+</body>
+<script src="__JS__/jquery.min.js"></script>
+<!-- banner -->
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // Enable debugger
+        debugger: true
+    });
+    </script>
+<!-- banner -->
+<script src="__JS__/js.js"></script>
+</html>

@@ -1,0 +1,187 @@
+<include file="Public:head"/>
+<div class="container">
+  <div class="inner clearfix">
+    <div class="content-left fl">
+      <dl class="left-menu shop_5 sub_signup">
+            <dt>
+                <i class="icon-menu signup"></i>
+                <span id="shop_5" data-id="5">订单管理</span>
+            </dt>
+            <dd class="subshop_0  "><a href="{:U('Admin/Order/lists')}">所有订单</a></dd>
+            <dd class="subshop_1  "><a href="{:U('Admin/Order/lists/dealerid/0')}">总部</a></dd>
+            
+      <foreach name="dealerlist" item="vo" >
+              <dd class="subshop_{$key+2} <eq name="dealerid" value="$vo.id">active</eq>"><a href="{:U('Admin/Order/lists/dealerid/')}/{$vo.id}">{$vo.username}</a></dd>
+            </foreach>
+            
+            
+            
+            
+        <!--<dd class="subshop_13 ">-->
+                    <!--<a href="/Order/export">导出订单</a>-->
+                                    <!--</dd><dd class="subshop_14 ">-->
+                    <!--<a href="/Order/del_log">删除日志</a>-->
+                                    <!--</dd><dd class="subshop_16 ">-->
+                    <!--<a href="/Order/order_import">备份订单导入</a>-->
+                                    <!--</dd> -->
+    </dl>
+      <dl class="left-menu shop_6 sub_shield">
+    <dt>
+        <i class="icon-menu shield"></i>
+        <span id="shop_6" data-id="6">售后服务</span>
+    </dt>
+    <dd class="subshop_0 active"><a href="{:U('Admin/Order/goodsRefund')}">退款审核</a></dd>
+    </dl>
+     </div>
+    <!-- end content-left -->
+    
+    <div class="content-right fl">
+      <h1 class="content-right-title">订单详情</h1>
+      <div class="panel-single panel-single-light">订单编号： <span class="order-title">{$orderdetail.orderno}</span></div>
+      
+      
+      <div class="chartBox mgt30">
+        <div class="cb-title">订单信息</div>
+        <div class="cb-contain">
+          <ul class="info-table mgl15">
+            <li class="long"> <span class="bold">订单状态：</span> <span> <span class="colorRed">
+              <switch name="orderdetail.orderstate">
+              	<case value="1">待付款</case>
+                <case value="2">待发货</case>
+                <case value="3">待收货</case>
+                <case value="4">成功</case>
+                <case value="5">退款</case>
+                <case value="6">已取消</case>
+                <case value="7">已取消</case>
+                <default/>
+                default </switch>
+              </span> </span> 
+            </li>
+            
+            
+            
+            <li class="long"> <span class="bold">姓　　名：</span> <span><a href=""> {$orderdetail.consignee}</a> </span> </li>
+            <li class="long"> <span class="bold">联系方式：</span> <span><a href=""> {$orderdetail.telephone}</a> </span> </li>
+            <li class="long"> <span class="bold">收货信息：</span> <span>{$orderdetail.province}－{$orderdetail.city}－{$orderdetail.district}{$orderdetail.address} </span> </li>
+            
+            <eq name="orderdetail.is_delivery" value="0">
+            <li class="long"> <span class="bold">配送方式：</span> <span>{$orderdetail.expressname}</span> </li>
+            <li class="long"> <span class="bold">　　　　　</span> <span>{$orderdetail.expressno}</span> </li>
+            </eq>
+
+            <eq name="orderdetail.is_delivery" value="1">
+            <li class="long"> <span class="bold">配送方式：</span> <span>自提</span> </li>
+            </eq>
+            
+            
+          </ul>
+        </div>
+        <div class="cb-contain feedback">
+          <p class="bold">买家留言:</p>
+          <div class="feedback-txt mgt5"> <span>{$orderdetail.comment}</span> 
+            <!--<a href="javascript:;" class="a_hover" id="j-feedback-mdf">修改留言</a>--> 
+          </div>
+          <!--<div class="feedback-modifyPanel mgt5">--> 
+          <!--<textarea>{$orderdetail.comment}</textarea>--> 
+          <!--<p class="mgt5">--> 
+          <!--<a href="javascript:;" class="btn btn-primary btn-small" id="j-feedback-mdf-save" data-id="2197883">保存</a>--> 
+          <!--<a href="javascript:;" class="btn btn-primary btn-small" id="j-feedback-mdf-cancel">取消</a>--> 
+          <!--</p>--> 
+          <!--</div>--> 
+        </div>
+        
+      </div>
+      
+      <table class="wxtables mgt15">
+        <colgroup>
+        <col width="55%">
+        <col width="10%">
+        <col width="15%">
+        <col width="10%">
+        <col width="15%">
+        </colgroup>
+        <thead>
+          <tr>
+            <td>商品</td>
+            <td>单价（元）</td>
+            <td>规格</td>
+            <td>数量</td>
+            <td>小计</td>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="orderdetail.orderdatails" id="vo" >
+            <tr>
+              <td><a href="javascript:void(0)" class="block" target="_blank" title="叶氏水果">
+                <div class="table-item-img"> <img src="{$vo.img}" alt=""> </div>
+                <div class="table-item-info">
+                  <p>{$vo.goodsname}</p>
+                   </div>
+                </a></td>
+              <td>¥{$vo.good_nowprice}</td>
+              <td>{$vo.guige}</td>
+              <td>{$vo.num}</td>
+              <td>¥{$vo.allprice}</td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="clearfix">
+        <ul class="order-statistics fr">
+          <li class="formitems">
+            <label class="fi-name">商品小计：</label>
+            <div class="form-controls">¥{$orderdetail.total_price}</div>
+          </li>
+          <li class="formitems">
+            <label class="fi-name">运费：</label>
+            <div class="form-controls">￥{$orderdetail.shipping_fee}</div>
+          </li>
+          <li class="formitems">
+            <label class="fi-name">实际支付：</label>
+            <div class="form-controls realPrice">¥{$orderdetail.total_price}</div>
+          </li>
+          <li class="txtCenter">
+          <form action="{:U('Admin/Order/orderUpdateRefund')}" method="post">
+            <input type="hidden" name="id" value="{$orderdetail.id}"/>
+            <input type="text" style="width:80px;height:28px;text-indent:5px" placeholder="退款金额"  name="money">
+            <input type="hidden" name="type">
+            <a href="javascript:update(2);" class="jbox-buttons-ok btn cancle btn-primary">允许退款</a>
+            <a href="javascript:update(3);" class="jbox-buttons-ok btn quxiao">不允许退款</a>
+          </form>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+
+<include file="Public:foot"/>
+<script type="text/javascript">
+  function update(type){
+    $('input[name=type]').val(type);
+    $.ajax({
+      url:$('form').attr('action'),
+      type:"post",
+      data:$('form').serialize(),
+      success:function(ret){
+        console.log(ret);
+        if(ret==1){
+          alert("操作成功");
+          if(type==2){
+            location.href="{:U('Admin/Order/lists')}/pay_type/5/dealerid";
+          }else{
+            location.href="{:U('Admin/Order/lists')}";
+          }
+        }else if(ret==2){
+          alert("退款金额不能大于商品总价");
+        }else if(ret==3){
+          alert("请输入正确的金额");
+        }else{
+          alert("操作失败");
+        }
+      }
+    });
+  }
+</script>

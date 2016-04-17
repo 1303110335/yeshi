@@ -1,0 +1,369 @@
+<include file="Public:head"/>
+<style>
+	.imgnav{
+		max-height: 30px;
+		overflow: hidden;
+		cursor: pointer;
+	}
+	.imgwrapper{
+		display: block;
+		width: 78px;
+		height: 78px;
+		overflow: hidden;
+	}
+	.imgwrapper img{
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		border:0;
+	}
+	.spanpd10{
+		margin:10px;
+	}
+	.wxtables.wxtables-sku.newtable{
+		width: 40%;
+		margin: 0;
+	}
+	.img-list li{
+		width: 60px;
+		height:60px;
+	}
+	.cst_h3 span{font-weight: normal;}
+	#imgdiv img{ max-width:190px; max-height:190px; display:none; margin:5px;}
+	.btnimage{width:80px; height:30px; background:white; border:1px solid #d9d9d9;cursor:pointer; position:relative}
+	#xuanze{ width:80px; height:30px; background:white; border:1px solid #d9d9d9;cursor:pointer; opacity:0 }
+	#xuanze:hover{ background:#E6E6E6; }
+	#imgdiv2 img{ max-width:88px; max-height:88px; display:none; margin:5px;}
+	#xuanze2{ width:60px; height:30px; background:white; border:1px solid #d9d9d9; }
+	#xuanze2:hover{ background:#E6E6E6; }
+	.huase{display:none; width:86px; height:30px; margin:5px; text-indent:5px;}
+  .youhui{ clear:both; margin:20px 0 0 120px; max-width:600px; padding:10px; }
+  .youhui span{ border:1px solid #d9d9d9; padding:2px 5px; }
+  .querygoods{ border:1px solid #d9d9d9;float:left;margin:10px;text-align:center;border-radius:5px;cursor:pointer; }
+
+	</style>
+<div class="container">
+<div class="inner clearfix">
+<include file="Public:indexleft"/>
+<!-- end content-left -->
+
+<div class="content-right fl">
+ 
+
+    <h1 class="content-right-title">查看图片</h1>
+<form aciton="{:U('/Admin/Index/editpic')}" method="post" id="add_step2" onsubmit="return toVaild()">
+<input type="hidden" name="id" id="id" value="{$editpic.id}">
+
+<div class="panel-single panel-single-light">
+    <h3 class="cst_h3 mgb20">图片信息</h3>
+    
+	<div class="formitems">
+        <label class="fi-name" style="margin-top:-4px;"><span class="colorRed">*</span>图片分类：</label>
+        <div class="form-controls"><input type="hidden" class="input large" name="classid" id="classid" value="<?php if($urlname=='indexpic'){?>1<?php }else{?>2<?php }?>">
+            <?php if($urlname=='indexpic'){?>首页切换图<?php }else{?>首页二屏展示图<?php }?>
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+    
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed">*</span>图片标题：</label>
+        <div class="form-controls">
+            <input type="text" class="input large" name="title" id="title" value="{$editpic.title}">
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+    
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed">*</span>是否文字链接：</label>
+        <div class="form-controls">
+            <div class="radio-group">
+                <label><input type="radio" name="is_urls" value="1" onclick="hide_urls()" 
+                	<eq name="editpic.is_urls" value="1">checked</eq>
+                	>否</label>
+                <label><input type="radio" name="is_urls" value="2" onclick="show_urls()"
+                	<eq name="editpic.is_urls" value="2">checked</eq>
+                	>是</label>
+              </div>
+
+          
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+    
+    <div class="formitems" id="pic_urls" <eq name="editpic.is_urls" value="1">style="display:none"</eq>>
+        <label class="fi-name"><span class="colorRed"></span>文字链接地址：</label>
+        <div class="form-controls">
+            <input type="text" class="input large" name="urls" id="urls" value="{$editpic.urls}">
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+    
+    <div class="formitems" id="pic_urls1" <eq name="editpic.is_urls" value="2">style="display:none"</eq>>
+        <label class="fi-name" style="margin-top:-4px;"><span class="colorRed"></span>选择链接：</label>
+        <div class="form-controls">
+            <input type="radio" class="input large" name="is_urls_type" value="1" <eq name="editpic.is_urls_type" value="1">checked</eq>>优惠券链接&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="input large" name="is_urls_type" value="2" <eq name="editpic.is_urls_type" value="2">checked</eq>>产品列表&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="input large" name="is_urls_type" id="urls3" value="3" <eq name="editpic.is_urls_type" value="3">checked</eq>>单个产品
+			<input type="radio" class="input large" name="is_urls_type" <eq name="editpic.is_urls_type" value="4">checked</eq> value="4" >活动产品
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+    <div class="formitems" id="signAct" <if condition="$editpic.is_urls_type neq 4">style="display:none;"</if>>
+        <label class="fi-name"><span class="colorRed">*</span>选择活动：</label>
+        <div class="form-controls">
+			<select name="activitys_id" class="select">
+            <foreach name="activitysList" item="val">
+				<option <?php if($editpic['activitys_id']==$val['id']){?>selected<?php } ?> value="{$val.id}">{$val.activitys_name}</option>
+			</foreach>
+			</select>
+        </div>
+    </div>
+    
+      <div class="formitems goodsDiv" <if condition="$editpic.is_urls_type eq 4">style="display:none;"</if>>
+        <label class="fi-name"><span class="colorRed">*</span>参与商品：</label>
+        <div class="form-controls">
+          <a href="javascript:;" class="btn btn-success fl BtnAddClass">选择商品</a>
+          <span class="fi-help-text"></span> </div>
+        <div class="youhui">
+          <span>{$editpic.goodsname}</span>
+          <input type="hidden" name="goodsid" id="goodsid" value="{$editpic.goodsid}">
+        </div>
+      </div>    
+    
+    
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed"></span>是否显示：</label>
+        <div class="form-controls">
+            <div class="radio-group">
+                <label><input type="radio" name="is_show" value="1" 
+                	<eq name="editpic.is_show" value="1">checked</eq>
+                	>显示</label>
+                <label><input type="radio" name="is_show" value="0" 
+                	<eq name="editpic.is_show" value="0">checked</eq>
+                	>隐藏</label>
+              </div>
+
+          
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+    
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed">*</span>排序：</label>
+        <div class="form-controls">
+            <input type="text" class="input large" name="sequence" id="sequence" value="{$editpic.sequence}">
+            数值越大排在越前面<span class="fi-help-text"></span>
+        </div>
+    </div>
+    
+    <div class="formitems">
+            <label class="fi-name">浏览图片：</label>
+            <div class="form-controls pdt5 j-imglistPanel">
+            	<div class="showimge fl mgr10">
+                	<neq name="editpic.pic" value="">
+						<img src="{$editpic.pic}" height="80"><input type="hidden" name="pic" id="pic" value="{$editpic.pic}">
+                    </neq>
+                </div>
+                <div class="btnimage fl">
+                	<div style="position:absolute; left:16px; top:5px">选择图片</div>
+                    <input type="file"  accept="image/*" name="serial" id="xuanze" >
+                </div>
+                <div class="progress1 fl mgr15" style="display:none"><img src="__IMAGES__/loadings.gif" width="30" /><span class="percent1">80%</span></div>
+                <span class="fi-help-text fl lh30 mgl10">建议大小（<?php if($urlname=='indexpic'){?>宽900高580<?php }else{?>宽900高350<?php }?>）</span>
+            </div>
+     </div>
+    
+    
+</div>
+<!-- end 基本信息 -->
+
+
+
+
+<div class="panel-single panel-single-light mgt20 txtCenter">
+    <a href="javascript:history.back(-1)" class="btn">返回</a>
+    <input type="submit" class="btn btn-primary" value="修改">
+</div>
+
+<div class="jbox addfenlei disshow" style="width:900px;margin-left:-450px;">
+          <div class="jbox-title">
+            <div class="jbox-title-txt">选择商品</div>
+            <a href="javascript:;" class="jbox-close cancle quxiao"></a></div>
+          <div class="jbox-container" style="height: 263px;">
+            <foreach name="goods" item="vo" >
+            <div class="querygoods" data-id="{$vo.id}" data-title="{$vo.good_name}" <?php if(in_array($vo['id'],$editmarketing['goods_ids'])){ ?>style="border-color:red;"<?php } ?>>
+              <br/>
+              <img src="{$vo.pic}" style="max-width:120px;max_height:80px;"><br/>
+              {$vo.good_name}<br/><br/>
+            </div>
+            </foreach>
+            
+            
+          </div>
+          <div class="jbox-buttons">
+            <a href="javascript:void(0);" class="jbox-buttons-ok btn cancle btn-primary">确定</a>
+            <a href="javascript:void (0);" class="jbox-buttons-ok btn quxiao">取消</a>
+          </div>
+        </div>
+
+
+</form>
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<include file="Public:foot"/>
+
+
+
+<!--提交表单前验证-->
+<script type="text/javascript" src="__JS__/jquery-form.js"></script>
+
+
+<script type="text/javascript">
+    var goodsel = Array(),goodselnam = Array();
+
+	
+    $(".BtnAddClass").click(function(){
+        $('.jbox-container input[type=checkbox]').each(function(i){
+          if($(this).attr('checked')){
+            goodsel[i] = true;
+            goodselnam[i] = $(this).attr('valname');
+            $(this).parent().css('border-color','red');
+          }else{
+            goodsel[i] = false;
+            $(this).parent().css('border-color','#d9d9d9');
+          }
+        });
+        $('.addfenlei').show();
+        $('#albums-overlay').show();
+    });
+	
+	
+	$('.querygoods').click(function(){
+		$('.querygoods').css('border','1px solid #d9d9d9');
+		$('.querygoods').attr('check','0');
+		$(this).attr('check','1');
+		$(this).css('border','1px solid #FF0000');
+	})
+	
+    $(".cancle").click(function(){
+        var html = "";
+        $('.querygoods').each(function(){
+		  var check = $(this).attr('check');
+		  var id = $(this).attr('data-id');
+		  var title = $(this).attr('data-title');
+		  console.log(check);
+		  if(check == 1)
+		  {
+		     html = '<span>'+ title +'</span><input type="hidden" value="'+ id +'" name="goodsid" id="goodsid" >';
+		  }
+        });
+		
+        $('.youhui').html(html);
+        $(this).parent().parent('.jbox').hide();
+        $('#albums-overlay').hide();
+    });
+	
+    $('.quxiao').click(function(){
+      $(this).parent().parent('.jbox').hide();
+      $('#albums-overlay').hide();
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+
+	$(function () { 
+		var percent = $('.percent1'); 
+		var progress = $('.progress1');
+		$("#xuanze").wrap("<form id='myupload1' action='{:U('/Admin/Category/addImage')}' method='post' enctype='multipart/form-data'></form>"); 
+		$("#xuanze").change(function(){ //选择文件 
+			$("#myupload1").ajaxSubmit({ 
+				dataType:  'json', //数据格式为json 
+				beforeSend: function() { //开始上传 
+					progress.show(); //显示进度条
+					var percentVal = '0%';
+					percent.html(percentVal);	
+				}, 
+				uploadProgress: function(event, position, total, percentComplete) { 
+					var percentVal = percentComplete + '%'; //获得进度 
+					percent.html(percentVal); //显示上传进度百分比 
+				}, 
+				success: function(data) { //成功 
+					console.log(data);
+					var img = '<img src="'+data[0]["savepath"].substr(1)+data[0]["savename"]+'" height="80" ><input type="hidden" name="pic" id="pic" value="'+data[0]["savepath"].substr(1)+data[0]["savename"]+'"></input>';
+					$('.showimge').html(img);
+					progress.hide();
+				}, 
+				error:function(xhr){ //上传失败 
+					//console.log(xhr.status)
+				} 
+			}); 
+		}); 
+	}); 
+
+
+
+</script>
+<!--提交表单前验证end-->
+
+
+
+<script type="text/javascript">
+    var pathimg='__IMAGES__';
+    var url='__URL__';
+    var delurl="{:U('/Admin/Goods/del')}";
+
+    function qiehuan(va){
+        if(va==1){
+            $('#hdup').css('display','none');
+            $('#hd_up').css('display','block');
+        }else{
+            $('#hd_up').css('display','none');
+            $('#hdup').css('display','block');
+        }
+    }
+    function updatehdid(id){
+        $.ajax({
+            url:'{:U("Admin/Member/updatehdid")}',
+            type:'post',
+            data:{'id':id,'hdid':$('#hdid').val()},
+            success:function(ret){
+                ret = $.trim(ret)
+                if('0'==ret){
+                    alert('修改成功!');
+                }else if('3'==ret){
+                    alert('该编号已存在!');
+                }else{
+                    alert('修改失败!');
+                }
+                window.location.href=window.location.href;
+            }
+        });
+    }
+	function show_urls(){
+		$('#pic_urls').show();
+		$('#pic_urls1').hide();
+		}
+	function hide_urls(){
+		$('#pic_urls').hide();
+		$('#pic_urls1').show();
+		}
+$('input[name=is_urls_type]').click(function(){
+	if($(this).val()==4){
+		$('.goodsDiv').css('display','none');
+		$('#signAct').css('display','block');
+	}else{
+		$('#signAct').css('display','none');
+		$('.goodsDiv').css('display','block');
+	}
+});
+</script>
+<!--上传图片-end->
+
+

@@ -1,0 +1,166 @@
+<include file="Public:head"/>
+    <!-- end header -->
+
+    <div class="container">
+        <div class="inner clearfix">
+            <div class="content-left fl">
+
+                <dl class="left-menu shop_2 sub_commodity">
+                    <dt>
+                        <i class="icon-menu commodity"></i>
+                        <span id="shop_2" data-id="2">产品管理</span>
+                    </dt>
+                    <dd class="subshop_0 ">
+                        <a href="{:U('/Admin/Goods/add')}">发布产品</a>
+                    </dd>
+                    <dd class="subshop_6">
+                        <a href="{:U('/Admin/Goods/index')}">出售中的产品</a>
+                    </dd>
+                    <dd class="subshop_7 active">
+                        <a href="{:U('/Admin/Goods/onsku')}">仓库中的产品</a>
+                        <i class="icon_hot"></i></dd>
+                    <dd class="subshop_8 ">
+                        <a href="{:U('/Admin/Goods/outstock')}">已售罄的产品</a>
+                    </dd>
+                    <dd class="subshop_9 ">
+                        <a href="{:U('/Admin/Category/warn')}">警戒的产品</a>
+                    </dd>
+                    <!--<dd class="subshop_12 ">-->
+                    <!--                    <a href="/Item/category_list">自定义类目</a>-->
+                    <!--</dd>-->
+                </dl>
+                <dl class="left-menu shop_3 sub_tags">
+                    <dt>
+                        <i class="icon-menu tags"></i>
+                        <span id="shop_3" data-id="3">分组管理</span>
+                    </dt>
+                    <dd class="subshop_0 ">
+
+                        <a href="{:U('/Admin/Category/category')}">产品分类</a>
+                    </dd>        </dl>
+				<dl class="left-menu shop_3 sub_tags">
+                <dt>
+                    <i class="icon-menu tags"></i>
+                    <span id="shop_3" data-id="3">积分商品管理</span>
+                </dt>
+                <dd class="subshop_0">
+
+                    <a href="{:U('/Admin/Distribution/add')}">发布商品</a>
+                </dd>  
+                
+                <dd class="subshop_0">
+
+                    <a href="{:U('/Admin/Distribution/index')}">积分商品</a>
+                </dd>        
+                
+                </dl>
+            </div>
+            <!-- end content-left -->
+
+            <div class="content-right fl">
+
+
+                <h1 class="content-right-title">产品列表</h1>
+
+
+                <a href="{:U('/Admin/Goods/add')}" class="btn btn-success">发布产品</a>
+
+                <form action="" method="post">
+                    <div class="tables-searchbox newcearchbox">
+                        <select name="group_id" class="select small newselect">
+                            <option value="-1" selected="">所有分组</option>
+                        </select>
+                        <select name="class_id" class="select small newselect">
+                            <option value="-1" selected="">所有分类</option>
+                        </select>
+                        <input type="text" placeholder="产品名称" class="input small" name="title" value="">
+                        <input type="text" placeholder="商家编码" class="input mini" name="goods_no" value="">
+                        <button class="btn btn-primary" style="line-height:26px;"><i class="gicon-search white"></i>查询
+                        </button>
+                        <a href="/Item/item_export" class="btn btn-warning"><i
+                                class="gicon-share white"></i>产品导出</a>
+                    </div>
+                    <div class="tabs clearfix mgt10">
+                        <a href="{:U('/Admin/Goods/index')}" class=" tabs_a fl">出售中(3)</a>
+                        <a href="{:U('/Admin/Goods/onsku')}" class="active tabs_a fl">仓库中(0)</a>
+                        <a href="{:U('/Admin/Goods/outstock')}" class=" tabs_a fl">已售罄(1)</a>
+                        <a href="{:U('/Admin/Goods/warn')}" class=" tabs_a fl">警戒(0)</a>
+
+                        <div class="grounp_chenge_box fr">
+                            <span class="grtt">每页显示产品数量:</span>
+                            <a class="intem  cur " href="javascript:;">10</a>
+                            <a class="intem  " href="javascript:;">20</a>
+                            <a class="intem  " href="javascript:;">40</a>
+                            <a class="intem  " href="javascript:;">50</a>
+                        </div>
+                    </div>
+                </form>
+                <!-- end tabs -->
+
+                <table class="wxtables mgt10">
+                    <colgroup>
+                        <col width="2%">
+                        <col width="30%">
+                        <col width="8%">
+                        <col width="7%">
+                        <col width="6%">
+                        <col width="8%">
+                        <col width="9%">
+                        <col width="26%">
+                    </colgroup>
+                    <thead>
+                    <tr class="po_list">
+                        <td><i class="icon_check"></i></td>
+                        <td>产品<span></span></td>
+                        <td>库存
+                      <span>
+                            <a href="/Item/lists/item_status/onsku/num/up"
+                               class="up "><b></b></a>
+                            <a></a>
+                            <a href="/Item/lists/item_status/onsku/num/down"
+                               class="down "><b></b></a>
+                        </span>
+                        </td>
+                        <td>总销量<span></span></td>
+                        <td>排序<span></span></td>
+                        <td>分类<span></span></td>
+                        <td>创建时间
+                      <span>
+                            <a href="/Item/lists/item_status/onsku/create_time/up"
+                               class="up "><b></b></a>
+                            <a></a>
+                            <a href="/Item/lists/item_status/onsku/create_time/down"
+                               class="down "><b></b></a>
+                        </span>
+                        </td>
+                        <td>操作<span></span></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="7">暂无信息</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+                <!-- end wxtables -->
+                <div class="tables-btmctrl clearfix">
+                    <div class="fl">
+                    </div>
+
+                    <div class="fr">
+                        <div class="paginate">
+                        </div>
+                        <!-- end paginate -->
+                    </div>
+                </div>
+                <!-- end tables-btmctrl -->
+
+
+            </div>
+            <!-- end content-right -->
+        </div>
+    </div>
+    <!-- end container -->
+
+<include file="Public:foot"/>

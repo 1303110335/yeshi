@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改收货地址</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/css.css">
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/jquery.selectlist.css">
+<script src="__JS__/pccs.js"  type="text/javascript"></script>
+
+<script type="text/javascript" src="__JS__/jquery-2.1.1.min.js"></script>  
+<script type="text/javascript" src="__JS__/GlobalProvinces_main.js"></script>
+
+<script type="text/javascript" src="__JS__/GlobalProvinces_extend.js"></script>
+
+<script type="text/javascript" src="__JS__/initLocation.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A607d61b18d43a1ff27abf4ac67da83c"></script> 
+
+<style>
+.dzinput{
+	-webkit-appearance:none;
+	}
+.ssk_xla {
+	-webkit-appearance:none;
+	padding-left:0% !important;
+	border:1px solid #ccc !important;
+	border-radius: 5px;
+	background:#FFF;
+	width:250px !important;
+	margin-left:30px;
+	color:#888 !important;
+	height:35px !important;
+	padding-left:10px !important;
+	
+	}
+.ctrl_s input {
+	width: 60%;
+	color: #fff;
+	border-radius: 5px;
+	background: orange;
+	font-size: 16px;
+	text-align: center;
+	line-height: 40px;
+	margin-top: 5%;
+	border:none;
+	cursor:pointer;
+	margin-left:20%;
+	}
+</style>
+</head>
+<body id="scroll_top">
+<!-- top --> 
+
+<!-- top --> 
+<!-- main_div -->
+<div class="main_div">
+  <div class="shdz">
+    <div class="shdz_bt">
+      <p>收货地址</p>
+    </div>
+    <div class="clear"></div>
+    <div class="shdz_xq">
+    <form action="" method="post">
+      <ul>
+        <li style=" padding-top:30px;">
+          <p>默认地址</p>
+          <font class="dzform">
+            <label>
+              <input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_0" <?php if($def==$addressedit['id']){ ?>checked<?php } ?>>
+              是</label>
+            <label>
+              <input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_1" <?php if($def!=$addressedit['id']){ ?>checked<?php } ?>>
+              否</label>
+              </font>
+            <br>
+          <div class="clear"></div>
+        </li>
+        <li>
+          <p>收货人</p>
+          <input class="dzinput" name="consignee" id="consignee" type="text" value="{$addressedit.consignee}" >
+        </li>
+        <li>
+          <p>手机号</p>
+          <input class="dzinput" name="telephone" id="telephone" type="text" value="{$addressedit.telephone}" >
+        </li>
+        <li>
+          <p>省份</p>
+          <!--<input class="dzinput" name="" type="text">-->
+          <!--<select class="ssk_xla"  name="province" id="province" >-->
+          <select class="ssk_xla" id="sheng" name="province" onChange="searchByStationName();"></select>
+    </select>
+        </li>
+        <li>
+          <p>城市</p>
+          <!--<input class="dzinput" name="" type="text">-->
+          <!--<select class="ssk_xla" name="city" id="city" >-->
+          
+          <select class="ssk_xla" id="shi" name="city" onChange="searchByStationName();" ></select>
+    </select>
+        </li>
+        <li>
+          <p>区/县</p>
+          <!--<input class="dzinput" name="" type="text">-->
+          <!--<select class="ssk_xla" name="county" id="county">-->
+          <select id="xian" class="ssk_xla" name="country"  onChange="searchByStationName();"></select>
+    </select>
+        </li>
+        <script type="text/javascript" charset='utf-8'>
+
+          $(function(){initLocation({sheng_val:"<?=$addressedit['province']?>",shi_val:"<?=$addressedit['city']?>",xian_val:"<?=$addressedit['country']?>",xiang_val:"<?=$addressedit['xiangqing']?>"});})
+
+      </script>  
+        <script language="javascript">
+        setup() 
+    </script>
+    <input type="hidden" name="id" value="{$addressedit.id}">
+        <li>
+          <p>详细地址</p>
+          <input class="dzinput" name="xiangqing"  id="xiangqing" type="text" value="{$addressedit.xiangqing}"  onkeyup="searchByStationName();" >
+          <input id="result_" type="text" name="dingwei" value="{$addressedit.dingwei}"  />
+        </li>
+      </ul>
+      </form>
+      <div class="shdz_btn"> <a href="javascript:void(0)">
+        <p>确认 </p>
+        </a> </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+<!-- main_div -->
+<include file="Public:foot" />
+<!-- footer --> 
+<!-- footer --> 
+</body>
+<script src="__JS__/jquery.min.js"></script>
+
+<script type="text/javascript">
+    var map = new BMap.Map("container");
+
+
+    var localSearch = new BMap.LocalSearch(map);
+    localSearch.enableAutoViewport(); //允许自动调节窗体大小
+
+	function searchByStationName() {
+		map.clearOverlays();//清空原来的标注
+		var sheng = document.getElementById("sheng").value;
+		var shi = document.getElementById("shi").value;
+		var qu = document.getElementById("xian").value;
+		var keyword = document.getElementById("xiangqing").value;
+		
+		
+		keyword = sheng+shi+qu+keyword;
+		localSearch.setSearchCompleteCallback(function (searchResult) {
+			var poi = searchResult.getPoi(0);
+			document.getElementById("result_").value = poi.point.lng + "," + poi.point.lat;
+		});
+		localSearch.search(keyword);
+		
+	} 
+</script>
+
+<script src="__JS__/js.js"></script>
+<!-- xlk_js -->
+<!--<script src="js/jquery-1.9.1.min.js"></script>-->
+<script src="__JS__/jquery.selectlist.js"></script>
+<script>
+$(function () {
+        $(".shdz_btn a").click(function () {
+          alert($('#result_').val());
+            var consignee = $('#consignee').val();
+            var telephone = $('#telephone').val();
+			var obj = document.getElementsByName("RadioGroup1");
+			for(var i=0; i<obj.length; i ++){
+				if(obj[i].checked){
+					var RadioGroup1=obj[i].value;
+				}
+			}
+			var obj = document.getElementsByName("address_type");
+			for(var i=0; i<obj.length; i ++){
+				if(obj[i].checked){
+					var address_type=obj[i].value;
+				}
+			}
+			var province = $('#province').val();
+			var city = $('#city').val();
+			var county = $('#county').val();
+			var xiangqing = $('#xiangqing').val();
+			
+            if (consignee == '') {
+                alert("请填写收货人！");
+				$('#consignee').focus();
+                return false;
+            }
+            if (telephone == "") {
+				alert("请填写手机号码!");
+				$('#telephone').focus();
+				return  false;
+				}else{ 
+					var reg1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;     
+						var r = telephone.match(reg1);    
+        				if(r==null) {  
+        				alert('对不起，您输入的手机格式不正确!'); //请将"日期"改成你需要验证的属性名称! 
+							$('#telephone').focus();
+						return  false;
+				}
+				}
+            if (xiangqing == "") {
+                alert('请填写详细地址');
+				$('#xiangqing').focus();
+                return false;
+            }
+			
+            /*$.ajax({
+                url: "{:U('/Home/Member/update_ress')}",
+                type: "post",
+                dataType: "json",
+                async:false,
+                data: $('form').serialize(),
+            }).done(function (g) {
+      				if(g==1){
+                alert('修改成功');
+                location.href="{:U('Home/Member/address')}";
+              }else{
+                alert('修改失败');
+              }
+      				//location.href=g.url;
+            })*/
+
+        })
+		
+		
+    })
+</script>
+<!-- xlk_js -->
+</html>

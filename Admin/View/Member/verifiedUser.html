@@ -1,0 +1,159 @@
+<include file="Public:head"/>
+
+<style>
+        .imgnav{
+            max-height: 30px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .imgwrapper{
+            display: block;
+            width: 78px;
+            height: 78px;
+            overflow: hidden;
+        }
+        .imgwrapper img{
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border:0;
+        }
+        .spanpd10{
+            margin:10px;
+        }
+        .wxtables.wxtables-sku.newtable{
+            width: 40%;
+            margin: 0;
+        }
+        .img-list li{
+            width: 60px;
+            height:60px;
+        }
+        .cst_h3 span{font-weight: normal;}
+    </style>
+
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+
+        <dl class="left-menu shop_8 sub_membership">
+                <dt>
+                    <i class="icon-menu membership"></i>
+                    <span id="shop_8" data-id="8">会员管理</span>
+                </dt>
+                <dd class="subshop_0">
+                    <a href="{:U('/Admin/Member/index')}">会员列表</a>
+                </dd>
+                <dd class="subshop_0 active">
+                    <a href="{:U('/Admin/Member/verified')}">会员实名认证</a>
+                </dd>
+            </dl>
+</div>
+<!-- end content-left -->
+
+<div class="content-right fl">
+ 
+
+    <h1 class="content-right-title">查看详情</h1>
+    
+    
+<input type="hidden" id="j-isSid" value="0"><!-- 是否选择了淘宝类目 -->
+<input type="hidden" id="j-hasNorms" value="1"><!-- 淘宝类目下是否有属性 -->
+<input type="hidden" id="supplier" value="">
+
+<form aciton="{:U('/Admin/Member/edit')}" method="post" id="add_step2" onsubmit="return toVaild()">
+<div class="panel-single panel-single-light mgt20">
+    <h3 class="cst_h3 mgb20">基本信息</h3>
+    <div>
+    <div class="formitems">
+        <label class="fi-name">头像：</label>
+        <div class="form-controls pdt3"><img src="__UPLOAD__/{$memberZhen.touimg}" alt="" width="50" ></div>
+    </div>
+    
+    
+    
+    <div class="formitems">
+        <label class="fi-name">昵称/手机：</label>
+        <div class="form-controls pdt3">{$memberZhen.telephone}</div>
+    </div>
+    
+    <div class="formitems">
+        <label class="fi-name">姓名：</label>
+        <div class="form-controls pdt3">{$memberZhen.truename}</div>
+    </div>
+    
+    <div class="formitems">
+        <label class="fi-name">会员等级：</label>
+        <div class="form-controls pdt3">
+        	<switch name="vo.dengji">
+                <case value="1">一级分销商</case>
+                <case value="2">二级分销商</case>
+                <case value="3">三级分销商</case>
+                <case value="4">四级分销商</case>
+                <case value="5">五级分销商</case>
+                <default/>普通会员
+            </switch>
+        </div>
+    </div>
+    <div class="formitems">
+        <label class="fi-name">申请时间：</label>
+        <div class="form-controls pdt3">{$memberZhen.addtime}</div>
+    </div>
+	</div>
+        
+
+</div>
+<!-- end 基本信息 -->
+
+<div class="panel-single panel-single-light mgt20">
+    <h3 class="cst_h3 mgb20">图片信息</h3>
+    <div class="formitems">
+        <label class="fi-name">身份证正面照片：</label>
+        <div class="form-controls" style="padding-top:5px">
+            <img src="/Uploads/Picture/verified/{$memberZhen['pic'][0]}" width="500">
+        </div>
+    </div>
+    
+
+
+    <div class="formitems">
+        <label class="fi-name">身份证反面照片：</label>
+        <div class="form-controls" style="padding-top:5px">
+            <img src="/Uploads/Picture/verified/{$memberZhen['pic'][1]}" width="500">
+        </div>
+    </div>
+
+    <div class="formitems">
+        <label class="fi-name">银行卡照片：</label>
+        <div class="form-controls" style="padding-top:5px">
+            <img src="/Uploads/Picture/verified/{$memberZhen['pic'][2]}" width="500">
+        </div>
+    </div>
+    
+    
+</div>
+<!-- end 产品信息 -->
+
+
+<div class="panel-single panel-single-light mgt20 txtCenter">
+	<div style="width:50%;height:100%;float:left;">
+		<a href="{:U('/Admin/Member/verified',array('id'=>$memberZhen['id'],'status'=>1))}" class="btn">审核成功</a>
+	</div>
+    <div style="width:50%;height:100%;float:left;text-align:left;">
+    	<a href="{:U('/Admin/Member/verified',array('id'=>$memberZhen['id'],'status'=>3))}" class="btn">审核失败</a>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+</form>
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<include file="Public:foot"/>
+
+

@@ -1,0 +1,67 @@
+<include file="Public:head"/>
+
+
+<div class="container">
+<div class="inner clearfix">
+  <include file="Public:indexleft"/>
+  <!-- end content-left -->
+  
+  <div class="content-right fl">
+    <h1 class="content-right-title">活动管理</h1>
+    <a href="{:U('/Admin/Activity/activitys')}" class="btn btn-success">新增活动</a>
+    <form action="" method="get">
+      <div class="tables-searchbox newcearchbox">
+        <input type="text" placeholder="标题名称" class="input" name="title" value="" >
+        <button class="btn btn-primary" style="line-height:26px;"> <i class="gicon-search white"></i>查询 </button>
+      </div>
+      <div class="tabs clearfix mgt10"> <a href="javascript:void (0)" class="active tabs_a fl">活动商品({$count})</a> 
+        
+      </div>
+    </form>
+    <!-- end tabs -->
+    
+    <table class="wxtables mgt10">
+      <colgroup>
+      <col width="5%">
+      <col width="25%">
+      <col width="25%">
+      <col width="10%">
+      <col width="10%">
+      </colgroup>
+      <thead>
+        <tr class="po_list">
+          <td><i class="icon_check"></i></td>
+          <td>标题<span></span></td>
+          <td>图片浏览</td>
+          <td>是否结束</td>
+          <td>操作<span></span></td>
+        </tr>
+      </thead>
+      <tbody>
+        <foreach name="list" item="vo">
+          <tr>
+            <td><input type="checkbox" class="checkbox table-ckbs" data-id=""></td>
+            <td>{$vo.activitys_name}</td>
+            <td><img src="{$vo.activitys_img}" height="60" /></td>
+            <td>
+            <div class="serialwrap">
+             <a style='color:#<if condition="($vo.is_close eq 0) ">0C0<else />c00</if>;font-size:20px;text-align:center;cursor:pointer;'><if condition="($vo.is_close eq 0) ">√<else />×</if></a>
+              
+           </div>
+            </td>
+            <td>
+            <a href="{:U('/Admin/Activity/activity_detail/id')}/{$vo.id}" class="btn btn-primary j-editClass" title="修改">编辑</a> </td>
+          </tr>
+        </foreach>
+      </tbody>
+    </table>
+    <!-- end wxtables -->
+    <div class="fr">
+          <div class="pages"> {$page} </div>
+          <!-- end paginate --> 
+        </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+<include file="Public:foot"/>

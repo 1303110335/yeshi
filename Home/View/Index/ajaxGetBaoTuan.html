@@ -1,0 +1,34 @@
+<style type="text/css">
+  .main_div:last-of-type{ padding-bottom:140px; }
+</style>
+<foreach name="goodsList" item="vo" key="k">
+<div class="main_div" <?php if($k==0){ ?>style="margin-top:-14%;"<?php } ?>>
+      <div class="list" <?php if($k==0){ ?>style="padding-top:16.5%;"<?php } ?>>
+         <a href="{:U('Home/Goods/buy')}/id/{$vo.id}"><img src="{$vo.pic2}" width="98%" style="margin:0 auto; display:block"></a>
+         <div style="<?php if($k==0){ ?>margin-top:15%;<?php } ?> width:34px; height:34px; border:2px solid #F90; color:#F90; background:white; border-radius:34px; line-height:32px; text-align:center; position:absolute; top:-2px;left:0">
+           <div style=" width:30px; height:30px; border:1px solid #F90; color:#F90; border-radius:30px; margin-top:1px;">{$vo.recommend_gnum}折</div>
+         </div>
+      </div>
+       
+      <div class="cen">
+          <div class="title1">{$vo.good_name1}</div>
+        <div class="neiron" style="height:auto;">{$vo.resource}</div>
+       </div>
+      <div class="tuan" style="width:95%;">
+       
+        <div class="tubiao"><img src="__IMAGES__/slo_03.png" width="100%"></div>
+         
+      
+        <div class="price1">
+          <div class="r">{$vo.group_num}人团</div>
+          <span>￥{$vo.groupprice}</span>
+          <button style=" border:none; border-bottom:none; width:72px; float:left;background:none;">
+            <a href="{:U('Home/Goods/buy')}/id/{$vo.id}">
+          <img src="__IMAGES__/1.png" width="100%">
+          </a>
+          </button>
+        </div>
+     </div>
+    </div>
+</foreach>
+    

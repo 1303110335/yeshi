@@ -1,0 +1,427 @@
+<include file="Public:head"/>
+
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+    <dl class="left-menu shop_7 sub_users">
+            <dt>
+                <i class="icon-menu users"></i>
+                <span id="shop_7" data-id="7">分销商</span>
+            </dt>
+            <dd class="subshop_0 active">
+                    <a href="{:U('/Admin/Member/apply_list')}">分销商审核</a>
+                                    </dd><dd class="subshop_1 ">
+                    <a href="{:U('/Admin/Member/agent_list')}">分销商管理</a>
+                                    </dd>
+<!--                    <dd class="subshop_6 ">-->
+<!--                    <a href="/User/agent_rank">分销商等级</a>-->
+<!--                                    </dd>-->
+<!--                    <dd class="subshop_12 ">-->
+<!--                    <a href="/User/export/type/2">分销商导出</a>-->
+<!--                                    </dd><dd class="subshop_13 ">-->
+<!--                    <a href="/User/agent_group_list">分销商分组</a>-->
+<!--                                    </dd><dd class="subshop_18 ">-->
+<!--                    <a href="/User/agent_sort">佣金排名设置</a>-->
+<!--                                    </dd><dd class="subshop_23 ">-->
+<!--                    <a href="/User/commission_log">佣金调整日志</a>-->
+<!--                                    </dd><dd class="subshop_26 ">-->
+<!--                    <a href="/User/apply_log">分销商审核日志</a>-->
+<!--                                    </dd>  -->
+
+            </dl></div>
+<!-- end content-left -->
+
+<div class="content-right fl">
+ 
+
+    <h1 class="content-right-title">分销商审核</h1>
+    
+    
+    <div class="tablesWrap">
+        <form action="" method="post" name="form1">
+	    <div class="tables-searchbox">
+            <input type="text" class="input mini" name="agent_name" value="" placeholder="姓名">
+            <input type="text" class="input mini" name="nickname" value="" placeholder="微信昵称">
+            <input type="text" class="input" name="mobile" value="" placeholder="手机号码">
+	        <input type="text" autocomplete="off" name="start_time" value="" placeholder="申请时间" class="input Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd&#39;})">
+	        <span class="mgr5">至</span>
+	        <input type="text" autocomplete="off" name="end_time" value="" placeholder="申请时间" class="input Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd&#39;})">
+	        <button class="btn btn-primary"><i class="gicon-search white"></i>查询</button>
+	    </div>
+        </form>
+	    <!-- end tables-searchbox -->
+	    <table class="wxtables">  
+            <colgroup>  
+                <col width="4%">
+                <col width="20%">
+                <col width="15%">
+                <col width="10%">
+                <col width="15%">
+                <col width="10%">
+                <col width="26%">
+                <col>
+            </colgroup>
+            <thead>  
+                <tr>  
+                	<td><i class="icon_check"></i></td>
+                    <td>手机号码(申请人)</td> 
+                    <td>详细地址</td>
+                    <td>总消费金额</td>
+                    <td>申请/审核时间</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>  
+            </thead>
+            <tbody>
+                <tr><td colspan="10">暂无信息</td></tr>
+                            </tbody>
+        </table>
+	    <!-- end wxtables -->
+        	    <!-- end tables-btmctrl -->
+	</div>
+	<!-- end tablesWrap -->
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<!--gonggao-->
+<div class="footer">© 2016 叶氏兄弟微信商城 , Inc. All rights reserved.</div>
+<!-- end footer -->
+    <div class="fixedBar" style="left: 1321px; height: 24px; top: 76px; margin-top: 0px;">
+        <ul>
+            <li class="shopManager7 cur"><a href="javascript:;" data-target="#shop_7">分销商</a></li>        </ul>
+    </div><a href="/User/apply_lists#" id="j-gotop" class="gotop" title="回到顶部" style="left: 1322.5px;"></a>
+<!-- end gotop -->
+
+<script type="text/j-template" id="tpl_tooltips">
+	<div class="tooltips" style="display:none;">
+	    <span class="tooltips-arrow tooltips-arrow-<%= placement %>"><em>◆</em><i>◆</i></span>
+	    <%= content %>
+	</div>
+</script>
+<!-- end tooltips -->
+
+<script type="text/j-template" id="tpl_hint">
+	<div class="hint hint-<%= type %>"><%= content %></div>
+</script>
+<!-- end hint -->
+
+<script type="text/j-template" id="tpl_jbox_simple">
+	<div class="mgt30"><%= content %></div>
+</script>
+<!-- end tpl_jbox_simple -->
+
+<script type="text/j-template" id="tpl_qrcode">
+	<div id="qrcode">
+		<img src="<%= src %>">
+		<a href="javascript:;" class="qrcode-btn j-closeQrcode"><i class="gicon-remove white"></i></a>
+	</div>
+</script>
+<!-- end qrcode -->
+
+<script type="text/j-template" id="tpl_verify_set">
+	
+	<div class="tabs clearfix mgt15" id="verify-set-tabs">    
+	    <a href="javascript:;" class="tabs_a fl active">店铺信息设置</a>
+	    <a href="javascript:;" class="tabs_a fl">微信设置</a>
+	    <a href="javascript:;" class="tabs_a fl">提成设置</a>
+	</div>  
+	<form action="" method="post" id='form-set'>
+
+		<!-- 店铺信息 -->
+		<div class="panel-single panel-single-light mgt20 verify-set-div ">
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>店铺名称：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="title" value="chandler">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>联系人：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="contact_name" value="qjw">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>联系电话：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="contact_phone" value="15267142067">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name">店铺简介：</label>
+				<div class="form-controls">
+					<textarea class="textarea" name="description"></textarea>
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+		</div>
+		<!-- 微信 -->
+		<div class="panel-single panel-single-light mgt20 verify-set-div hide">
+			<div class="alert alert-info">开通微信营销需要绑定微信公众帐号，不知道怎么绑定请参考 <a href="/PubMarketing/setting_guide" target="_blank" class="a_hover">开通指引</a></div>
+
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>名称：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="pub_name" value="">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>原始ID：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="source_id" value="">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>微信号：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="pub_account" value="">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems" style="margin-top:30px;">  
+				<label class="fi-name">回调URL：</label>
+				<div class="form-controls pdt5">
+					<div class="fl" style="width:355px;">/Wxapi/index.html?id=2009442</div>
+					<a href="javascript:;" class="btn btn-small j-copy" data-copy="/Wxapi/index.html?id=2009442">复制</a>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name">Token：</label>
+				<div class="form-controls pdt5">
+					<div class="fl" style="width:355px;">bcf0c7f9a680eb0b30dc94ac99dc6fc7</div>
+					<a href="javascript:;" class="btn btn-small j-copy" data-copy="bcf0c7f9a680eb0b30dc94ac99dc6fc7">复制</a>
+				</div>
+			</div>
+			<div class="formitems mgt5">  
+				<label class="fi-name"><span class="colorRed">*</span>AppId：</label>
+				<div class="form-controls">
+					<input type="text" class="input xlarge" value="" name="app_id" >
+					<span class="fi-help-text"><a href="https://mp.weixin.qq.com/" target="_blank">点击获取</a>(开发者中心)</span>
+				</div>
+			</div>
+
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>Secret：</label>
+				<div class="form-controls">
+					<input type="text" class="input xlarge" name="app_secret" value="">
+					<span class="fi-help-text"><a href="https://mp.weixin.qq.com/" target="_blank">点击获取</a>(开发者中心)</span>
+				</div>
+			</div>
+
+		</div>
+		<!-- 提成 -->
+		<div class="panel-single panel-single-light mgt20 verify-set-div hide">
+			<div class="formitems">  
+				<label class="fi-name" style="width: 121px;"><span class="colorRed">*</span>直属上级提成比例：</label>
+				<div class="form-controls">
+					<input type="text" class="input mini j-pid" name="directly_online_ratio" value="0">
+					<span class="fi-help-text">购买者直属上级会员的提成比例</span>
+				</div>
+			</div>
+
+			<div class="formitems">  
+				<label class="fi-name" style="width: 121px;"><span class="colorRed">*</span>上级会员提成比例：</label>
+				<div class="form-controls">
+					<input type="text" class="input mini j-pid" name="superior_online_ratio" value="0">
+					<span class="fi-help-text">购买者直属上级会员的上级会员提成比例</span>
+				</div>
+			</div>
+
+            <div class="formitems">
+                <label class="fi-name" style="width: 121px;"><span class="colorRed">*</span>上级的上级会员提成比例：</label>
+                <div class="form-controls">
+                    <input type="text" class="input mini j-pid" name="three_online_ratio" value="0">
+                    <span class="fi-help-text">购买者直属上级会员上级的上级提成比例</span>
+                </div>
+            </div>
+
+		</div>
+
+		<div class="panel-single panel-single-light mgt20 txtCenter">
+		    <a href="javascript:;" class="btn" id='verify-set-prev'>上一步</a>
+		    <a href="javascript:;" class="btn btn-primary" id='verify-set-next'>下一步</a>
+		    <a href="javascript:;" class="btn btn-primary hide" id='verify-set-save'>保存</a>
+		</div>
+	</form>
+</script>
+
+
+
+<script type="text/j-template" id="tpl_agent_detail_modify">
+    <div>
+        <div class="formitems">  
+            <label class="fi-name" >分销商地区：</label>
+            <div class="form-controls J_ItemDivision" data-pid="<%=pid%>"  data-cid="<%=cid%>"  data-aid="<%=aid%>">
+            <select name="province" class="J_Provinceg" data-key="province" >
+                    <option value="">请选择省份...</option>
+                    <option value="110000">北京</option>
+                    <option value="120000">天津</option>
+                    <option value="130000">河北省</option>
+                    <option value="140000">山西省</option>
+                    <option value="150000">内蒙古自治区</option>
+                    <option value="210000">辽宁省</option>
+                    <option value="220000">吉林省</option>
+                    <option value="230000">黑龙江省</option>
+                    <option value="310000">上海</option>
+                    <option value="320000">江苏省</option>
+                    <option value="330000">浙江省</option>
+                    <option value="340000">安徽省</option>
+                    <option value="350000">福建省</option>
+                    <option value="360000">江西省</option>
+                    <option value="370000">山东省</option>
+                    <option value="410000">河南省</option>
+                    <option value="420000">湖北省</option>
+                    <option value="430000">湖南省</option>
+                    <option value="440000">广东省</option>
+                    <option value="450000">广西壮族自治区</option>
+                    <option value="460000">海南省</option>
+                    <option value="500000">重庆</option>
+                    <option value="510000">四川省</option>
+                    <option value="520000">贵州省</option>
+                    <option value="530000">云南省</option>
+                    <option value="540000">西藏自治区</option>
+                    <option value="610000">陕西省</option>
+                    <option value="620000">甘肃省</option>
+                    <option value="630000">青海省</option>
+                    <option value="640000">宁夏回族自治区</option>
+                    <option value="650000">新疆维吾尔自治区</option>
+                    <option value="710000">台湾</option>
+                    <option value="810000">香港特别行政区</option>
+                    <option value="820000">澳门特别行政区</option>
+                </select>
+                </select>
+                <select name="city" class="J_Cityg" data-key="city">
+                   <option value="">请选择城市...</option>
+                </select>
+                <select name="area" class="J_Areag" data-key="area">
+                   <option value="">请选择区/县...</option>
+                </select>
+            </div>
+        </div>
+        <div class="formitems">  
+            <label class="fi-name">详细地址：</label>
+            <div class="form-controls">
+                <input type="text" name="address" class="input" value="<%=address%>">
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/j-template" id="tpl_apply_nopass_remark">
+    <div>
+        <div class="formitems" >
+            <label>确定不通过审核？</label>
+        </div>
+        <div class="formitems">  
+            <div>
+                <label>备注（选填）：</label>
+                <input type="text" name="remark" class="input" value="" />
+            </div>
+        </div>
+</script>
+<script type="text/j-template" id="tpl_apply_nopassAll_remark">
+    <div>
+        <div class="formitems" >
+            <label>确定批量不通过审核？</label>
+        </div>
+        <div class="formitems">  
+            <div>
+                <label>备注（选填）：</label>
+                <input type="text" name="remark" class="input" value="" />
+            </div>
+        </div>
+</script>
+
+<!--end front template  -->
+
+<script src="./applly_files/lib-min.js"></script>
+<script src="./applly_files/jquery.jbox-min.js"></script>
+<script src="./applly_files/jquery.zclip-min.js"></script>
+<!-- 线上环境 -->
+    <script src="./applly_files/component-min.js"></script>
+    <script src="./applly_files/scroll.js"></script>
+<!--[if lt IE 10]>
+<script src="/Public/js/jquery/jquery.placeholder-min.js"></script>
+<script>
+    $(function(){
+        //修复IE下的placeholder
+        $('.input,.textarea').placeholder();
+    });
+</script>
+<![endif]-->
+
+
+<script src="./applly_files/WdatePicker.js"></script>
+<script src="./applly_files/apply_lists.js"></script>
+<script src="./applly_files/area.js"></script>
+<script src="./applly_files/change_area.js"></script>
+
+
+
+<script>
+    $(function(){
+                                $(".j-copy").zclip({
+            path: '/Public/plugins/zclip/ZeroClipboard.swf',
+            copy: function(){
+                return $(this).data('copy');
+            },
+            afterCopy:function(){
+                HYD.hint("success","内容已成功复制到您的剪贴板中");
+            }
+        });
+        $(".btn-notice").click(function(){
+            // $.post('/System/readAllNotice',{},function(){
+            //     window.location.reload();
+            // })
+            $.ajax({
+                url: '/System/readAllNotice',
+                type: 'POST',
+                success:function(data){
+                    if(data.status == 1){
+                        window.location.reload();
+                    }else{
+                         HYD.hint("danger",data.msg);
+                    }
+                    
+                }
+            })
+        });
+        
+        
+        ;(function(){
+            // 首页竖线到底
+            var height1=$(".content-right").height();
+            var height2=$(".content-left").height();
+            if(parseInt(height1) < parseInt(height2)){
+                $(".content-right").css({'min-height': height2});
+            };
+            
+                    })();
+       
+    });
+</script>
+<!-- end session hint -->
+<script>
+	$(function () {
+		setTimeout(gggoup(),5000);
+		$('.gound_close').click(function(){
+			$('#gonggao').animate({bottom:"-270px"},1000);
+		});
+	});
+	function gggoup(){
+		$('#gonggao').animate({bottom:"3px"},1000);
+	};
+</script>
+
+
+</body></html>

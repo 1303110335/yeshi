@@ -1,0 +1,157 @@
+<include file="Public:head"/>
+<style>
+.wxtables td .btn {
+	padding: 0px 6px;
+}
+</style>
+
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<div class="container">
+  <div class="inner clearfix">
+    <div class="content-left fl">
+      <dl class="left-menu shop_7 sub_users">
+        <dt> <i class="icon-menu users"></i> <span id="shop_7" data-id="7">分销商</span> </dt>
+        <!--<dd class="subshop_0 "> <a href="{:U('/Admin/Member/apply_list')}">分销商审核</a> </dd>-->
+        <dd class="subshop_1 active"> <a href="{:U('/Admin/Member/agent_list')}">分销商管理</a> </dd>
+        <!--                    <dd class="subshop_6 ">--> 
+        <!--                    <a href="/User/agent_rank">分销商等级</a>--> 
+        <!--                                    </dd><dd class="subshop_12 ">--> 
+        <!--                    <a href="/User/export/type/2">分销商导出</a>--> 
+        <!--                                    </dd><dd class="subshop_13 ">--> 
+        <!--                    <a href="/User/agent_group_list">分销商分组</a>--> 
+        <!--                                    </dd><dd class="subshop_18 ">--> 
+        <!--                    <a href="/User/agent_sort">佣金排名设置</a>--> 
+        <!--                                    </dd><dd class="subshop_23 ">--> 
+        <!--                    <a href="/User/commission_log">佣金调整日志</a>--> 
+        <!--                                    </dd><dd class="subshop_26 ">--> 
+        <!--                    <a href="/User/apply_log">分销商审核日志</a>--> 
+        <!--                                    </dd>-->
+      </dl>
+    </div>
+    <!-- end content-left -->
+    
+    <div class="content-right fl">
+      <h1 class="content-right-title">分销商管理</h1>
+      <div class="alert alert-info disable-del">共有 <span style="font-size:16px;">{$count}</span> 名分销商。<a href="javascript:;" class="alert-delete" title="隐藏"><i class="gicon-remove"></i></a></div>
+      <div class="tablesWrap">
+        
+          <div class="tables-searchbox"> 
+            <!--<input type="text" class="input mini" name="name" value="" placeholder="姓名">-->
+            <input type="text" class="input" name="title" id="title" placeholder="手机号码">
+            <!--<select name="user_group_id" class="select mini">
+                    <option value="-1" selected="">所有分组</option>
+                    <option value="0">未分组</option>
+                                    </select>-->
+            <select name="dengji" id="dengji" class="select mini">
+              <option value="" selected>所有等级</option>
+              <option value="1">一级分销商</option>
+              <option value="2">二级分销商</option>
+              <option value="3">三级分销商</option>
+              <option value="4">四级分销商</option>
+              <option value="5">五级分销商</option>
+            </select>
+            <!--<input type="text" autocomplete="off" name="start_time" value="" placeholder="注册时间" class="input mini Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd&#39;})">
+                <span class="mgr5">至</span>
+                <input type="text" autocomplete="off" name="end_time" value="" placeholder="注册时间" class="input mini Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd&#39;})">
+               <select name="order" class="select small">
+                    <option value="－1">选择排序</option>
+                    <option value="1">下级人数排序</option>
+                    <option value="2">订单笔数排序</option>
+                    
+                </select>-->
+            <button class="btn btn-primary" onclick="search_m()"><i class="gicon-search white"></i>查询</button>
+          </div>
+        
+        <!-- end tables-searchbox -->
+        <table class="wxtables">
+          <colgroup>
+          <col width="4%">
+          <col width="10%">
+          <col width="8%">
+          <col width="8%">
+          <col width="8%">
+          <col width="10%">
+          <col width="8%">
+          <col width="20%">
+          <col width="8%">
+          </colgroup>
+          <thead>
+            <tr>
+              <td><i class="icon_check"></i></td>
+              <td>头像</td>
+              <td>昵称</td>
+              <td>手机</td>
+              <td>余额</td>
+              <td>级别</td>
+              <td>总消费金额</td>
+              
+              <td>注册时间</td>
+              <td align="center">操作</td>
+            </tr>
+          </thead>
+          <tbody>
+          <foreach name="member" item="vo">
+            <tr>
+              <td><input type="checkbox" class="checkbox table-ckbs" data-id="3646068" data-name=""></td>
+              <td><if condition="($vo.touimg eq null) "><img src="__IMAGES__/yhtx.jpg" alt="" width="50" height="50"><else /><img src="__UPLOAD__/{$vo.touimg}" alt="" width="50" ></if></td>
+              <td>{$vo.truename}</td>
+              <td>
+                <p> {$vo.telephone}</p></td>
+              <td>¥{$vo.balance}</td>
+              <td>{$vo.dengji}</td>
+              <td>¥{$vo.costmoney}</td>
+              
+              <td>{$vo.addtime}</td>
+              <td align="right"><p style=" text-align:center"> 
+                  <!--<a href="javascript:;" class="btn j-agentLevel" data-id="3646068" data-rank="" data-name="">设等级</a>--> 
+                  <!--<a href="javascript:;" class="btn j-gavePoint" data-user_id="3646068" data-id="3646068" data-name="" data-point="0">调整积分</a>--> 
+                  <a href="{:U('/Admin/Member/agent_edit/id')}/{$vo.id}" class="btn">详情</a> 
+                  <!--<a href="javascript:;" data-id="3646068" data-name="" data-mobile="15257183714" data-email="" class="btn j-edit">编辑</a>--> 
+                  <!--<a href="javascript:;" class="btn j-redPack" data-user_id="3646068" data-name="">发红包</a>--> 
+                  <!--<a href="/User/agent_detail/id/3646068" target="_blank" class="btn">下级</a>--> 
+                  <!--<a href="/User/getAgentOrder/id/3646068" target="_blank" class="btn">订单</a>--> 
+                  <!--<a href="/User/getPie/id/3646068" target="_blank" class="btn">财务报表</a>--> 
+                  <!--<a href="javascript:;" data-id="3646068" data-name="" data-mobile="15257183714" data-email="" class="btn j-cancel">取消分销资质</a>--> 
+                  <!--<a href="javascript:;" data-id="3646068" data-time="--" class="btn j-agent_time">设置到期时间</a>--> 
+                  <!--<a href="javascript:;" class="btn j-balance" data-id="3646068" data-name="" data-balance="0.00">调整余额</a>--> 
+                  <!--<a href="javascript:;" class="btn j-commission" data-id="3646068" data-name="" data-balance="0.00" data-remark="">调整佣金</a>--> 
+                  <!--</p>--> </td>
+            </tr>
+            </foreach>
+          </tbody>
+        </table>
+        <!-- end wxtables -->
+        <div class="tables-btmctrl clearfix">
+          <div class="fl"> <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a> <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a> <!--<a href="javascript:;" class="btn btn-warning j-setGroup" data-type="1">批量设置分组</a> <a href="javascript:;" class="btn btn-warning j-setAgentLevel">批量设置等级</a> --></div>
+          <div class="fr">
+                        <div class="pages">
+                            {$page}
+                        </div>
+                        <!-- end paginate -->
+                    </div>
+        </div>
+        <!-- end tables-btmctrl --> 
+      </div>
+      <!-- end tablesWrap --> 
+      
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+<script>
+function search_m(){
+	var title=$('#title').val();
+	var dengji=$('#dengji').val();
+	if(title != '' &&  dengji == ''){
+		location.href="{:U('/Admin/Member/agent_list')}/title/"+title;
+		}else if(dengji != '' &&  title == ''){
+			location.href="{:U('/Admin/Member/agent_list')}/dengji/"+dengji;
+			}else if (title != '' && dengji != ''){
+				location.href="{:U('/Admin/Member/agent_list')}/title/"+title+"/dengji/"+dengji;
+				}else{
+					location.href="{:U('/Admin/Member/agent_list')}";
+					}
+	}
+</script>
+<include file="Public:foot"/>

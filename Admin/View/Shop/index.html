@@ -1,0 +1,97 @@
+<include file="Public:head"/>
+
+<div class="container">
+    <div class="inner clearfix">
+        <div class="content-left fl">
+            <dl class="left-menu shop_0  sub_home">
+                <dt>
+                    <i class="icon-menu home"></i>
+                    <span id="shop_0" data-id="0">店铺管理</span>
+                </dt>
+                <dd class="subshop_0 active">
+                    <a href="javascript:void(0)">店铺主页</a>
+                </dd>
+                <!--<dd class="subshop_1 ">-->
+                <!--<a href="/Shop/user_center">会员主页</a>-->
+                <!--</dd>-->
+                <!--<dd class="subshop_2 ">-->
+                <!--<a href="/Shop/navigation">店铺导航</a>-->
+                <!--</dd><dd class="subshop_3 ">-->
+                <!--<a href="/Shop/fenxiao">分销说明</a>-->
+                <!--</dd><dd class="subshop_10 ">-->
+                <!--<a href="/Shop/list_custom_module">自定义通用模块</a>-->
+                <!--</dd><dd class="subshop_11 ">-->
+                <!--<a href="/Shop/public_module">详情页公共模块</a>-->
+                <!--</dd><dd class="subshop_12 ">-->
+                <!--<a href="/Shop/limit_buy_page">商品限购提示页</a>-->
+                <!--</dd>        </dl><dl class="left-menu shop_1 sub_pencil">-->
+                <!--<dt>-->
+                <!--<i class="icon-menu pencil"></i>-->
+                <!--<span id="shop_1" data-id="1">自定义专题</span>-->
+                <!--</dt>-->
+                <!--<dd class="subshop_0 ">-->
+                <!--<a href="/Shop/list_magazine">分销专题</a>-->
+                <!--</dd><dd class="subshop_1 ">-->
+                <!--<a href="/Shop/list_magazine_category">专题分类</a>-->
+                </dd></dl>
+        </div>
+        <!-- end content-left -->
+
+        <div class="content-right fl">
+
+
+            <h1 class="content-right-title">店铺主页
+
+            </h1>
+
+
+            <h3 class="cst_h3">微信店铺页面</h3>
+
+            <div class="hPage-using clearfix mgt20">
+                <div class="hPage-using-preview fl">
+                    <img src="__IMAGES__/ydshop.jpg" alt="模板9">
+                </div>
+                <ul class="fl hPage-using-info">
+                    <li>
+                        <span>店铺首页</span>
+                        <span></span>
+                    </li>
+                    <li class="clearfix">
+                        <span>店铺首页链接：</span>
+                    <span class="hPage-using-copy" style="width:380px;">
+                    http://{$Think.server.SERVER_NAME}/Index/index/pid/{$Think.session.admin_id}.html</span>
+                    <!--<a href="javascript:;" data-copy="http://{$Think.server.SERVER_NAME}/yongde/Index/index.html"-->
+                        <!--class="btn btn-success btn-small mgl5 j-copy fr" style="margin-top:-5px;">复制</a>-->
+                    </li>
+                    <li class="clearfix">
+                        <span>分销申请链接：</span>
+                        <span class="hPage-using-copy" style="width:356px;">
+                            http://{$Think.server.SERVER_NAME}/User/apply/pid/{$Think.session.admin_id}.html</span>
+                    </li>
+                    <li>
+                        <span>店铺首页二维码：</span>
+                <span>
+                	<img src="/Uploads/Picture/QRcode/shop/{$Think.session.admin_id}.png" class="hPage-using-qrcode">
+                </span>
+                        <span class="mgl15">分销申请二维码：</span>
+                <span>
+                	<img src="/Uploads/Picture/QRcode/apply/{$Think.session.admin_id}.png" class="hPage-using-qrcode">
+                </span>
+                    </li>
+                    <li>
+                        <!--<a href="##" class="btn btn-primary hPage-using-edit">编辑</a>-->
+                    </li>
+                </ul>
+            </div>
+            <!-- end 当前使用的模板 -->
+
+            <!--	<h3 class="cst_h3 mgt30">可使用的模板</h3>-->
+            <!-- end 可使用的模板 -->
+
+
+        </div>
+        <!-- end content-right -->
+    </div>
+</div>
+<!-- end container -->
+<include file="Public:foot"/>

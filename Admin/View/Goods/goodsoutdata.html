@@ -1,0 +1,114 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="../css/lists.css">
+
+<script type="text/javascript" src="__LHG__/lhgcore.min.js"></script>
+<script type="text/javascript" src="__LHG__/lhgcalendar.min.js"></script>
+<script type="text/javascript">
+    J(function(){
+        J('#starttime').calendar({ format:'yyyy-MM-dd 00:00:00' });
+        J('#endtime').calendar({ format:'yyyy-MM-dd 23:59:59' });
+    });
+</script>
+
+<div class="container">
+<div class="inner clearfix"> <include file="Public:goodsleft"/> 
+  <!-- end content-left -->
+  
+
+  <div class="content-right fl">
+  <h1 class="content-right-title">产品出货信息</h1>
+    <form action="" method="get">
+      <div class="tables-searchbox newcearchbox">
+        <input type="text" placeholder="产品名称" class="input" value="{$good_name}" name="good_name">
+        <input type="text" autocomplete="off" name="start_time" value="{$start_time}" id="starttime" placeholder="起始日期" class="input Wdate">
+        <span class="mgr5">至</span>
+        <input type="text" autocomplete="off" name="end_time" value="{$end_time}" id="endtime" placeholder="结束日期" class="input Wdate">
+        <button class="btn btn-primary" style="line-height:26px;"> <i class="gicon-search white"></i>查询 </button>
+        <!--<a href="/Item/item_export" class="btn btn-warning"><i class="gicon-share white"></i>--> 
+        <!--产品导出</a>--> 
+      </div>
+    </form>
+    <!-- end tabs -->
+    
+    <table class="wxtables mgt10">
+      <colgroup>
+      <col width="5%">
+      <col width="20%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="5%">
+      </colgroup>
+      <thead>
+        <tr class="po_list">
+          <td><i class="icon_check"></i></td>
+          <td onclick="tt()">产品<span></span></td>
+          <td>库存</td>
+          <td>待发货配送</td>
+          <td>待发货自取(团购中)</td>
+          <td>待发货自取(团购成功)</td>
+          <td>待发货自取(单买)</td>
+          <td>总待发货(不含团购中)</td>
+          <td>已出货</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <foreach name="goodslist" item="vo">
+          <tr>
+            <td><input type="checkbox" class="checkbox table-ckbs" data-id=""></td>
+            <td><div class="goodswrap"> <a href="javascript:void(0)" class="block" target="_blank" title="r">
+                <div class="table-item-img" > <img src="{$vo['pics'][0]}" alt=""> </div>
+                <div class="table-item-info" style="width: 100px;float:left;">
+                  <p style="height:auto">{$vo.good_name}</p>
+                   </div>
+                </a> </div>
+            </td>
+            <td><div class="stockwrap"> <span>{$vo.kucun}</span> </div></td>
+            <td>{$vo.stateOne}<br>{$vo.stateOnee}</td>
+            <td>{$vo.stateOne1}<br>{$vo.stateOne12}</td>
+            <td>{$vo.stateOne2}<br>{$vo.stateOne22}</td>
+            <td>{$vo.stateTwo}<br>{$vo.stateTwo2}</td>
+            <td>{$vo.count}<br>{$vo.count2}</td>
+            <td>{$vo.stateThree}<br>{$vo.stateThree2}</td>
+            <td>（总）<br>（日）</td>
+          </tr>
+        </foreach>
+      </tbody>
+    </table>
+    <div class="tables-btmctrl clearfix">
+        <div class="fr">
+          <div class="pages"> {$page} </div>
+          <!-- end paginate --> 
+        </div>
+      </div>
+      <!-- end tables-btmctrl --> 
+    </div>
+  </div>
+</div>
+<!-- end container --> 
+<include file="Public:foot"/>
+<script type="text/javascript" src="__JS__/layer/layer.js"></script>
+<script type="text/javascript">
+  fun();
+  setInterval(function(){
+    fun();
+  },60000);
+  function fun(){
+    layer.open({
+        type: 2,
+        title: '存货不足的商品',
+        shade: [0],
+        offset: 'rb', //右下角弹出
+        area: ['auto', '555px'],
+        shift: 2,
+        time:20000,
+        shadeClose:true,
+        content: ["{:U('Admin/Goods/ajaxretrieval')}"], //iframe的url，no代表不显示滚动条
+    });
+  }
+</script>

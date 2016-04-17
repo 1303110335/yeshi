@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>待收货</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=yes" name="format-detection" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="__CSS__/css.css">
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+<link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+<style>
+.dshbox{ margin:0 auto; width:95%; padding-bottom:100px;}
+.dsh{border: #e4e4e4 1px solid; border-radius:5px; margin-top:15px; overflow:hidden;}
+.dsh_img{ width:30%; float:left; padding:3px; border:none; margin:1%;}
+.dsh_text{ width:35%; float:left; margin-left:1%; margin-top:1%;}
+.dsh_text h1{ font-size:14px; color:#888;overflow:hidden; height:22px; font-weight:normal; margin:0;}
+.dsh_text p{ font-size:12px; color:#999; margin-top:1%;}
+.dsh_text1{ width:30%; float:right; margin-top:1%;}
+.dsh_text1 h1{ color:#e72c3e; font-size:18px; text-align:center; font-weight:normal;}
+.dsh_text1 p{ color:#f29200; font-size:14px; text-align:center; margin-top:1%;}
+.qrshqr{
+	margin-top:2px;
+	}
+.qrshqr a{
+	display:block;
+	border:1px solid #f29200;
+	width:70px;
+	text-align:center;
+	padding:3px 0;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	color:#f29200;
+	}
+.qrshqr a:hover{
+	background:#f29200;
+	color:#fff;
+	text-decoration:none;
+	}
+  .ddlb_nav{ width:20%; }
+</style>
+</head>
+<body id="scroll_top">
+<!-- top --> 
+
+<!-- top -->
+
+<div class="main_div" style=" background:#f6f6f6; padding:0 !important;">
+  <div class="ddlb">
+    <div class="ddlb_box">
+      <div class="ddlb_nav"> <a href="{:U('member/orderlist')}" style=" color:#888; border-bottom:none;">待付款</a> </div>
+      <div class="ddlb_nav"> <a href="{:U('member/ordersend')}" style=" color:#888; border-bottom:none;">待发货</a> </div>
+      <div class="ddlb_nav"> <a href="{:U('member/dsh')}">待收货</a> </div>
+      <div class="ddlb_nav"> <a href="{:U('member/achieve')}" style=" color:#888; border-bottom:none;">已完成</a> </div>
+      <div class="ddlb_nav"> <a href="{:U('member/achieveorder')}" style=" color:#888; border-bottom:none;">退款</a></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+	<div class="ddlb_lb">
+<foreach name="sendorder" item="vo">
+    <div class="ddlb_list">
+      <div class="ddlb_lb_bt">
+        <p style="float:left; width:38%; padding-left:1%;">待收货<eq name="vo.is_groupbuy" value='1'>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px !important">(团购<eq name="vo.groupbuy_ok" value='0'>中</eq><eq name="vo.groupbuy_ok" value='1'>成功</eq><eq name="vo.groupbuy_ok" value='2'>失败</eq>)</span></eq></p>
+        <p style="float:right; text-align:right; width:60%; padding-right:1%; color:#999">订单号：{$vo.orderno}</p>
+        <div style=" clear:both"></div>
+      </div>
+      <eq name="vo.is_groupbuy" value='1'><a href="{:U('Order/pintuan/orderid')}/{$vo.id}"></eq>
+<foreach name="vo.orderlist" item="vo1">
+      <div class="qrzf">
+      <a href="{:U('Member/trade1/orderid')}/{$vo1.orderid}">
+        <div class="qrzf_cp">
+          <div class="qrzf_cp_left"> <img src="{$vo1.img}" width="100%"> </div>
+          <div class="qrzf_cp_right">
+            <h1>{$vo1.goodsname}</h1>
+            <p style="margin-top:5px">规格：{$vo1.guige}</p>
+            <p>数量：{$vo1.num} <span class="shuliang">¥{$vo1.good_nowprice}</span><span class="damwei">/件</span></p>
+          </div>
+        </div>
+        </a>
+        <div class="clear"></div>
+      </div>
+</foreach>
+<eq name="vo.is_groupbuy" value='1'></a></eq>
+      <div class="ddlb_jg" style="min-height:40px;">
+      <div class="fukan">
+      <eq name="vo.is_delivery" value='0'>
+      <a href="javascript:affirmOrder({$vo.id})">确认收货</a>
+      </eq>
+      <eq name="vo.is_groupbuy" value="0">
+      <eq name="vo.is_refund" value="0"><a href="javascript:cancelOrder({$vo.id})" style="margin-left:10px;">申请退款</a></eq>
+      </eq>
+
+      <eq name="vo.is_groupbuy" value="1">
+      <eq name="vo.is_refund" value="0">
+      <eq name="vo.groupbuy_ok" value="1">
+        <a href="javascript:cancelOrder({$vo.id})" style="margin-left:10px;">申请退款</a>
+      </eq>
+      </eq>
+      </eq>
+      
+      <eq name="vo.is_refund" value="1"><a href="javascript:;" style="margin-left:10px;">退款审核中</a></eq>
+      <eq name="vo.is_refund" value="2"><a href="javascript:;" style="margin-left:10px;">退款成功</a></eq>
+      <eq name="vo.is_refund" value="3"><a href="javascript:;" style="margin-left:10px;">退款失败</a></eq>
+      </div>
+        <h1>运费：¥{$vo.shipping_fee} 总计：<span> ¥{$vo.total_price} </span></h1>
+        <div class="clear"></div>
+      </div>
+    </div>
+</foreach>
+  </div>
+<!--<div class="dshbox">
+<foreach name="sendorder" item="vo">
+  <div class="dsh">
+    <div class="ddlb_lb_bt">
+        <p style="float:left; width:29%; padding-left:1%;">待收货</p>
+        <p style="float:right; text-align:right; width:69%; padding-right:1%; color:#999">订单号：{$vo.orderno}</p>
+        <div style=" clear:both"></div>
+    </div>
+    <eq name="vo.is_groupbuy" value='1'><a href="{:U('Order/pintuan/orderid')}/{$vo.id}"></eq>
+     <foreach name="vo.orderlist" item="vo1">
+     <div style="display:block">
+    <div class="dsh_img"> <img src="{$vo1.img}" width="100%"/> </div>
+    <div class="dsh_text">
+    <eq name="vo.is_groupbuy" value='1'><p><span class="shuliang" style="font-size:14px !important">(团购订单)</span></p></eq>
+      <h1>{$vo1.goodsname} </h1>
+      <p>规格：{$vo1.guige}</p>
+      <p>数量：{$vo1.num} 件</p>
+      <p style="margin-bottom:5px;">单价：￥{$vo1.good_nowprice}</p>
+      
+    </div>
+    </div>
+    <br/>
+    </foreach>
+    <eq name="vo.is_groupbuy" value='1'></a></eq>
+
+    <div class="dsh_text1">
+      <h1>-{$vo.orderlist.0.allprice}</h1>
+      <!--<p>等待对方发货</p>
+      <div class="qrshqr"><a href="javascript:affirmOrder({$vo.id})">确认收货</a></div>
+    </div>
+  </div>
+</foreach>
+</div>-->
+</div>
+<eq name="sendorder.0" value="">
+<div class="gwc_js">
+      <div class="gwc_jsnav">
+        <div class="gwc_jsleft" style="float:none;width:auto;margin:0 auto;margin-top:116px;">
+        	
+          <p style="margin-top:5px;text-align:center;">暂无订单...</p>
+        </div>
+        <div class="gwc_jsright" style="float:none;margin-top:30px;"> <a href="{:U('Member/main')}" >
+          <p style="color:#fff">返回</p>
+          </a> </div>
+      </div>
+    </div>
+</eq>
+<div style="height:100px;"></div>
+<!-- main_div -->
+<div class="scorll_top"><a href="#scroll_top"><img src="__IMAGES__/scorll_top.png"></a></div>
+<!-- footer --> 
+<include file="Public:foot" /> 
+<!-- footer --> 
+<!--统计流量-->
+<div style="display:none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257387489'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257387489%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<!--统计流量-->
+</body>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/layer-v2.1/layer/layer.js"></script>
+<script src="__JS__/layer-v2.1/layer/extend/layer.ext.js"></script>
+<!-- banner -->
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // Enable debugger
+        debugger: true
+    });
+    function affirmOrder(id){
+      layer.confirm('是否确认收货？', {
+          btn: ['确认','取消'] //按钮
+      }, function(){
+          layer.closeAll();
+          $.ajax({
+            url:"{:U('Home/Order/affirmOrder')}",
+            type:"post",
+            dataType:"json",
+            data:{id:id},
+            success:function(ret){
+              if(ret==1){
+                alert("操作成功");
+                window.location.href=window.location.href;
+              }else{
+                alert("操作失败");
+              }
+            }
+          });
+      }, function(){
+          layer.closeAll();
+      });
+    }
+    function cancelOrder(id){
+      layer.prompt({
+          title: '请输入您的退货理由',
+          formType: 2 //prompt风格，支持0-2
+      }, function(data){
+          $.ajax({
+            url:"{:U('Home/Order/cancelOrder')}",
+            type:"post",
+            async:false,
+            dataType:"json",
+            data:{id:id,data:data},
+            success:function(ret){
+              layer.closeAll();
+              if(1==ret){
+                alert("申请成功");
+                window.location.href=window.location.href;
+              }else{
+                alert("申请失败");
+              }
+            }
+          });
+      });
+    }
+</script>
+<!-- banner -->
+<script src="__JS__/js.js"></script>
+</html>

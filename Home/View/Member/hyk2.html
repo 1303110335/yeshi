@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>会员卡</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=yes" name="format-detection" />
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+    
+	
+    
+    <link rel="stylesheet" href="__CSS__/css.css">
+    <link rel="stylesheet" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+    <link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+    
+ 
+</head>
+<body id="scroll_top">
+	<!-- top -->
+
+    <!-- top -->
+	<!-- main_div -->
+    <div class="main_div">
+<div class="yhq">
+<div class="yhq_nav">
+<a href="#">会员卡</a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="yhq_lb">
+<div class="bdsj">
+  <h1>您还没有绑定手机号!</h1>
+  <div class="bdsj_sr">
+  <input class="bdiput" name="telephone" id="telephone" type="tel" placeholder="请输入手机号">
+  </div>
+  
+  <div class="bdsj_sr" style=" position:relative;">
+  <input class="bdiput" name="code" id="code" type="text" placeholder="请输入验证码">
+  <a class="hqyzm" href="javascript:;" status="0" >获取验证码</a>
+  </div>
+  
+  <div class="xgmm_btn"><a href="javascript:;" class="btn"><p>确认</p></a></div>
+  </div>
+</div>
+</div> 
+    
+	<!-- main_div -->
+    <!-- footer -->
+<include file="Public:foot" />
+    <!-- footer -->
+</body>
+
+
+<script src="__JS__/jquery.min.js"></script>
+
+<script>
+
+var timerc=60; //全局时间变量（秒数）  
+
+$('.hqyzm').click(function(){
+	if($(this).attr("status")==0){
+		var phone=$("#telephone").val();
+		var lenth = phone.length;
+		if (lenth == 0) {
+			alert("手机号长度不符合要求");
+			return false;
+		}
+		if(!(/^1[0-9][0-9]\d{4,8}$/.test(phone))){
+			alert("手机号码无效");
+			return false;
+		}
+		$.ajax({
+			url:'{:U("Home/Member/hyk_getcode")}',
+			data: {phone: phone},
+			type:'post',
+			dataType:'json',
+			success: function(json){
+				if(json.type==1){
+					add();
+					alert(json.info)
+				}else{
+				 	alert(json.info)
+					}
+			}
+		});
+	}	
+			
+})
+
+
+function add(){ //加时函数                             
+	 if(timerc > 0){ //如果不到5分钟
+		 $(".hqyzm").html("重新发送("+timerc+")"); 
+		 $(".hqyzm").css("background","#eeeeee"); 
+		 $(".hqyzm").css("border","#eeeeee 1px solid"); 
+		 $(".hqyzm").css("color","#424242");  
+		 $(".hqyzm").attr("status",1);	
+		 timerc--; //时间变量自减1    
+		 setTimeout("add()",1000); //设置1000毫秒以后执行一次本函数       
+	 }else{
+		 timerc=60; 
+		 $(".hqyzm").html("获取验证码");
+		 $(".hqyzm").css("background","#f29200");
+		 $(".hqyzm").css("border","#f29200 1px solid"); 
+		 $(".hqyzm").css("color","#ffffff");   
+		 $(".hqyzm").attr("status",0);	
+	};
+};   
+
+$('.btn').click(function(){
+	
+	var code = $('#code').val();
+	var phone=$("#telephone").val();
+
+	if(phone == ""){
+		alert("请输入手机号码");
+		return false;
+	}
+	
+	if(code == ""){
+		alert("请输入验证码");
+		return false;
+	}
+	
+	$.ajax({
+		url:'{:U("Home/Member/hyk_checkcode")}',
+		data: {phone: phone,code:code},
+		type:'post',
+		dataType:'json',
+		success: function(json){
+			if(json.type==1){
+				alert(json.info);
+				window.location.href='{:U("Home/Member/hyk")}';
+			}else{
+				alert(json.info)
+				}
+		}
+	});
+
+})
+
+
+</script>
+
+
+</html>

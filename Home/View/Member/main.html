@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>会员中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=yes" name="format-detection" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__CSS__/css.css">
+    <link rel="stylesheet" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" href="__CSS__/iconfont1/iconfont1.css">
+    <link rel="stylesheet" href="__CSS__/iconfont2/iconfont2.css">
+    <link rel="stylesheet" href="__CSS__/iconfont2/iconfont3.css">
+    <link rel="stylesheet" href="__CSS__/iconfont/iconfont.css">
+    <style>
+body {
+	background: #eeeeee;
+}
+* {
+	font-family: "微软雅黑";
+}
+h1, h2 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+p {
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	display: block;
+}
+img {
+	display: block;
+}
+.overflowH {
+	overflow: hidden;
+	margin-top: 5%;
+}
+body, html {
+	overflow-x: hidden;
+}
+</style>
+    </head>
+    <body id="scroll_top">
+    <include file="Public:guanzhu" />
+<!-- top --> 
+
+<!-- top --> 
+
+<!--set--> 
+<!--set_top-->
+<div class="set_topbox">
+      <div class="set_top">
+    <div class="clear"></div>
+    <div class="set_img overflowH">
+          <div class="set_imgbox"><img src="{$info.touimg}"></div>
+          <div class="namebox">
+        <h1>{$info.truename}</h1>
+        <div class="qiandao">
+              <div style=" width:100px; line-height:25px; height:25px; text-align:center; border:#fff 1px solid; border-radius:120px; margin-top:10px !important; margin:0 auto;"> 
+              <if condition="$issign==0">
+              <a href="javascript:qian()">签到</a>
+              <else />
+                <a href="javascript:void(0)">已签到</a>
+                </if>
+               </div>
+              <div class="clear"></div>
+            </div>
+      </div>
+        </div>
+    
+  </div>
+      <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+      <div class="clear"></div>
+    </div>
+
+<!--set_top--> 
+<div class="grzx_grzx"> 
+      <!-- grzx_lb -->
+      <div class="grzx_lb">
+    <ul>
+          <li>
+        <div class="grxzx_box"> <a href="{:U('member/hyk')}">
+          <div class="grxzx_tb grxzx_tb01 iconfont"><img src="__IMAGES__/iconfont-huiyuanqia01.svg" width="100%"></div>
+          <div class="grxzx_wz">会员卡</div>
+          </a> </div>
+      </li>
+          <li>
+        <div class="grxzx_box"> <a href="{:U('member/yhq')}">
+          <div class="grxzx_tb grxzx_tb02 iconfont"><img src="__IMAGES__/iconfont-youhuiquan01.svg" width="100%"></div>
+          <div class="grxzx_wz">优惠券</div>
+          </a> </div>
+      </li>
+          <li>
+        <div class="grxzx_box"> <a href="{:U('member/wait')}">
+          <div class="grxzx_tb grxzx_tb03 iconfont"><img src="__IMAGES__/iconfont-dingdan.svg" width="100%"></div>
+          <div class="grxzx_wz">我的订单</div>
+          </a> </div>
+      </li>
+          <li>
+        <div class="grxzx_box"> <a href="{:U('member/service')}">
+          <div class="grxzx_tb grxzx_tb04 iconfont"><img src="__IMAGES__/iconfont-kefu.svg" width="100%"></div>
+          <div class="grxzx_wz">客服中心</div>
+          </a> </div>
+      </li>
+          <li>
+        <div class="grxzx_box"> <a href="{:U('Member/address')}">
+          <div class="grxzx_tb grxzx_tb05 iconfont"><img src="__IMAGES__/iconfont-dizhi.svg" width="100%"></div>
+          <div class="grxzx_wz">收货地址</div>
+          </a> </div>
+      </li>
+          <li>
+        <div class="grxzx_box"> <a href="{:U('member/favorites')}">
+          <div class="grxzx_tb grxzx_tb06 iconfont"><img src="__IMAGES__/iconfont-shoucangjia.svg" width="100%"></div>
+          <div class="grxzx_wz">收藏夹</div>
+          </a> </div>
+      </li>
+          <div class="clear"></div>
+        </ul>
+  </div>
+      <!-- grzx_lb --> 
+    </div>
+
+<!-- footer -->
+<include file="Public:foot" />
+<!-- footer --> 
+</body>
+    <script src="__JS__/jquery.min.js"></script>
+    <!-- banner -->
+    <script src="__JS__/swiper.min.js"></script>
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // Enable debugger
+        debugger: true
+    });
+    </script>
+    
+    <!-- banner -->
+    <script src="__JS__/js.js"></script>
+    <script src="__JS__/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script>
+        function qian()
+        {
+
+
+			$.ajax({
+				url: "{:U('/Member/qiandao')}",//   //http://www.www.hedeqb.com/Goods/search/pid/1.html
+				type: "post",
+				dataType: "json",
+				data: "",
+			}).done(function (g) {
+				if (g.status == 1) {
+					alert("签到成功");
+					window.location.reload();
+				} else if(g.status==2) {
+                    alert(g.textt);
+                } else {
+					alert("已签到");
+
+
+				}
+
+			})
+
+
+        }
+    </script>
+</html>

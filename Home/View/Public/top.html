@@ -1,0 +1,58 @@
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A607d61b18d43a1ff27abf4ac67da83c"></script>
+
+<div class="top">
+  <div class="logo"><a href="{:U('Index/index')}"><img src="__IMAGES__/logo.png" height="30px"></a></div>
+  <div class="city"><a href="#" id="mapcontainer" style="display:none;"></a><a href="{:U('Index/index')}" id="city_add"></a></div>
+  <div class="class"></div>
+</div>
+<script>
+           function getLocation(){
+               var options={
+                   enableHighAccuracy:true, 
+                   maximumAge:1000
+               }
+               if(navigator.geolocation){
+                   //浏览器支持geolocation
+                   navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
+               }else{
+                   //浏览器不支持geolocation
+                   alert('您的浏览器不支持地理位置定位');
+               }
+           }
+           //成功时
+           function onSuccess(position){
+               //返回用户位置
+               //经度
+               var longitude =position.coords.longitude;
+               //纬度
+               var latitude = position.coords.latitude;
+               
+               //根据经纬度获取地理位置，不太准确，获取城市区域还是可以的
+    var map = new BMap.Map("mapcontainer");
+    var point = new BMap.Point(longitude,latitude);
+    var gc = new BMap.Geocoder();
+    gc.getLocation(point, function(rs){
+       var addComp = rs.addressComponents;
+       document.getElementById("city_add").innerHTML=addComp.city;;
+    });
+           }
+           //失败时
+           function onError(error){
+               switch(error.code){
+                   case 1:
+                   alert("位置服务被拒绝");
+                   break;
+                   case 2:
+                   alert("暂时获取不到位置信息");
+                   break;
+                   case 3:
+                   alert("获取信息超时");
+                   break;
+                   case 4:
+                    alert("未知错误");
+                   break;
+               }
+           }
+           window.onload=getLocation;
+         
+   </script>

@@ -1,0 +1,425 @@
+<include file="Public:head"/>
+<style>
+	.imgnav{
+		max-height: 30px;
+		overflow: hidden;
+		cursor: pointer;
+	}
+	.imgwrapper{
+		display: block;
+		width: 78px;
+		height: 78px;
+		overflow: hidden;
+	}
+	.imgwrapper img{
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		border:0;
+	}
+	.spanpd10{
+		margin:10px;
+	}
+	.wxtables.wxtables-sku.newtable{
+		width: 40%;
+		margin: 0;
+	}
+	.img-list li{
+		width: 60px;
+		height:60px;
+	}
+	.cst_h3 span{font-weight: normal;}
+	#imgdiv img{ max-width:190px; max-height:190px; display:none; margin:5px;}
+	.btnimage{width:80px; height:30px; background:white; border:1px solid #d9d9d9;cursor:pointer; position:relative}
+	#xuanze{ width:80px; height:30px; background:white; border:1px solid #d9d9d9;cursor:pointer; opacity:0 }
+	#xuanze:hover{ background:#E6E6E6; }
+	#imgdiv2 img{ max-width:88px; max-height:88px; display:none; margin:5px;}
+	#xuanze2{ width:60px; height:30px; background:white; border:1px solid #d9d9d9; }
+	#xuanze2:hover{ background:#E6E6E6; }
+	.huase{display:none; width:86px; height:30px; margin:5px; text-indent:5px;}
+  .youhui{ clear:both; margin:20px 0 0 110px; max-width:600px; padding:10px; }
+  .youhui span{ border:1px solid #d9d9d9; padding:2px 5px; }
+  .querygoods{ border:1px solid #d9d9d9;float:left;margin:10px;text-align:center;border-radius:5px;cursor:pointer; }
+
+	</style>
+<script type="text/javascript" src="__LHG__/lhgcore.min.js"></script>
+<script type="text/javascript" src="__LHG__/lhgcalendar.min.js"></script>
+
+<script type="text/javascript">
+
+    J(function(){
+        J('#start_time').calendar();
+        J('#end_time').calendar();
+//    $(function(){
+//        $('#starttime').calendar({ format:'yyyy-MM-dd' });
+//        $('#endtime').calendar({ format:'yyyy-MM-dd' });
+    });
+
+</script>
+<div class="container">
+  <div class="inner clearfix"> 
+    <div class="content-left fl">
+        <dl class="left-menu shop_2 sub_commodity">
+            <dt>
+                <i class="icon-menu commodity"></i>
+                <span id="shop_2" data-id="2">营销管理</span>
+            </dt>
+            <dd class="subshop_0 active">
+                <a href="{:U('/Admin/Marketing/index')}">优惠券管理</a>
+            </dd>
+        </dl>
+    </div>
+  
+    <!-- end content-left -->
+    
+    <div class="content-right fl">
+      <h1 class="content-right-title">新建优惠券</h1>
+      <input type="hidden" id="j-isSid" value="0">
+      <!-- 是否选择了淘宝类目 -->
+      <input type="hidden" id="j-hasNorms" value="1">
+      <!-- 淘宝类目下是否有属性 -->
+      <input type="hidden" id="supplier" value="">
+      <form aciton="{:U('/Admin/Goods/add')}" enctype="multipart/form-data" method="post" id="add_step2" onsubmit="return toVaild()">
+        
+        
+        <!-- end 基本信息 -->
+        
+        <div class="panel-single panel-single-light mgt20">
+          <h3 class="cst_h3 mgb20">优惠券信息</h3>
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>优惠券名称：</label>
+            <div class="form-controls">
+              <input type="text" class="input xxlarge" name="title" id="title" value="">
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>面值：</label>
+            <div class="form-controls">
+              <input type="text" class="input mini" name="price" id="price" value="">
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>订单金额：</label>
+            <div class="form-controls">
+              <input type="radio" name="is_order" id="is_order" checked="checked" value="1" >不限制
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed"></span></label>
+            <div class="form-controls">
+              <input type="radio" name="is_order" id="is_order" value="2" >满&nbsp;&nbsp;&nbsp;<span  id="is_order_price"><input type="text" class="input mini" name="is_order_price"  value="">&nbsp;可使用</span>
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>发放总量：</label>
+            <div class="form-controls">
+              <input type="text" class="input mini" name="kucun" id="kucun" value="">
+              <span>张</span> <span class="fi-help-text"></span> </div>
+          </div>
+
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>领取方式：</label>
+            <div class="form-controls">
+              <input type="checkbox" name="is_exchange" value="1"  >每人只能领取一张
+            </div>
+          </div>
+          
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>生效时间：</label>
+            <div class="form-controls">
+              <input type="text" class="input mini" name="start_time" id="start_time" value="<?=date('Y-m-d',time())?>">
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>过期时间：</label>
+            <div class="form-controls">
+              <input type="text" class="input mini" name="end_time" id="end_time" value="<?=date('Y-m-d',(time()+86400))?>">
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          
+     
+     		 
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed">*</span>参与优惠商品：</label>
+            <div class="form-controls">
+              <a href="javascript:;" class="btn btn-success fl BtnAddClass">选择商品</a>
+              <span class="fi-help-text"></span> </div>
+            <div class="youhui">
+              <foreach name="goods" item="vo" >
+              <?php if(in_array($vo['id'],$editmarketing['goods_ids'])){ ?>
+                <span>{$vo.good_name}</span>
+              <?php } ?>
+              </foreach>
+            </div>
+            <div style="margin-left:120px;">不选择商品默认是所有商品都参与优惠</div>
+          </div>
+          
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed"></span>排序：</label>
+            <div class="form-controls">
+              <input type="text" class="input mini" name="rank" value="0">
+            </div>
+          </div>
+          
+          
+          
+          <div class="formitems">
+            <label class="fi-name"><span class="colorRed"></span>补充说明：</label>
+            <div class="form-controls">
+              <textarea style="border:1px solid #ccc;padding:10px;" cols='50' rows='9' name="content"></textarea>
+              <span class="fi-help-text"></span> </div>
+          </div>
+          
+          <!--    <div  class="formitems">
+        <label class="fi-name"><span class="colorRed">*</span>总库存：</label>
+        <div class="form-controls">
+            <input type="text" class="input mini" id="j-totalStock" name="num" value="">
+            <span><input type="text" class="input xmini" name="unit" value="平方"></span>
+            <span class="fi-help-text"></span>
+        </div>
+    </div>-->
+          
+          <!-- <div class="formitems">
+            <label class="fi-name">产品花色：</label>
+            <div class="form-controls pdt5 j-imglistPanel">
+              <div style="width: 610px; height: auto; border: 1px solid #e1e1e1; font-size: 12px; padding: 10px;">
+                <div id="xzhs">
+                  <input type="button" value="选择图片" id="xuanze2">
+                  <input type="file" name="huase1" id='up_img11' class="hstp" style="display:none;"/>
+                  <input type="file" name="huase2" id='up_img21' class="hstp" style="display:none;"/>
+                  <input type="file" name="huase3" id='up_img31' class="hstp" style="display:none;"/>
+                  <input type="file" name="huase4" id='up_img41' class="hstp" style="display:none;"/>
+                  <input type="file" name="huase5" id='up_img51' class="hstp" style="display:none;"/>
+                  <input type="file" name="huase6" id='up_img61' class="hstp" style="display:none;"/>
+                  <input type="file" name="huase7" id='up_img71' style="display:none;"/>
+                <input type="file" name="huase8" id='up_img81' style="display:none;"/>
+                <input type="file" name="huase9" id='up_img91' style="display:none;"/>
+                <input type="file" name="huase10" id='up_img101' style="display:none;"/> 
+                </div>
+                <div id='imgdiv2'> <img id="imgShow11"/> <img id="imgShow21"/> <img id="imgShow31"/> <img id="imgShow41"/> <img id="imgShow51"/> <img id="imgShow61"/> 
+                  <img id="imgShow71"/>
+                <img id="imgShow81"/>
+                <img id="imgShow91"/>
+                <img id="imgShow101"/>
+                </div>
+                <div>
+                  <input type="text" name="hsname1" class="huase" placeholder="花色名称">
+                  <input type="text" name="hsname2" class="huase" placeholder="花色名称">
+                  <input type="text" name="hsname3" class="huase" placeholder="花色名称">
+                  <input type="text" name="hsname4" class="huase" placeholder="花色名称">
+                  <input type="text" name="hsname5" class="huase" placeholder="花色名称">
+                  <input type="text" name="hsname6" class="huase" placeholder="花色名称">
+                </div>
+              </div>
+              <input type="hidden" name="pic" id="upimg" value=""/>
+              <span class="fi-help-text">建议上传尺寸640px * 640px</span> </div>
+          </div> --> 
+          
+          
+        </div>
+        <!-- end 产品信息 --> 
+        
+        <!-- end 库存/规格 --> 
+        <!-- <button id="test">show sku</button> -->
+        
+        
+        
+        <!-- end 详情及其它 -->
+        
+        <div class="panel-single panel-single-light mgt20 txtCenter"> <a href="" class="btn">取消</a>
+          <input type="submit" class="btn btn-primary" value="保存">
+        </div>
+
+        <div class="jbox addfenlei disshow" style="width:900px;margin-left:-450px;">
+          <div class="jbox-title">
+            <div class="jbox-title-txt">选择商品</div>
+            <a href="javascript:;" class="jbox-close cancle quxiao"></a></div>
+          <div class="jbox-container" style="height: 263px;">
+            <foreach name="goods" item="vo" >
+            <label><div class="querygoods" <?php if(in_array($vo['id'],$editmarketing['goods_ids'])){ ?>style="border-color:red;"<?php } ?>>
+              <br/>
+              <img src="{$vo.pic}" style="max-width:120px;max_height:80px;"><br/>
+              <input type="checkbox" name="goodsid[]" <?php if(in_array($vo['id'],$editmarketing['goods_ids'])){ ?>checked<?php } ?> value="{$vo.id}" valname="{$vo.good_name}">{$vo.good_name}<br/><br/>
+            </div></label>
+            </foreach>
+            
+            
+          </div>
+          <div class="jbox-buttons">
+            <a href="javascript:void(0);" style="float:left;" id="quanxuan" class="btn btn-primary btn_table_selectAll">全选</a>
+            <a href="javascript:void(0);" style="float:left;" id="quanbuxuan" class="jbox-buttons-ok btn">取消全选</a>
+            <a href="javascript:void(0);" class="jbox-buttons-ok btn cancle btn-primary">确定</a>
+            <a href="javascript:void (0);" class="jbox-buttons-ok btn quxiao">取消</a>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <!-- end content-right --> 
+  </div>
+</div>
+<!-- end container --> 
+
+<include file="Public:foot"/>
+
+<!--选择分类--> 
+
+ 
+<!--选择分类-end->
+
+
+<!--提交表单前验证--> 
+<script type="text/javascript">
+
+    function toVaild(){
+
+        var kucun=$('#kucun').val();
+        var title=$('#title').val();
+        var price=$('#price').val();
+        if(title==''||title==null){
+            alert('优惠券名称必填');
+            return false;
+        }
+		if(price==''||price==0){
+			alert('面值必填');
+			$('#price').focus();
+			return false;
+		}
+		if(kucun==''||kucun==0){
+			alert('发放总量必填');
+			$('#price').focus();
+			return false;
+		}
+
+
+    }
+	function is_order_show(){
+		$('#is_order_price').show();
+		}
+	function is_order_hide(){
+		$('#is_order_price').hide();
+		}
+</script> 
+
+<!--提交表单前验证end--> 
+
+<!--上传图片--> 
+
+<script type="text/javascript" src="__JS__/jquery.js"></script> 
+<script type="text/javascript" src="__JS__/uploadPreview.min.js"></script> 
+ 
+<script>
+function add_div(){
+	var num=$('.add_div').children().length+1;
+	$('.add_div').append('<div class="form-controls" id="div'+num+'">规格：<input type="text" class="input mini" name="guige'+num+'" style="width:200px">现价：<input type="text" class="input mini" name="guige_price'+num+'" value="0" > 元&nbsp;&nbsp;&nbsp;&nbsp;团购价：<input type="text" class="input mini" name="guige_groupprice'+num+'" value="0" > 元&nbsp;&nbsp;&nbsp;&nbsp;<input style="background-color: #3071a9;border-color: #285e8e;color:#fff;padding:7px 10px;border:none;margin-bottom:20px;border-radius: 2px;" onclick="del_div('+num+')" type="button" value="删除"></div>');
+	$("#nums").val(num);
+	}
+function del_div(e){
+	$("#div"+e).remove();
+	var num=$('.add_div').children().length;
+	$("#nums").val(num);
+	}
+</script>
+<script type="text/javascript" src="__JS__/jquery-form.js"></script>
+<script type="text/javascript">
+var goodsel = Array(),goodselnam = Array();
+    $(".BtnAddClass").click(function(){
+        $('.jbox-container input[type=checkbox]').each(function(i){
+          if($(this).attr('checked')){
+            goodsel[i] = true;
+            goodselnam[i] = $(this).attr('valname');
+            $(this).parent().css('border-color','red');
+          }else{
+            goodsel[i] = false;
+            $(this).parent().css('border-color','#d9d9d9');
+          }
+        });
+        $('.addfenlei').show();
+        $('#albums-overlay').show();
+    });
+    $(".cancle").click(function(){
+        var string = "";
+        $('.jbox-container input[type=checkbox]').each(function(){
+          if($(this).attr('checked')){
+            string += " <span>"+$(this).attr('valname')+"</span> ";
+          }
+        });
+        $('.youhui').html(string);
+        $(this).parent().parent('.jbox').hide();
+        $('#albums-overlay').hide();
+    });
+    $('.quxiao').click(function(){
+      for(var i=0;i<goodsel.length;i++){
+        if(goodsel[i]){
+          $('.jbox-container input[type=checkbox]:eq('+i+')').attr('checked',true);
+        }else{
+          $('.jbox-container input[type=checkbox]:eq('+i+')').attr('checked',false);
+        }
+      }
+      var string = "";
+        $('.jbox-container input[type=checkbox]').each(function(){
+          if($(this).attr('checked')){
+            string += " <span>"+$(this).attr('valname')+"</span> ";
+          }
+        });
+        $('.youhui').html(string);
+      $(this).parent().parent('.jbox').hide();
+      $('#albums-overlay').hide();
+    });
+    $('.querygoods input[type=checkbox]').click(function(){
+      if($(this).attr('checked')){
+        $(this).parent().css('border-color','red');
+      }else{
+        $(this).parent().css('border-color','#d9d9d9');
+      }
+    });
+    $('#quanxuan').click(function(){
+        $('.querygoods input[type=checkbox]').attr('checked',true).parent().css('border-color','red');
+    });
+    $('#quanbuxuan').click(function(){
+        $('.querygoods input[type=checkbox]').attr('checked',false).parent().css('border-color','#d9d9d9');
+    });
+
+	$(function () { 
+		var percent = $('.percent1'); 
+		var progress = $('.progress1');
+		$("#xuanze").wrap("<form id='myupload1' action='{:U('/Admin/Category/addImage')}' method='post' enctype='multipart/form-data'></form>"); 
+		$("#xuanze").change(function(){ //选择文件 
+			$("#myupload1").ajaxSubmit({ 
+				dataType:  'json', //数据格式为json 
+				beforeSend: function() { //开始上传 
+					progress.show(); //显示进度条
+					var percentVal = '0%';
+					percent.html(percentVal);	
+				}, 
+				uploadProgress: function(event, position, total, percentComplete) { 
+					var percentVal = percentComplete + '%'; //获得进度 
+					percent.html(percentVal); //显示上传进度百分比 
+				}, 
+				success: function(data) { //成功 
+					console.log(data);
+					var img = '<img src="'+data[0]["savepath"].substr(1)+data[0]["savename"]+'" height="80" ><input type="hidden" name="pic" id="pic" value="'+data[0]["savepath"].substr(1)+data[0]["savename"]+'"></input>';
+					$('.showimge').html(img);
+					progress.hide();
+				}, 
+				error:function(xhr){ //上传失败 
+					//console.log(xhr.status)
+				} 
+			}); 
+		}); 
+	}); 
+
+
+</script>
+<!--上传图片-end->
+
+

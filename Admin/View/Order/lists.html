@@ -1,0 +1,516 @@
+<include file="Public:head"/>
+
+<style>
+    .ftnormal {line-height: 25px!important;}
+    .btn{vertical-align: baseline;}
+    .newinput{ width:145px;}
+    .select.mini{width: 110px;}
+    .vtal-2{vertical-align: -2px;}
+	.shady{ background:#000; opacity:0.5; width:100%; height:100%; position:fixed; top:0; left:0; z-index:111111; display:none; }
+</style>
+<script type="text/javascript" src="__LHG__/lhgcore.min.js"></script>
+<script type="text/javascript" src="__LHG__/lhgcalendar.min.js"></script>
+
+<script type="text/javascript">
+
+    J(function(){
+        J('#starttime').calendar();
+        J('#endtime').calendar();
+//    $(function(){
+//        $('#starttime').calendar({ format:'yyyy-MM-dd' });
+//        $('#endtime').calendar({ format:'yyyy-MM-dd' });
+    });
+
+</script>
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+    <dl class="left-menu shop_5 sub_signup">
+            <dt>
+                <i class="icon-menu signup"></i>
+                <span id="shop_5" data-id="5">订单管理</span>
+            </dt>
+            <dd class="subshop_0  <eq name="dealerid" value="">active</eq>"><a href="{:U('Admin/Order/lists')}">所有订单</a></dd>
+            <dd class="subshop_1  <eq name="dealerid" value="0">active</eq>"><a href="{:U('Admin/Order/lists/dealerid/0')}">总部</a></dd>
+            
+			<foreach name="dealerlist" item="vo" >
+            	<dd class="subshop_{$key+2} <eq name="dealerid" value="$vo.id">active</eq>"><a href="{:U('Admin/Order/lists/dealerid/')}/{$vo.id}">{$vo.username}</a></dd>
+            </foreach>
+            
+            
+            
+            
+        <!--<dd class="subshop_13 ">-->
+                    <!--<a href="/Order/export">导出订单</a>-->
+                                    <!--</dd><dd class="subshop_14 ">-->
+                    <!--<a href="/Order/del_log">删除日志</a>-->
+                                    <!--</dd><dd class="subshop_16 ">-->
+                    <!--<a href="/Order/order_import">备份订单导入</a>-->
+                                    <!--</dd> -->
+    </dl>
+    <dl class="left-menu shop_6 sub_shield">
+    <dt>
+        <i class="icon-menu shield"></i>
+        <span id="shop_6" data-id="6">售后服务</span>
+    </dt>
+    <dd class="subshop_0 "><a href="{:U('Admin/Order/goodsRefund')}">退款审核</a></dd>
+    </dl>
+    
+    <!--
+    <dl class="left-menu shop_6 sub_shield">
+        <dt>
+            <i class="icon-menu shield"></i>
+            <span id="shop_6" data-id="6">售后服务</span>
+        </dt>
+        <dd class="subshop_0 ">
+            <a href="{:U('/Admin/Order/exchange')}">退/换货审核</a>
+        </dd>
+        <dd class="subshop_3 ">-->
+            <!--<a href="/Comment/lists">商品评价</a>-->
+        <!--</dd>-->
+        <!--<dd class="subshop_8 ">-->
+            <!--<a href="/Comment/custom_comment">自定义评价</a>-->
+        <!--</dd>-->
+    </dl>
+</div>
+<!-- end content-left -->
+<div class="shady" id="heemu"></div>
+<img src="" id="em" style="position:fixed;width:34%;margin:auto;left:0;right:0;display:none;z-index:11111111111111;cursor:pointer;" onclick="this.style.display='none',document.getElementById('heemu').style.display='none'"/>
+<div class="content-right fl">
+
+
+    <h1 class="content-right-title">所有订单</h1>
+
+
+    <form action="" method="get">
+        <div class="tables-searchbox">
+            <input type="text" placeholder="手机号" class="input newinput" name="telephone" value="{$telephone}">
+            <input type="text" placeholder="输入订单号" class="input newinput" name="orderno" value="{$orderno}">
+            <input type="text"  name="starttime" id="starttime" value="{$starttime}" placeholder="订单起始时间" class="input Wdate mini" >
+            <span class="mgr5">至</span>
+            <input type="text"  name="endtime" value="{$endtime}" id="endtime" placeholder="订单结束时间" class="input Wdate mini" >
+
+            <select value="{$pay_type}" name="pay_type" class="select mini">
+                <option value="" selected="">订单状态</option>
+                <option value="1">待付款</option>
+                <option value="2">待发货</option>
+                <option value="3">已发货</option>
+                <option value="4">已签收</option>
+                <option value="5">已退款</option>
+                <option value="6">已取消</option>
+            </select>
+            <button class="btn btn-primary vtal-2"><i class="gicon-search white"></i>查询</button>
+        </div>
+    </form>
+        <div class="tabs clearfix mgt15">
+        <a href="{:U('Admin/Order/lists/dealerid/')}/{$dealerid}" class="<if condition="($pay_type eq '') and ($groupbuy_type eq '')">active</if> tabs_a fl">所有订单({$counts})</a>
+        <a href="{:U('Admin/Order/lists/pay_type/1/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="1">active</eq> tabs_a fl">待付款({$count1})</a>
+        <a href="{:U('Admin/Order/lists/groupbuy_type/1/dealerid/')}/{$dealerid}" class="<eq name="groupbuy_type" value="1">active</eq> tabs_a fl">团购中({$count_group})</a>
+        <a href="{:U('Admin/Order/lists/pay_type/2/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="2">active</eq> tabs_a fl">待发货({$count2})</a>
+        <a href="{:U('Admin/Order/lists/pay_type/3/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="3">active</eq> tabs_a fl">自提({$count3})</a>
+		<eq name="ceshi" value="1"><a href="{:U('Admin/Order/lists/pay_type/32/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="32">active</eq> tabs_a fl">配送({$count32})</a></eq>
+        <a href="{:U('Admin/Order/lists/pay_type/4/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="4">active</eq> tabs_a fl">已签收({$count4})</a>
+        <a href="{:U('Admin/Order/lists/pay_type/5/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="5">active</eq> tabs_a fl">退款({$count5})</a>
+        <!--<a href="{:U('Admin/Order/lists/pay_type/6/dealerid/')}/{$dealerid}" class="<eq name="pay_type" value="6">active</eq> tabs_a fl">已取消({$count6})</a>-->
+		<eq name="pay_type" value="2">
+		<a href="{:U('/Admin/Order/excel')}/dealerid/{$dealerid}" class="btn btn-success fr">导出</a>
+		</eq>
+    </div>
+        <table class="wxtables table-order mgt20">
+            <colgroup>
+                <col width="25%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="15%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td align="center">商品</td>
+                    <td align="center">收货人</td>
+                    <td align="center">总价</td>
+                    <td align="center">经销商</td>
+                    <td align="center">类型</td>
+                    <td align="center">买家留言</td>
+                    <td align="center">操作</td>
+                </tr>
+            </thead>
+                    </table>
+
+
+    	<table class="wxtables table-order mgt20">
+              <colgroup>
+                <col width="25%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="15%">
+                <col width="10%">
+              </colgroup>
+
+            <volist name="orderlist" id="vo" empty="$empty">
+                <thead>
+
+                    <tr>
+                        <td colspan="7" class="ftnormal" style="background-color:#F2F8FC;">
+                            <input type="checkbox" class="checkbox table-ckbs" data-id="2137327" name="id" value="{$vo.id}">
+                            
+                            <span>订单编号：<b>{$vo.orderno}</b></span>
+                            <span class="mgl15">{$vo.addtime}</span>
+                            <!---->
+                            <span class="mgl15 colorRed">
+                                <switch name="vo.orderstate">
+                                    <case value="1">待付款</case>
+                                    <case value="2">待发货</case>
+                                    <case value="3">待收货</case>
+                                    <case value="4">交易成功</case>
+                                    <case value="5">已退款</case>
+                                    <case value="6">已取消</case>
+                                    <case value="7">已取消</case>
+                                </switch>
+                                <eq name="vo.is_refund" value="1">（退款审核中）</eq>
+                                <eq name="vo.is_refund" value="3">（退款失败）</eq>
+                            </span>
+                         </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pd0">
+                            <volist name="vo.orderdatail" id="vod" empty="$empty">
+                                    <!--{$vo.orderdatail.0.id}-->
+            				<div class="table-item">
+		                            <a href="{:U('/Admin/Order/orderdetail/id')}/{$vo.id}" class="block" target="_blank" title="{$vod.goodsname}">
+		                                <div class="table-item-img">
+                                            <img src="{$vod.img}" alt="">
+                                                                                      		                                </div>
+		                                <div class="table-item-info">
+		                                    <p>{$vod.goodsname}</p>
+		                                    <span class="price">单价：¥{$vod.good_nowprice}</span>
+		                                    <span class="number">数量：{$vod.num}</span>
+		                                </div>
+		                            </a>
+	            				</div>
+                            </volist>
+                        </td>
+                        <td valign="top" class="txtCenter" style="padding-top:15px;vertical-align: inherit;">
+                            <p>{$vo.consignee}</p>
+                            <p>{$vo.telephone}</p>
+                     	</td>
+                        <td valign="middle" align="center" class="txtCenter">
+                            <p><b>¥{$vo.total_price}</b></p>
+                            <p><b><eq name="vo.is_delivery" value="0">配送</eq><eq name="vo.is_delivery" value="1">自提</eq></b></p>
+                            <eq name="vo.is_delivery" value="0"><p class="colorGray">(含运费 ¥{$vo.shipping_fee})</p></eq>
+                        </td>
+                        <td valign="middle" align="center"  class="txtCenter">
+                            <p><b>{$vo.dealername}</b></p>
+                        </td>
+                        <td valign="middle" align="center">
+                        <p>
+                            <if condition="($vo.is_groupbuy eq 0)">
+                            单买
+                            <elseif condition="$vo.groupbuy_ok eq 0"/>
+                            团购中...
+                            <elseif condition="$vo.groupbuy_ok eq 1" />
+                            拼团成功
+                            <elseif condition="$vo.groupbuy_ok eq 2" />
+                            拼团失败
+                        </if>
+                        </td>
+                        <td valign="top" style="padding-top:30px;vertical-align: inherit;">
+                        <p>{$vo.comment}</p>
+                        </td>
+                        <td valign="top" style="vertical-align: inherit;">
+                           <!--待付款--->
+                            <switch name="vo.orderstate">
+                                <case value="1">
+                                    <p><a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+                                    
+                                </case>
+                                <!--待发货--->
+                                <case value="2">
+                                    <p><a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+                                    
+                                    <if condition="$vo.is_groupbuy eq 0">
+                                    	<p><a href="javascript:;" class="J_shipping_order btn btn-mini btn-primary" data-id="{$vo.id}" data-no="{$vo.orderno}">标记发货</a></p>
+                                    </if>
+									<if condition="($vo.groupbuy_ok eq 1) AND ($vo.is_groupbuy eq 1)">
+                                  		<p><a href="javascript:;" class="J_shipping_order btn btn-mini btn-primary" data-id="{$vo.id}" data-no="{$vo.orderno}">标记发货</a></p>
+                                    </if>
+                                    <!--{:U('/Admin/Order/delivergoods/id')}/{$vo.id}-->
+                                </case>
+                                <!--已经发货-->
+                                <case value="3">
+                                    <p style=" <eq name="vo.is_delivery" value="1"> margin-top:8px; </eq>  <eq name="vo.is_delivery" value="0"> margin-top:18px; </eq> ">
+                                    <a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+
+                                    <if condition="($vo.is_groupbuy eq 0) AND ($vo.is_delivery eq 1)">
+                                        <p><a href="javascript:;" class="J_confirm_order btn btn-mini btn-primary" data-id="{$vo.id}" data-no="{$vo.orderno}">确认收货</a></p>
+                                    </if>
+                                    
+                                    <if condition="($vo.is_groupbuy eq 1) AND ($vo.is_delivery eq 1) AND ($vo.groupbuy_ok eq 1)">
+                                  		<p><a href="javascript:;" class="J_confirm_order btn btn-mini btn-primary" data-id="{$vo.id}" data-no="{$vo.orderno}">确认收货</a></p>
+                                    </if>
+                                    
+                                    
+                                </case>
+                                <!--已经签收-->
+                                <case value="4">
+                                    <p><a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+                                    <!-- <p class="mgt5"><a href="{:U('Admin/Order/orderdel/id')}/{$vo.id}" class="btn btn-mini btn-danger J_del_order">删除订单</a></p> -->
+                                    <eq name="vo.is_exist" value="1">
+                                        <p><a href="javascript:isexist({$vo.id},2);" class="btn btn-mini btn-danger" >标记无货</a></p>
+                                    </eq>
+                                    <eq name="vo.is_exist" value="2">
+                                        <p><a href="javascript:isexist({$vo.id},1);" style="background:#5CB85C;border-color:#5CB85C;" class="btn btn-mini btn-danger" >标记有货</a></p>
+                                    </eq>
+                                </case>
+                                <!--退款中-->
+                                <case value="5">
+                                    <p><a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+                                    <!-- <p class="mgt5"><a href="{:U('Admin/Order/orderdel/id')}/{$vo.id}" class="btn btn-mini btn-danger J_del_order">删除订单</a></p> -->
+                                </case>
+                                  <!--关闭订单-->
+                                <case value="6"> <p><a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+                                    <!-- <p class="mgt5"><a href="{:U('Admin/Order/orderdel/id')}/{$vo.id}" class="btn btn-mini btn-danger J_del_order">删除订单</a></p> -->
+                                </case>
+                                <case value="7">
+                                    <p><a href="{:U('Admin/Order/orderdetail')}/id/{$vo.id}/dealerid/{$dealerid}" class="btn btn-mini btn-primary">查看详情</a></p>
+                                    <!-- <p class="mgt5"><a href="{:U('Admin/Order/orderdel/id')}/{$vo.id}" class="btn btn-mini btn-danger J_del_order">删除订单</a></p> -->
+                                </case>
+                            </switch>
+							<eq name="pay_type" value="32"><p><a onclick="showem('{$vo.barcode}')" class="btn btn-mini btn-primary">核验</a></p></eq>
+							
+                        </td>
+                    </tr>
+                </tbody>
+ </volist>
+
+            </table>
+
+        <!-- end wxtables -->
+        <div class="tables-btmctrl clearfix mgt10">
+            <div class="fl" style="float:none;">
+                <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a>
+                <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a>
+                <!-- <a href="javascript:void(0)" onclick="del()" class="btn btn-danger J_batch_del">删除订单</a> -->
+            </div>
+
+                <div class="pages" style="float:none;width:100%;text-align:left;padding-top:10px;">
+                    {$page}
+                </div>
+                <!-- end paginate -->
+
+        </div>        <!-- end tables-btmctrl -->
+
+
+    <form action="" method="post" id="ids">
+        <input type="hidden" name="ids" value="">
+    </form>
+
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<!--gonggao-->
+<include file="Public:foot"/>
+
+<div id="albums-overlay" class="disshow"></div>
+<div class="jbox addfenlei disshow" style="height:280px;">
+  <div class="jbox-title">
+    <div class="jbox-title-txt">确认发货</div>
+    <a href="javascript:;" class="jbox-close cancle"></a></div>
+  <div class="jbox-container" style="height: 153px;">
+   
+    <div class="formitems">
+      <label class="fi-name"><span class="colorRed"></span>订单编号：</label>
+      <div class="form-controls">
+        <span class="orderno"></span>
+        <input type="hidden" name="orderid" class="orderid" value="" />
+        <span class="fi-help-text"></span> </div>
+    </div>
+    
+    <div class="formitems">
+      <label class="fi-name"><span class="colorRed">*</span>快递公司：</label>
+      <div class="form-controls">
+        <input type="text" class="input expressname" name="expressname" >
+        <span class="fi-help-text"></span> </div>
+    </div>
+    
+    
+    <div class="formitems">
+      <label class="fi-name"><span class="colorRed"></span>快递单号：</label>
+      <div class="form-controls">
+        <input type="text" class="input expressno" name="expressno" >
+        <span class="fi-help-text"></span> </div>
+    </div>
+    
+    
+    
+    
+  </div>
+  <div class="jbox-buttons"><a href="javascript:void(0);" class="jbox-buttons-ok btn btn-primary" id="addshipping">确定</a><a
+            href="javascript:void (0);" class="jbox-buttons-ok btn cancle">取消</a></div>
+</div>
+
+<div class="jbox confirmreceipt disshow" style="height:280px;">
+  <div class="jbox-title">
+    <div class="jbox-title-txt">确认收货</div>
+    <a href="javascript:;" class="jbox-close cancle"></a></div>
+  <div class="jbox-container" style="height: 153px;">
+   
+    <div class="formitems">
+      <label class="fi-name"><span class="colorRed"></span>订单编号：</label>
+      <div class="form-controls">
+        <span class="orderno"></span>
+        <input type="hidden" name="orderid" class="orderid" value="" />
+        <span class="fi-help-text"></span> </div>
+    </div>
+    
+    <div class="formitems">
+      <label class="fi-name"><span class="colorRed">*</span>验证码：</label>
+      <div class="form-controls">
+        <input type="text" class="input code" name="code" >
+        <span class="fi-help-text"></span> </div>
+    </div>
+    
+    
+  </div>
+  <div class="jbox-buttons"><a href="javascript:void(0);" class="jbox-buttons-ok btn btn-primary" id="confirmreceipt">确定</a><a
+            href="javascript:void (0);" class="jbox-buttons-ok btn cancle">取消</a></div>
+</div>
+
+
+<script type="text/javascript">
+
+	function del(){
+		obj = document.getElementsByName("id");
+		check_val = [];
+		for(k in obj){
+			if(obj[k].checked)
+				check_val.push(obj[k].value);
+		}
+		location.href="{:U('/Admin/Order/orderdel')}/ids/"+check_val
+	}
+
+    $(".J_shipping_order").click(function(){
+        $('.addfenlei').show();
+        $('#albums-overlay').show();
+		
+        var orderno=$(this).attr('data-no');
+        var orderid=$(this).attr('data-id');
+		$('.orderno').html(orderno);
+		$('.orderid').val(orderid);
+    })
+	
+    $(".J_confirm_order").click(function(){
+        $('.confirmreceipt').show();
+        $('#albums-overlay').show();
+		
+        var orderno=$(this).attr('data-no');
+        var orderid=$(this).attr('data-id');
+		$('.orderno').html(orderno);
+		$('.orderid').val(orderid);
+    })
+
+    $(".cancle").click(function(){
+        $(this).parent().parent('.jbox').hide();
+        $('#albums-overlay').hide();
+    })
+
+	$('#addshipping').click(function(){
+	
+        var orderid = $('.orderid').val(); 
+		var expressname = $('.expressname').val();
+		var expressno = $('.expressno').val(); 
+      
+        if (expressname == '') {
+            alert("请填写快递公司");
+			$('.expressname').focus();
+            return false;
+        }
+		
+        $.ajax({
+            url: "{:U('/Admin/Order/addshipping')}",
+            type: "post",
+            dataType: "json",
+            data: {
+                orderid: orderid,
+				expressname: expressname,
+				expressno: expressno
+            }
+        }).done(function (g) {
+		    if (g.status == 1) {
+                alert(g.info);
+                window.location.reload();
+            } else {
+                alert(g.info);
+            }
+
+        })
+
+	})
+	
+	$('#confirmreceipt').click(function(){
+	
+        var orderid = $('.orderid').val(); 
+		var code = $('.code').val();
+      
+        if (code == '') {
+            alert("请填写验证码");
+			$('.code').focus();
+            return false;
+        }
+		
+        $.ajax({
+            url: "{:U('/Admin/Order/confirmreceipt')}",
+            type: "post",
+            dataType: "json",
+            data: {
+                orderid: orderid,
+				code: code
+            }
+        }).done(function (g) {
+           	console.log(g);
+		    if (g.status == 1) {
+                alert(g.info);
+                window.location.reload();
+            } else {
+                alert(g.info);
+            }
+
+        })
+
+	})
+	function showem(url){
+		$('#heemu').css('display','block');
+		$('#em').attr('src','http://goead.ysxdgy.com/'+url).css('display','block');
+	}
+	function isexist(id,states){
+        $.ajax({
+            url: "{:U('/Admin/Order/goodsnoexist')}",
+            type: "post",
+            dataType: "json",
+            data: {
+                id:id,
+                states,states
+            }
+        }).done(function (g) {
+            if(g==1){
+                alert("操作完成");
+                window.location.reload();
+            }else{
+                alert("操作失败");
+            }
+        })
+    }
+	
+	
+</script> 

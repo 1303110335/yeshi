@@ -1,0 +1,203 @@
+<include file="Public:head"/>
+
+<link rel="stylesheet" href="../css/lists.css">
+
+<div class="container">
+    <div class="inner clearfix">
+        <div class="content-left fl">
+
+            <dl class="left-menu shop_2 sub_commodity">
+                <dt>
+                    <i class="icon-menu commodity"></i>
+                    <span id="shop_2" data-id="2">商品管理</span>
+                </dt>
+                <dd class="subshop_0 ">
+                    <a href="{:U('/Admin/Goods/add')}">发布商品</a>
+                </dd>
+                <dd class="subshop_6 active">
+                    <a href="{:U('/Admin/Goods/index')}">商品管理</a>
+                </dd>
+                <!--<dd class="subshop_7">-->
+                    <!--<a href="{:U('/Admin/Goods/onsku')}">仓库中的商品</a>-->
+                    <!--<i class="icon_hot"></i></dd>-->
+                <!--<dd class="subshop_8 ">-->
+                    <!--<a href="{:U('/Admin/Goods/outstock')}">已售罄的商品</a>-->
+                <!--</dd>-->
+                <!--<dd class="subshop_9 ">-->
+                    <!--<a href="{:U('/Admin/Goods/warn')}">警戒的商品</a>-->
+                <!--</dd>-->
+                <!--<dd class="subshop_12 ">-->
+                <!--                    <a href="/Item/category_list">自定义类目</a>-->
+                <!--</dd>-->
+            </dl>
+            <dl class="left-menu shop_3 sub_tags">
+                <dt>
+                    <i class="icon-menu tags"></i>
+                    <span id="shop_3" data-id="3">分组管理</span>
+                </dt>
+                <dd class="subshop_0 ">
+
+                    <a href="{:U('/Admin/Category/category')}">商品分类</a>
+                </dd>
+            </dl>
+
+        </div>
+        <!-- end content-left -->
+
+        <div class="content-right fl">
+
+
+            <h1 class="content-right-title">商品列表</h1>
+
+
+            <a href="{:U('/Admin/Goods/add')}" class="btn btn-success">发布商品</a>
+
+            <form action="" method="post">
+                <div class="tables-searchbox newcearchbox">
+
+                    <select name="class_id" class="select small newselect">
+
+                        <option value="" selected="">所有分类</option>
+
+                        <foreach name="categorylist" item="vo">
+                        <option value="{$vo.id}">{$vo.classname}</option>
+
+                        </foreach>
+                    </select>
+
+                    <input type="text" placeholder="商品名称" class="input" name="title" value="" >
+                    <input type="text" placeholder="商家编码" class="input" name="goods_no" value="" >
+                    <button class="btn btn-primary" style="line-height:26px;">
+                        <i class="gicon-search white"></i>查询
+                    </button>
+                    <!--<a href="/Item/item_export" class="btn btn-warning"><i class="gicon-share white"></i>-->
+                    <!--商品导出</a>-->
+                </div>
+                <div class="tabs clearfix mgt10">
+                    <a href="javascript:void (0)" class="active tabs_a fl">出售中(3)</a>
+                    <!--<a href="{:U('/Admin/Goods/onsku')}" class=" tabs_a fl">仓库中(0)</a>-->
+                    <!--<a href="{:U('/Admin/Goods/outstock')}" class=" tabs_a fl">已售罄(1)</a>-->
+                    <!--<a href="{:U('/Admin/Goods/warn')}" class=" tabs_a fl">警戒(0)</a>-->
+
+                </div>
+            </form>
+            <!-- end tabs -->
+
+            <table class="wxtables mgt10">
+                <colgroup>
+                    <col width="2%">
+                    <col width="25%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="7%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="26%">
+                </colgroup>
+                <thead>
+                <tr class="po_list">
+                    <td><i class="icon_check"></i></td>
+                    <td>商品<span></span></td>
+                    <td>库存</td>
+                    <td>是否上架</td>
+                    <td>状态<span></span></td>
+                    <td>排序<span></span></td>
+                    <td>分类<span></span></td>
+                    <td>创建时间</td>
+                    <td>操作<span></span></td>
+                </tr>
+                </thead>
+                <tbody>
+                <foreach name="goodslist" item="vo">
+
+
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="checkbox table-ckbs" data-id="">
+                        </td>
+                        <td>
+                            <div class="goodswrap">
+                                <a href="javascript:void(0)" class="block" target="_blank" title="r">
+                                    <div class="table-item-img">
+                                        <img src="{$vo.pic}" alt="">
+                                    </div>
+                                    <div class="table-item-info" style="width: 100px">
+                                        <p>{$vo.good_name}</p>
+                                        <span class="price">¥{$vo.good_nowprice}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="stockwrap">
+                                <span>{$vo.good_nowprice}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <if condition="($vo.is_show eq 1)"> 上架 <else/>下架</if>
+
+                        </td>
+                        <td>
+                            <div class="serialwrap">
+                                <span>
+                                    <if condition="($vo.goodstype eq 0) "> 销售中
+                                        <elseif condition="$vo.goodstype eq 1"/>仓库中
+                                        <else />
+                                        售罄
+                                    </if>
+
+                                <i class="edit-item j-geteditserial" data-id="2151938" data-serial="1" title="编辑排序"></i>
+                            </div>
+                        </td>
+                        <td>
+
+                            {$vo.rank}
+
+                        </td>
+                        <td class="class_name">
+                            <span>{$vo.classname}</span>
+                            <i class="edit-item j-geteditclassName" title="编辑分类" data-id="2151938" data-cid=""
+                               style="right:50%;margin-right:-8px;"></i>
+                        </td>
+                        <td>{$vo.addtime}</td>
+                        <td>
+                            <a href="{:U('/Admin/Goods/edit/id')}/{$vo.id}" class="btn btn-primary j-editClass" title="修改">编辑</a>
+                            <a href="{:U('/Admin/Goods/delgoods/id')}/{$vo.id}" onclick="{if(confirm('确定删除商品吗?')){this.document.formname.submit();return true;}return false;} " class="btn j-delClass btn-warning" title="删除"
+                               data-id="2151938">删除</a>
+                        </td>
+                    </tr>
+                </foreach>
+                </tbody>
+
+            </table>
+            <!-- end wxtables -->
+            <div class="tables-btmctrl clearfix">
+                <div class="fl">
+                    <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a>
+                    <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a>
+                    <!--<a href="javascript:;" class="btn btn-primary btn_table_offshelf">下架</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary btn_table_delAll">删除</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary btn_table_groupAll">分组</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary btn_table_setLevel">开/关折扣</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary j_alibaba">导入1688</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary j_postfee">运费</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary batch_update_price">修改价格</a>-->
+                    <!--<a href="javascript:;" class="btn btn-primary batch_update_class">分类</a></div>-->
+
+                <div class="fr">
+                    <div class="pages">
+                        {$page}
+                    </div>
+                    <!-- end paginate -->
+                </div>
+            </div>
+            <!-- end tables-btmctrl -->
+
+
+        </div>
+        <!-- end content-right -->
+    </div>
+</div>
+<!-- end container -->
+<include file="Public:foot"/>

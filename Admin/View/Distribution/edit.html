@@ -1,0 +1,336 @@
+<include file="Public:head"/>
+
+<style>
+        .imgnav{
+            max-height: 30px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .imgwrapper{
+            display: block;
+            width: 78px;
+            height: 78px;
+            overflow: hidden;
+        }
+        .imgwrapper img{
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border:0;
+        }
+        .spanpd10{
+            margin:10px;
+        }
+        .wxtables.wxtables-sku.newtable{
+            width: 40%;
+            margin: 0;
+        }
+        .img-list li{
+            width: 60px;
+            height:60px;
+        }
+        .cst_h3 span{font-weight: normal;}
+    </style>
+
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+
+        <dl class="left-menu shop_2 sub_commodity">
+            <dt>
+                <i class="icon-menu commodity"></i>
+                <span id="shop_2" data-id="2">产品管理</span>
+            </dt>
+            <dd class="subshop_0 ">
+                <a href="{:U('/Admin/Goods/add')}">产品商品</a>
+            </dd>
+            <dd class="subshop_6 ">
+                <a href="{:U('/Admin/Goods/index')}">出售中的产品</a>
+            </dd>
+            <!--<dd class="subshop_7">-->
+                <!--<a href="{:U('/Admin/Goods/onsku')}">仓库中的商品</a>-->
+                <!--<i class="icon_hot"></i></dd>-->
+            <!--<dd class="subshop_8 ">-->
+                <!--<a href="{:U('/Admin/Goods/outstock')}">已售罄的商品</a>-->
+            <!--</dd>-->
+            <!--<dd class="subshop_9 ">-->
+                <!--<a href="{:U('/Admin/Goods/warn')}">警戒的商品</a>-->
+            <!--</dd>-->
+            <!--<dd class="subshop_12 ">-->
+            <!--                    <a href="/Item/category_list">自定义类目</a>-->
+            <!--</dd>-->
+        </dl>
+        <dl class="left-menu shop_3 sub_tags">
+            <dt>
+                <i class="icon-menu tags"></i>
+                <span id="shop_3" data-id="3">分组管理</span>
+            </dt>
+            <dd class="subshop_0 ">
+
+                    <a href="{:U('/Admin/Category/category')}">产品分类</a>
+                                    </dd>        </dl>
+		<dl class="left-menu shop_3 sub_tags">
+                <dt>
+                    <i class="icon-menu tags"></i>
+                    <span id="shop_3" data-id="3">积分商品管理</span>
+                </dt>
+                <dd class="subshop_0">
+
+                    <a href="{:U('/Admin/Distribution/add')}">发布商品</a>
+                </dd>  
+                
+                <dd class="subshop_0 active">
+
+                    <a href="{:U('/Admin/Distribution/index')}">积分商品</a>
+                </dd>        
+                
+                </dl>
+</div>
+<!-- end content-left -->
+
+<div class="content-right fl">
+ 
+
+    <h1 class="content-right-title">修改商品</h1>
+    
+    
+<input type="hidden" id="j-isSid" value="0"><!-- 是否选择了淘宝类目 -->
+<input type="hidden" id="j-hasNorms" value="1"><!-- 淘宝类目下是否有属性 -->
+<input type="hidden" id="supplier" value="">
+
+<form aciton="{:U('/Admin/Distribution/editdistribution')}" method="post" id="add_step2" onsubmit="return toVaild()">
+<div class="panel-single panel-single-light mgt20">
+    <h3 class="cst_h3 mgb20">基本信息</h3>
+    <div class="formitems">
+        <label class="fi-name">商品类目：</label>
+        <div class="form-controls pdt3">积分商品 </div>
+    </div>
+        
+
+</div>
+<!-- end 基本信息 -->
+
+<div class="panel-single panel-single-light mgt20">
+    <h3 class="cst_h3 mgb20">商品信息</h3>
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed">*</span>商品名：</label>
+        <div class="form-controls">
+            <input type="text" class="input xxlarge" name="title" id="title" value="{$distributiondetail.good_name}">
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+	<div class="formitems">
+        <label class="fi-name"><span class="colorRed"></span>兑换需要积分：</label>
+        <div class="form-controls">
+                <input type="text" class="input mini" name="dianzan" value="{$distributiondetail.dianzan}">
+        </div>
+    </div>
+
+    <div class="formitems">
+        <label class="fi-name">上传图片：</label>
+        <div class="form-controls pdt5 j-imglistPanel">
+            <!--<ul class="img-list clearfix">-->
+
+                <!--<li class="img-list-add j-addimg">+</li>-->
+            <!--</ul>-->
+
+
+            <div style="width: 610px; height: auto; border: 1px solid #e1e1e1; font-size: 12px; padding: 10px;">
+                <span id="spanButtonPlaceholder"></span>
+                <div id="divFileProgressContainer"></div>
+                <div id="thumbnails">
+                    <ul id="pic_list" style="margin: 5px;"></ul>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <img src="{$distributiondetail.pic}" width='60' />
+            <input type="hidden" name="pic" id="upimg" value=""/>
+            <!--<input type="hidden" name="file_path" class="j-imglist-dataset" value="">-->
+            <span class="fi-help-text">建议上传尺寸640px * 640px</span>
+        </div>
+    </div>
+
+</div>
+<!-- end 商品信息 -->
+
+
+<!-- end 库存/规格 -->
+<!-- <button id="test">show sku</button> -->
+
+<div class="panel-single panel-single-light mgt20 j-showinhyd" style="display: block;">
+    <h3 class="cst_h3 mgb20">详情</h3>
+
+    
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed"></span>排序：</label>
+        <div class="form-controls">
+                <input type="text" class="input mini" name="rank" value="{$distributiondetail.rank}">
+        </div>
+    </div>
+
+    <div class="formitems">
+        <label class="fi-name"><span class="colorRed">*</span>商品详情：</label>
+        <div class="form-controls">
+            <script id="editor" name="detail" type="text/plain" style="width:200px;height:500px;">
+			{$distributiondetail.detail}
+            </script>
+
+        </div>
+    </div>
+
+</div>
+<!-- end 详情及其它 -->
+
+    <script type="text/javascript">
+
+        //实例化编辑器
+        //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+        UE.getEditor('editor');
+
+        </script>
+
+
+<div class="panel-single panel-single-light mgt20 txtCenter">
+    <a href="" class="btn">取消</a>
+    <input type="submit" class="btn btn-primary" value="保存">
+</div>
+</form>
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<include file="Public:foot"/>
+
+<div id="albums-overlay" style="display: none;"></div>
+<div class="jbox fenlei disshow" >
+    <div class="jbox-title">
+        <div class="jbox-title-txt">请选择分类</div>
+        <a href="javascript:void(0);" class="jbox-close cancle"></a></div>
+    <div class="jbox-container" style="height: 75px;">
+        <div class="formitems">
+            <label class="fi-name"><span class="colorRed"></span>选择分类：</label>
+
+            <div class="form-controls">
+                <select name="select_class_id" id="select_class_id" class="select">
+
+                    <foreach name="categorylist" item="vo" >
+
+
+                    <option value="{$vo.id}">{$vo.classname}</option>
+                    </foreach>
+                </select>
+                <span class="fi-help-text"></span>
+            </div>
+        </div>
+    </div>
+    <div class="jbox-buttons">
+        <a href="javascript:void(0);" class="jbox-buttons-ok btn btn-primary" id="select_class">确定</a>
+        <a href="javascript:void(0);" class="jbox-buttons-ok btn cancle">取消</a>
+    </div>
+</div>
+
+<!--选择分类-->
+
+<script type="text/javascript">
+    $("#j-select_category_id").click(function(){
+        $('.fenlei').show();
+        $('#albums-overlay').show();
+    })
+            $(".cancle").click(function(){
+                $(this).parent().parent('.jbox').hide();
+                $('#albums-overlay').hide();
+            })
+
+            $("#select_class").click(function(){
+                var clssid=$("#select_class_id  option:selected").val();
+                var classname=$("#select_class_id option:selected" ).text();
+               $('#class_id').val(clssid);
+               $('#class_name').val(classname);
+//                alert(clssid);
+                $(this).parent().parent('.jbox').hide();
+                $('#albums-overlay').hide();
+            })
+        </script>
+
+
+<!--选择分类-end->
+
+<!--提交表单前验证-->
+<script type="text/javascript">
+    function toVaild(){
+        var title=$('#title').val();
+        var dianzan=$('#dianzan').val();
+        var upimg=$('#upimg').val();
+        var detail=$('#editor').text();
+        if(title==''||title==null){
+            alert('商品名称必填');
+            return false;
+        }
+		if(dianzan==''||dianzan==0){
+            alert('商品需要积分');
+            return false;
+        }
+        if(detail==''||detail==null){
+            alert('详情必填');
+            return false;
+        }
+
+
+    }
+</script>
+<!--提交表单前验证end-->
+
+
+  <!--上传图片-->
+
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/swfupload.js"></script>
+<script type="text/javascript" src="__JS__/handlers.js"></script>
+<link href="__CSS__/default.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    var pathimg='__IMAGES__';
+    var url='__URL__';
+    var delurl="{:U('/Admin/Distribution/del')}";
+//    alert(url);
+    var swfu;
+    window.onload = function () {
+        swfu = new SWFUpload({
+            upload_url: "{:U('/Admin/Distribution/uploadImg')}",
+            post_params: {"PHPSESSID": "<?php echo session_id();?>"},
+            file_size_limit : "2 MB",
+            file_types : "*.jpg;*.png;*.gif;*.bmp",
+            file_types_description : "JPG Images",
+            file_upload_limit : "100",
+            file_queue_error_handler : fileQueueError,
+            file_dialog_complete_handler : fileDialogComplete,
+            upload_progress_handler : uploadProgress,
+            upload_error_handler : uploadError,
+            upload_success_handler : uploadSuccess,
+            upload_complete_handler : uploadComplete,
+            button_image_url : "__IMAGES__/upload.png",
+            button_placeholder_id : "spanButtonPlaceholder",
+            button_width: 113,
+            button_height: 33,
+            button_text : '',
+            button_text_style : '.spanButtonPlaceholder { font-family: Helvetica, Arial, sans-serif; font-size: 14pt;} ',
+            button_text_top_padding: 0,
+            button_text_left_padding: 0,
+            button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+            button_cursor: SWFUpload.CURSOR.HAND,
+            flash_url : "__SWF__/swfupload.swf",
+            custom_settings : {
+                upload_target : "divFileProgressContainer"
+            },
+            debug: false
+        });
+    };
+</script>
+<!--上传图片-end->
+
+

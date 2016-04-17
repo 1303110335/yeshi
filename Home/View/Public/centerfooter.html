@@ -1,0 +1,114 @@
+
+
+<section class="members_bottom">
+    <section style="height:48px;">All Right Reserved ©2015 赫德墙布 版权所有<!--<br>技术支持：吾诺瀚卓--> <a
+            href="http://www.miitbeian.gov.cn" style="color: #b3b3b3;"></a></section>
+</section>
+</div>
+<div class="nav">
+    <section class="inner">
+        <section class="nav-lists clearfix hasmenu0">
+            <dl class="nav-item j-showNavSub wid3 style0 fl">
+                <dt><a href="{:U('Index/index')}">店铺主页</a></dt>
+            </dl>
+            <dl class="nav-item j-showNavSub wid3 style0 fl">
+                <dt><a href="{:U('Member/main')}">会员主页</a></dt>
+            </dl>
+            <dl class="nav-item j-showNavSub wid3 style0 fl">
+                <dt><a href="{:U('Goods/search')}">所有商品</a></dt>
+            </dl>
+        </section>
+
+    </section>
+</div>
+<div id="mmexport"><img src="__IMAGES__/mmexport.png" width="100%" alt=""></div>
+
+<!--关注-->
+<!-- 悬浮按钮 -->
+<script src="__JS__/lib-min.js"></script>
+<script src="__JS__/main.js"></script>
+<!--<script src="__JS__/dist/cbb_jssdk.js"></script>-->
+<script src="__JS__/jweixin-1.0.0.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.J-sign').one("click", function () {
+            var oBtn = $(this);
+            oBtn.addClass('getvisited');
+            //签到
+            $.ajax({
+                url: "/Activity/checkin",
+                type: "post",
+                dataType: "json",
+                data: {
+                    "ischeckin": 1,
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        oBtn.find('.J-point').text("已签到");
+                        var points = parseInt($('.points').text()) + data.points;
+                        $('.points').text(points);
+                        $('.add_one').text('+' + data.points);
+                        oBtn.find('i').fadeIn(500).delay(500).fadeOut(500);
+                    } else {
+                        $.Error(data.msg)
+                    }
+                }
+            });
+
+
+        });
+    })
+    $(document).on('click', '.myif_er', function (event) {
+        var popcon = '<div class="popbg"></div><div class="popcon">' +
+                '<img src="/Uploads/Picture/QRcode/shop/{$Think.session.member_id}.png" width="100%"/>' +
+                '</div>';
+        if ($('.popcon').length == 1) {
+            $('.popcon').show();
+            $('.popbg').show();
+        } else {
+            $('body').append(popcon);
+        }
+    });
+    //点击阴影部分，隐藏弹窗
+    $(document).on('click', '.popcon,.popbg', function () {
+        $('.popcon').hide();
+        $('.popbg').hide();
+    });
+
+    // 普通会员与分销商之间的Tab切换
+    // $('.mainTab>ul>li').click(function(event) {
+    //     var me = $(this),
+    //         oparent = me.closest('.mainTab'),
+    //         index = me.index();
+    //     me.addClass('cur').siblings('li').removeClass('cur');
+    //     oparent.siblings('.mainlist').eq(index).show().siblings('.mainlist').hide();
+    //     $('.headerModule').eq(index).show().siblings('.headerModule').hide();
+    //     $('.mainicon').eq(index).show().siblings('.mainicon').hide();
+    // });
+
+//    window.onload = function () {
+//
+//        a();
+//        function a() {
+//            var oheader = document.getElementById('header');
+//            var width = oheader.offsetWidth;
+//            var height = width * 236 / 640;
+//            oheader.style.height = height + 'px';
+//        }
+//
+//        window.onresize = function () {
+//            a();
+//        }
+//
+//    }
+
+</script>
+
+
+<!--在线客服 -->
+
+
+</body>
+</html>

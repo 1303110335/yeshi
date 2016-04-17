@@ -1,0 +1,691 @@
+<include file="Public:head"/>
+
+<!-- end header -->
+<style>
+    .wxtables td .btn {padding: 0px 6px;}
+    #J_wx_fans{ vertical-align:-2px; margin-top:5px;}
+    .select.mini.new{ width:140px;}
+    input.mini.Wdate{ width:100px;}
+</style>
+
+<div class="container">
+<div class="inner clearfix">
+<div class="content-left fl">
+    <dl class="left-menu shop_8 sub_membership">
+            <dt>
+                <i class="icon-menu membership"></i>
+                <span id="shop_8" data-id="8">会员管理</span>
+            </dt>
+            <dd class="subshop_0 active">
+                    <a href="{:U('/Admin/User/index')}">会员列表</a>
+                                    </dd>
+<!--                    <dd class="subshop_12 ">-->
+<!--                    <a href="/User/rank">会员等级</a>-->
+<!--                                    </dd><dd class="subshop_17 ">-->
+<!--                    <a href="/User/privilege">会员权益</a>-->
+<!--                                    </dd><dd class="subshop_18 ">-->
+<!--                    <a href="/User/export">会员导出</a>-->
+<!--                                    </dd><dd class="subshop_19 ">-->
+<!--                    <a href="/User/letter">站内信</a>-->
+<!--                                    </dd><dd class="subshop_25 ">-->
+<!--                    <a href="/User/group_list">会员分组</a>-->
+<!--                                    </dd><dd class="subshop_33 ">-->
+<!--                    <a href="/User/user_import">备份会员导入</a>-->
+<!--                                    </dd>      -->
+    </dl></div>
+<!-- end content-left -->
+
+<div class="content-right fl">
+ 
+
+    <h1 class="content-right-title">会员列表</h1>
+    
+    
+    <div class="alert alert-info disable-del">目前拥有 <span style="font-size:16px;">2</span> 名会员。<a href="javascript:;" class="alert-delete" title="隐藏"><i class="gicon-remove"></i></a></div>
+    <!--<a href="/User/user_export" class="btn btn-warning">会员导出</a>-->
+    <div class="tablesWrap">
+        <form action="" method="get" name="form1">
+	    <div class="tables-searchbox">
+            <div>
+                <input type="text" class="input" name="name" value="" placeholder="姓名/ID">
+                <input type="text" class="input" name="mobile" value="" placeholder="昵称/手机">
+                <select name="user_group_id" class="select mini new">
+                    <option value="-1" selected="">所有分组</option>
+                    <option value="0">未分组</option>
+                                    </select>
+                <select name="is_user_del" class="select mini new">
+                    <option value="0" selected="">正常会员</option>
+                    <option value="1">已删除会员
+                    </option>
+                </select>
+                <input type="text" autocomplete="off" name="start_time" value="" placeholder="注册时间" class="input mini Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd&#39;})">
+                <span class="mgr5">至</span>
+                <input type="text" autocomplete="off" name="end_time" value="" placeholder="注册时间" class="input mini Wdate" onclick="WdatePicker({ dateFmt:&#39;yyyy-MM-dd&#39;})">
+            </div>
+	        <div>
+                <select name="province" class="select mini new">
+                    <option value="0" selected="">所有省份</option>
+                    <option value="110000">北京市</option><option value="120000">天津市</option><option value="130000">河北省</option><option value="140000">山西省</option><option value="150000">内蒙古自治区</option><option value="210000">辽宁省</option><option value="220000">吉林省</option><option value="230000">黑龙江省</option><option value="310000">上海市</option><option value="320000">江苏省</option><option value="330000">浙江省</option><option value="340000">安徽省</option><option value="350000">福建省</option><option value="360000">江西省</option><option value="370000">山东省</option><option value="410000">河南省</option><option value="420000">湖北省</option><option value="430000">湖南省</option><option value="440000">广东省</option><option value="450000">广西壮族自治区</option><option value="460000">海南省</option><option value="500000">重庆市</option><option value="510000">四川省</option><option value="520000">贵州省</option><option value="530000">云南省</option><option value="540000">西藏自治区</option><option value="610000">陕西省</option><option value="620000">甘肃省</option><option value="630000">青海省</option><option value="640000">宁夏回族自治区</option><option value="650000">新疆维吾尔自治区</option><option value="710000">台湾</option><option value="810000">香港特别行政区</option><option value="820000">澳门特别行政区</option><option value="990000">海外</option>                </select>
+                <select name="order" class="select mini new">
+                    <option value="-1">选择排序</option>
+                    <option value="2">总积分排序</option>
+                    <option value="1">总消费金额排序</option>
+                    
+                </select>
+                <button class="btn btn-primary" style="vertical-align:-2px;"><i class="gicon-search white"></i>查询</button>
+                <a href="javascript:;" class="btn btn-warning" id="J_wx_fans">同步微信粉丝</a>
+            </div>
+            
+	    </div>
+        </form>
+	    <!-- end tables-searchbox -->
+	    <table class="wxtables">  
+            <colgroup>  
+                <col width="1%">
+                <col width="10%">
+                <col width="8%">
+                <col width="8%">
+                <col width="9%">
+                <col width="10%">
+                <col width="10%">
+                <col width="40%">
+            </colgroup>  
+            <thead>  
+                <tr>  
+                	<td><i class="icon_check"></i></td>
+                    <td>微信头像</td>
+                    <td>昵称/手机</td>
+                    <td>会员等级</td>  
+                    <td>统计</td>
+                    <td>上级</td>
+                    <td>注册时间</td>
+                    <td>操作</td>
+                </tr>  
+            </thead>
+            <tbody>
+                                <tr>  
+                	<td>
+                		<input type="checkbox" class="checkbox table-ckbs" data-id="3646068" data-name="">
+                	</td>  
+                    <td>
+                     <img src="" alt="" width="50" height="50">
+                    </td>
+                    <td>
+                        <p></p>
+                        <p> 15257183714</p>
+                    </td>
+                    <td>店铺客户</td>
+                    <td>
+                       <p>消费: ¥0</p>
+                        <p>余额:¥0.00</p>
+                        <p>积分: 0</p>
+                    </td>
+                    <!--td>0</td>
+                    <td>0</td-->
+                    <!-- <td class="blod ftsize20">0</td> -->
+                    <td>
+                                                                        </td>
+                    <td>2015-08-07</td>
+                    <td> 
+                    	<p>
+                            						 <a href="/User/detail/id/3646068" target="_blank" class="btn">详情</a>
+                                                     <a href="javascript:;" data-id="3646068" data-name="" data-mobile="15257183714" data-email="" data-remark="" class="btn j-edit">编辑</a>
+                         <a href="javascript:;" class="btn j-del" data-id="3646068">删除</a>
+						                        <a href="javascript:;" class="btn btn-success">已是分销商</a>                        <a href="javascript:;" class="btn j-sendLetter" data-id="3646068">发送站内信</a>
+						<br>
+
+						
+						<a href="javascript:;" class="btn j-setLevel" data-id="3646068" data-rank="2048748" data-name="">设等级</a>
+                        <a href="javascript:;" class="btn j-gavePoint" data-user_id="3646068" data-id="3646068" data-name="" data-point="0">调整积分</a>
+                           
+                        <a href="/User/set_superior/id/3646068" class="btn">设置上级</a>
+                                <a href="/User/exportAllLower/id/3646068" class="btn">导出全部下级</a>
+                        <a href="javascript:;" class="btn j-balance" data-id="3646068" data-name="" data-balance="0.00">调整余额</a>
+                                                        <a href="javascript:;" class="btn j-redPack" data-user_id="3646068" data-name="">发红包</a>                        </p>
+                    </td>  
+                </tr><tr>  
+                	<td>
+                		<input type="checkbox" class="checkbox table-ckbs" data-id="3602870" data-name="温">
+                	</td>  
+                    <td>
+                     <img src="" alt="" width="50" height="50">
+                    </td>
+                    <td>
+                        <p></p>
+                        <p> 13336096376</p>
+                    </td>
+                    <td>店铺客户</td>
+                    <td>
+                       <p>消费: ¥0</p>
+                        <p>余额:¥0.00</p>
+                        <p>积分: 0</p>
+                    </td>
+                    <!--td>0</td>
+                    <td>0</td-->
+                    <!-- <td class="blod ftsize20">0</td> -->
+                    <td>
+                                                                        </td>
+                    <td>2015-08-05</td>
+                    <td> 
+                    	<p>
+                            						 <a href="/User/detail/id/3602870" target="_blank" class="btn">详情</a>
+                                                     <a href="javascript:;" data-id="3602870" data-name="温" data-mobile="13336096376" data-email="" data-remark="" class="btn j-edit">编辑</a>
+                         <a href="javascript:;" class="btn j-del" data-id="3602870">删除</a>
+						                        <a href="javascript:;" class="btn btn-success">已是分销商</a>                        <a href="javascript:;" class="btn j-sendLetter" data-id="3602870">发送站内信</a>
+						<br>
+
+						
+						<a href="javascript:;" class="btn j-setLevel" data-id="3602870" data-rank="2048748" data-name="">设等级</a>
+                        <a href="javascript:;" class="btn j-gavePoint" data-user_id="3602870" data-id="3602870" data-name="" data-point="0">调整积分</a>
+                           
+                        <a href="/User/set_superior/id/3602870" class="btn">设置上级</a>
+                                <a href="/User/exportAllLower/id/3602870" class="btn">导出全部下级</a>
+                        <a href="javascript:;" class="btn j-balance" data-id="3602870" data-name="" data-balance="0.00">调整余额</a>
+                                                        <a href="javascript:;" class="btn j-redPack" data-user_id="3602870" data-name="">发红包</a>                        </p>
+                    </td>  
+                </tr>            </tbody>
+        </table>
+	    <!-- end wxtables -->
+        <div class="tables-btmctrl clearfix">
+	    	<div class="fl">
+                <a href="javascript:;" class="btn btn-primary btn_table_selectAll">全选</a>
+	            <a href="javascript:;" class="btn btn-primary btn_table_Cancle">取消</a>
+                <a href="javascript:;" class="btn btn-warning j-setUsersLevel">设置等级</a>
+    	            <a href="javascript:;" class="btn btn-warning j-setAgent">设置分销商</a>
+                    <a href="javascript:;" class="btn btn-warning j-setGroup" data-type="0">设置分组</a>
+                    <a href="javascript:;" class="btn btn-warning j-setSuperior">设置上级</a>
+                    <a href="javascript:;" class="btn btn-warning j-setPwd">设置密码</a>
+                                    	        </div>
+	        <div class="fr">
+	            <div class="paginate">
+                    	            </div>
+	            <!-- end paginate -->
+	        </div>
+	    </div>	    <!-- end tables-btmctrl -->
+	</div>
+	<!-- end tablesWrap -->
+
+</div>
+<!-- end content-right -->
+</div>
+</div>
+<!-- end container -->
+
+<!--gonggao-->
+<div class="footer">© 2016 叶氏兄弟微信商城 , Inc. All rights reserved.</div>
+<!-- end footer -->
+    <div class="fixedBar" style="left: 1321px; height: 24px; top: 76px; margin-top: 0px;">
+        <ul>
+            <li class="shopManager8 cur"><a href="javascript:;" data-target="#shop_8">会员管理</a></li>        </ul>
+    </div><a href="/User/lists#" id="j-gotop" class="gotop" title="回到顶部" style="left: 1322.5px;"></a>
+<!-- end gotop -->
+
+<script type="text/j-template" id="tpl_tooltips">
+	<div class="tooltips" style="display:none;">
+	    <span class="tooltips-arrow tooltips-arrow-<%= placement %>"><em>◆</em><i>◆</i></span>
+	    <%= content %>
+	</div>
+</script>
+<!-- end tooltips -->
+
+<script type="text/j-template" id="tpl_hint">
+	<div class="hint hint-<%= type %>"><%= content %></div>
+</script>
+<!-- end hint -->
+
+<script type="text/j-template" id="tpl_jbox_simple">
+	<div class="mgt30"><%= content %></div>
+</script>
+<!-- end tpl_jbox_simple -->
+
+<script type="text/j-template" id="tpl_qrcode">
+	<div id="qrcode">
+		<img src="<%= src %>">
+		<a href="javascript:;" class="qrcode-btn j-closeQrcode"><i class="gicon-remove white"></i></a>
+	</div>
+</script>
+<!-- end qrcode -->
+
+<script type="text/j-template" id="tpl_verify_set">
+	
+	<div class="tabs clearfix mgt15" id="verify-set-tabs">    
+	    <a href="javascript:;" class="tabs_a fl active">店铺信息设置</a>
+	    <a href="javascript:;" class="tabs_a fl">微信设置</a>
+	    <a href="javascript:;" class="tabs_a fl">提成设置</a>
+	</div>  
+	<form action="" method="post" id='form-set'>
+
+		<!-- 店铺信息 -->
+		<div class="panel-single panel-single-light mgt20 verify-set-div ">
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>店铺名称：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="title" value="chandler">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>联系人：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="contact_name" value="qjw">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>联系电话：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="contact_phone" value="15267142067">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name">店铺简介：</label>
+				<div class="form-controls">
+					<textarea class="textarea" name="description"></textarea>
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+		</div>
+		<!-- 微信 -->
+		<div class="panel-single panel-single-light mgt20 verify-set-div hide">
+			<div class="alert alert-info">开通微信营销需要绑定微信公众帐号，不知道怎么绑定请参考 <a href="/PubMarketing/setting_guide" target="_blank" class="a_hover">开通指引</a></div>
+
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>名称：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="pub_name" value="">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>原始ID：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="source_id" value="">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>微信号：</label>
+				<div class="form-controls">
+					<input type="text" class="input" name="pub_account" value="">
+					<span class="fi-help-text"></span>
+				</div>
+			</div>
+			<div class="formitems" style="margin-top:30px;">  
+				<label class="fi-name">回调URL：</label>
+				<div class="form-controls pdt5">
+					<div class="fl" style="width:355px;">/Wxapi/index.html?id=2009442</div>
+					<a href="javascript:;" class="btn btn-small j-copy" data-copy="/Wxapi/index.html?id=2009442">复制</a>
+				</div>
+			</div>
+			<div class="formitems">  
+				<label class="fi-name">Token：</label>
+				<div class="form-controls pdt5">
+					<div class="fl" style="width:355px;">bcf0c7f9a680eb0b30dc94ac99dc6fc7</div>
+					<a href="javascript:;" class="btn btn-small j-copy" data-copy="bcf0c7f9a680eb0b30dc94ac99dc6fc7">复制</a>
+				</div>
+			</div>
+			<div class="formitems mgt5">  
+				<label class="fi-name"><span class="colorRed">*</span>AppId：</label>
+				<div class="form-controls">
+					<input type="text" class="input xlarge" value="" name="app_id" >
+					<span class="fi-help-text"><a href="https://mp.weixin.qq.com/" target="_blank">点击获取</a>(开发者中心)</span>
+				</div>
+			</div>
+
+			<div class="formitems">  
+				<label class="fi-name"><span class="colorRed">*</span>Secret：</label>
+				<div class="form-controls">
+					<input type="text" class="input xlarge" name="app_secret" value="">
+					<span class="fi-help-text"><a href="https://mp.weixin.qq.com/" target="_blank">点击获取</a>(开发者中心)</span>
+				</div>
+			</div>
+
+		</div>
+		<!-- 提成 -->
+		<div class="panel-single panel-single-light mgt20 verify-set-div hide">
+			<div class="formitems">  
+				<label class="fi-name" style="width: 121px;"><span class="colorRed">*</span>直属上级提成比例：</label>
+				<div class="form-controls">
+					<input type="text" class="input mini j-pid" name="directly_online_ratio" value="0">
+					<span class="fi-help-text">购买者直属上级会员的提成比例</span>
+				</div>
+			</div>
+
+			<div class="formitems">  
+				<label class="fi-name" style="width: 121px;"><span class="colorRed">*</span>上级会员提成比例：</label>
+				<div class="form-controls">
+					<input type="text" class="input mini j-pid" name="superior_online_ratio" value="0">
+					<span class="fi-help-text">购买者直属上级会员的上级会员提成比例</span>
+				</div>
+			</div>
+
+            <div class="formitems">
+                <label class="fi-name" style="width: 121px;"><span class="colorRed">*</span>上级的上级会员提成比例：</label>
+                <div class="form-controls">
+                    <input type="text" class="input mini j-pid" name="three_online_ratio" value="0">
+                    <span class="fi-help-text">购买者直属上级会员上级的上级提成比例</span>
+                </div>
+            </div>
+
+		</div>
+
+		<div class="panel-single panel-single-light mgt20 txtCenter">
+		    <a href="javascript:;" class="btn" id='verify-set-prev'>上一步</a>
+		    <a href="javascript:;" class="btn btn-primary" id='verify-set-next'>下一步</a>
+		    <a href="javascript:;" class="btn btn-primary hide" id='verify-set-save'>保存</a>
+		</div>
+	</form>
+</script>
+
+
+
+<script type="text/j-template" id="tpl_user_lists_setlevel">
+<div>
+	<div class="formitems inline">  
+		<label class="fi-name">会员昵称：</label>
+		<div class="form-controls pdt3"><%= name %></div>
+	</div>
+	<div class="formitems inline">
+		<label class="fi-name">会员等级：</label> 
+		<div class="form-controls">
+			<select name="rank" class="select">
+                <option value="2048748" <% if(rank==2048748){ %>selected<% } %> >
+                    店铺客户                </option><option value="2048749" <% if(rank==2048749){ %>selected<% } %> >
+                    普通会员                </option><option value="2048750" <% if(rank==2048750){ %>selected<% } %> >
+                    高级会员                </option><option value="2048751" <% if(rank==2048751){ %>selected<% } %> >
+                    VIP会员                </option><option value="2048752" <% if(rank==2048752){ %>selected<% } %> >
+                    至尊VIP会员                </option>			</select>
+		</div> 
+	</div>
+</div>
+</script>
+<!-- end tpl_user_lists_setlevel -->
+<script type="text/j-template" id="tpl_user_lists_alllevel">
+        <div>
+            <div class="formitems inline">
+                <label class="fi-name">会员等级：</label>
+                <div class="form-controls">
+                    <select name="rank" class="select">
+                        <option value="2048748" <% if(rank==2048748){ %>selected<% } %> >
+                            店铺客户                            </option><option value="2048749" <% if(rank==2048749){ %>selected<% } %> >
+                            普通会员                            </option><option value="2048750" <% if(rank==2048750){ %>selected<% } %> >
+                            高级会员                            </option><option value="2048751" <% if(rank==2048751){ %>selected<% } %> >
+                            VIP会员                            </option><option value="2048752" <% if(rank==2048752){ %>selected<% } %> >
+                            至尊VIP会员                            </option>                    </select>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- end tpl_user_lists_setlevel -->
+<script type="text/j-template" id="tpl_user_lists_gavePoint">
+<div>
+	<div class="formitems inline">  
+		<label class="fi-name">会员姓名：</label>
+		<div class="form-controls pdt3"><%= name %></div>
+	</div>
+    <div class="formitems inline">
+        <label class="fi-name">当前积分：</label>
+        <div class="form-controls pdt3"><%= now_point %></div>
+    </div>
+    <div class="formitems inline">
+        <label class="fi-name"><span class="colorRed">*</span>增加或减少积分：</label>
+        <div class="form-controls">
+            <input type="text" name="point" class="input mini">
+            <span>分</span>
+            <span class="fi-help-text"></span>
+        </div>
+    </div>
+	<div class="formitems inline">
+		<label class="fi-name">备注：</label>
+		<div class="form-controls">
+			<textarea name="remark" class="textarea" style="width:270px;height:120px;"></textarea>
+		</div>
+	</div>
+</div>
+</script>
+<!-- end tpl_user_lists_gavePoint -->
+
+<script type="text/j-template" id="tpl_user_detail_modify">
+    <div>
+        <div class="formitems">  
+            <label class="fi-name">买家姓名：</label>
+            <div class="form-controls">
+                <input type="text" name="name" class="input mini" value="<%= name %>">
+            </div>
+        </div>
+        <div class="formitems">  
+            <label class="fi-name">手机号：</label>
+            <div class="form-controls">
+                <input type="text" name="mobile" class="input mini" value="<%= mobile %>">
+            </div>
+        </div>
+        <div class="formitems">
+            <label class="fi-name">密码：</label>
+            <div class="form-controls">
+                <input type="password" name="password" class="input mini">
+            </div>
+        </div>
+        <div class="formitems">
+            <label class="fi-name">邮箱：</label>
+            <div class="form-controls">
+                <input type="text" name="email" class="input" value="<%= email %>">
+            </div>
+        </div>
+        <div class="formitems">
+            <label class="fi-name">备注：</label>
+            <div class="form-controls">
+                <input type="text" name="user_remark" class="input" value="<%= user_remark %>">
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/j-template" id="tpl_user_set_agent">
+    <div>
+        <div class="formitems">  
+            确定设为分销商？
+        </div>
+    </div>
+</script>
+<!-- end tpl_user_rank_modify -->
+
+<script type="text/j-template" id="tpl_user_lists_balance">
+        <div>
+            <div class="formitems inline">
+                <label class="fi-name">会员姓名：</label>
+                <div class="form-controls pdt3"><%= name %></div>
+            </div>
+            <div class="formitems inline">
+                <label class="fi-name">当前余额：</label>
+                <div class="form-controls pdt3"><%= balance %></div>
+            </div>
+            <div class="formitems inline">
+                <label class="fi-name"><span class="colorRed">*</span>增加或减少余额：</label>
+                <div class="form-controls">
+                    <input type="text" name="payment" class="input mini">
+                    <span class="fi-help-text"></span>
+                </div>
+            </div>
+            <div class="formitems inline">
+                <label class="fi-name">备注：</label>
+                <div class="form-controls">
+                    <textarea name="balance_remark" class="textarea" style="width:270px;height:120px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </script>
+
+<script type="text/j-template" id="tpl_user_lists_ump">
+        <div>
+            <div class="formitems inline">
+                <label class="fi-name">会员等级：</label>
+                <div class="form-controls">
+                    <select name="rank_id" class="select">
+                        <option value="0">请选择</option>
+                        <option value="2048748">
+                            店铺客户                            </option><option value="2048749">
+                            普通会员                            </option><option value="2048750">
+                            高级会员                            </option><option value="2048751">
+                            VIP会员                            </option><option value="2048752">
+                            至尊VIP会员                            </option>                    </select>
+                    <span class="fi-help-text">选择会员等级时会按会员等级发放，不选按选中会员发放</span>
+                </div>
+            </div>
+            <div class="formitems inline">
+                <label class="fi-name">选择优惠券：</label>
+                <div class="form-controls">
+                    <select name="coupon_id" class="select">
+                                            </select>
+                </div>
+
+            </div>
+        </div>
+    </script>
+
+<script type="text/j-template" id="tpl_user_lists_group">
+    <div>
+        <div class="formitems inline">
+            <label class="fi-name">分组选择：</label>
+            <div class="form-controls">
+                <select name="user_group_id" class="select">
+                                    </select>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/j-template" id="tpl_user_lists_pwd">
+    <div>
+        <div class="formitems inline">
+            <label class="fi-name">密码：</label>
+            <div class="form-controls pdt3"><input name="password" class="input"></div>
+        </div>
+    </div>
+</script>
+    <!-- end tpl_user_lists_setlevel -->
+<script type="text/j-template" id="tpl_user_send_letter">
+    <div>
+        <div class="formitems">
+            <label class="fi-name">发送内容：</label>
+            <div class="form-controls">
+                <textarea name="content" id="" class="textarea small"></textarea>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/j-template" id="tpl_user_reborn_user">
+    <div>
+        <div class="formitems">  
+            确定批量恢复已删除会员？
+        </div>
+    </div>
+</script>
+
+    <script type="text/j-template" id="tpl_user_lists_redPack">
+        <div>
+            <div class="formitems inline">
+                <label class="fi-name">会员昵称：</label>
+                <div class="form-controls pdt3"><%= name %></div>
+            </div>
+            <div class="formitems inline">
+                <label class="fi-name"><span class="colorRed">*</span>红包金额：</label>
+                <div class="form-controls">
+                    <input type="text" name="total_amount" class="input mini">
+                    <span>元</span>
+                    <span class="fi-help-text">红包金额介于[1.00元，200.00元]之间</span>
+                </div>
+            </div>
+            <div class="formitems inline">
+                <label class="fi-name"><span class="colorRed">*</span>祝福语：</label>
+                <div class="form-controls">
+                    <input name="wishing" class="input large">
+                    <span class="fi-help-text"></span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- end tpl_user_lists_redPack -->
+
+<!--end front template  -->
+
+<script src="./user_files/lib-min.js"></script>
+<script src="./user_files/jquery.jbox-min.js"></script>
+<script src="./user_files/jquery.zclip-min.js"></script>
+<!-- 线上环境 -->
+    <script src="./user_files/component-min.js"></script>
+    <script src="./user_files/scroll.js"></script>
+<!--[if lt IE 10]>
+<script src="/Public/js/jquery/jquery.placeholder-min.js"></script>
+<script>
+    $(function(){
+        //修复IE下的placeholder
+        $('.input,.textarea').placeholder();
+    });
+</script>
+<![endif]-->
+
+
+<script src="./user_files/WdatePicker.js"></script>
+<script src="./user_files/lists.js"></script>
+
+
+<script>
+    $(function(){
+                                $(".j-copy").zclip({
+            path: '/Public/plugins/zclip/ZeroClipboard.swf',
+            copy: function(){
+                return $(this).data('copy');
+            },
+            afterCopy:function(){
+                HYD.hint("success","内容已成功复制到您的剪贴板中");
+            }
+        });
+        $(".btn-notice").click(function(){
+            // $.post('/System/readAllNotice',{},function(){
+            //     window.location.reload();
+            // })
+            $.ajax({
+                url: '/System/readAllNotice',
+                type: 'POST',
+                success:function(data){
+                    if(data.status == 1){
+                        window.location.reload();
+                    }else{
+                         HYD.hint("danger",data.msg);
+                    }
+                    
+                }
+            })
+        });
+        
+        
+        ;(function(){
+            // 首页竖线到底
+            var height1=$(".content-right").height();
+            var height2=$(".content-left").height();
+            if(parseInt(height1) < parseInt(height2)){
+                $(".content-right").css({'min-height': height2});
+            };
+            
+                    })();
+       
+    });
+</script>
+<!-- end session hint -->
+<script>
+	$(function () {
+		setTimeout(gggoup(),5000);
+		$('.gound_close').click(function(){
+			$('#gonggao').animate({bottom:"-270px"},1000);
+		});
+	});
+	function gggoup(){
+		$('#gonggao').animate({bottom:"3px"},1000);
+	};
+</script>
+
+
+</body></html>

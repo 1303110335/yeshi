@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+    <title>微信安全支付</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+	<script type="text/javascript">
+     
+		//调用微信JS api 支付
+		function jsApiCall()
+		{
+			WeixinJSBridge.invoke(
+				'getBrandWCPayRequest',
+				<?php echo $jsApiParameters; ?>,
+				function(res){
+					//WeixinJSBridge.log(res.err_msg);
+					//alert(res.err_msg);
+//					alert(res.err_code+res.err_desc+res.err_msg);
+                   // window.location.href="http://www.hedeqb.com";
+				    var type = <?php echo $type;?>;
+					//alert(type)
+                    if(res.err_msg=="get_brand_wcpay_request:ok"){
+                        //alert(res.err_code+res.err_desc+res.err_msg);
+                        if(type==1){
+							alert('支付成功');
+						}else{
+							alert('充值成功');
+						}
+						location.href="{:U('Home/Order/notify_url',array('type'=>$type,'id'=>$id,'gid'=>$gid,'gchongzhi'=>$gchongzhi))}";	
+                        //window.location.href="http://www.hedeqb.com";
+                    }else{
+                    	var ct = <?php echo $ct;?>;
+                        //返回跳转到订单详情页面
+						//alert(res.err_msg);
+                        if(type==1){
+							alert('取消支付');
+							if(ct==1){
+								location.href="{:U('Home/Order/delectCanTuan',array('id'=>$id))}";
+							}else{
+								location.href="{:U('Home/Member/orderlist')}";
+							}
+						}else{
+							alert('取消充值');
+							location.href="{:U('Home/Cash/chong')}";
+						}
+                    }
+				}
+			);
+		}
+        window.onload=callpay();
+		function callpay()
+		{
+            
+			if (typeof WeixinJSBridge == "undefined"){
+				//alert(1);
+			    if( document.addEventListener ){
+			        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+			    }else if (document.attachEvent){
+			        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+			        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+			    }
+			}else{
+//                alert(2);
+			    jsApiCall();
+			}
+		}
+	</script>
+    
+    
+    
+</head>
+<body>
+</body>
+</html>

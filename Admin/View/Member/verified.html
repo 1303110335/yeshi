@@ -1,0 +1,142 @@
+<include file="Public:head"/>
+
+<!-- end header -->
+<style>
+    .wxtables td .btn {
+        padding: 0px 6px;
+    }
+
+    #J_wx_fans {
+        vertical-align: -2px;
+        margin-top: 5px;
+    }
+
+    .select.mini.new {
+        width: 140px;
+    }
+
+    input.mini.Wdate {
+        width: 100px;
+    }
+</style>
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<div class="container">
+    <div class="inner clearfix">
+        <div class="content-left fl">
+            <dl class="left-menu shop_8 sub_membership">
+                <dt>
+                    <i class="icon-menu membership"></i>
+                    <span id="shop_8" data-id="8">会员管理</span>
+                </dt>
+                <dd class="subshop_0">
+                    <a href="{:U('/Admin/Member/index')}">会员列表</a>
+                </dd>
+                <dd class="subshop_0 active">
+                    <a href="{:U('/Admin/Member/verified')}">会员实名认证</a>
+                </dd>
+            </dl>
+        </div>
+        <!-- end content-left -->
+
+        <div class="content-right fl">
+
+
+            <h1 class="content-right-title">会员列表</h1>
+
+            <div class="tablesWrap">
+                    <div class="tables-searchbox">
+                        <div>
+                            <input type="text" class="input" name="title" id="title" value="" placeholder="手机">
+                            <button class="btn btn-primary" onclick="search_m()" style="vertical-align:-2px;"><i
+                                    class="gicon-search white"></i>查询
+                            </button>
+
+                        </div>
+                    </div>
+  
+                <!-- end tables-searchbox -->
+                <table class="wxtables">
+                    <colgroup>
+                        <col width="1%">
+                        <col width="2%">
+                        <col width="5%">
+                        <col width="5%">
+                        <col width="8%">
+                        <col width="5%">
+                        <col width="3%">
+                        <col width="3%">
+                        <col width="10%">
+                        <col width="40%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <td>头像</td>
+                        <td>昵称/手机</td>
+                        <td>姓名</td>
+                        <td>会员等级</td>
+                        <td>申请时间</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="memberlist" item="vo">
+                    <tr>
+                        <td>
+                            <if condition="($vo.touimg eq null) "><img src="__IMAGES__/yhtx.jpg" alt="" width="50" height="50"><else /><img src="__UPLOAD__/{$vo.touimg}" alt="" width="50" ></if>
+                        </td>
+                        <td>
+
+                            <p> {$vo.telephone}</p>
+                        </td>
+                        <td>
+                            <p>{$vo.truename}</p>
+                        </td>
+                        <td>
+                            <p> 
+                                <switch name="vo.dengji">
+                                    <case value="1">一级分销商</case>
+                                    <case value="2">二级分销商</case>
+                                    <case value="3">三级分销商</case>
+                                    <case value="4">四级分销商</case>
+                                    <case value="5">五级分销商</case>
+                                    <default/>普通会员
+                                </switch>
+                            </p>
+                        </td>
+                        <td>{$vo.addtime}</td>
+                        <td>
+                            <p>
+                                <a href="{:U('/Admin/Member/verifiedUser/id')}/{$vo.id}" class="btn btn-success">查看详情</a> <a href="javascript:;"
+                                                                                            <!--class="btn j-sendLetter"-->
+                                <br>
+                            </p>
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <!-- end wxtables -->
+                <div class="tables-btmctrl clearfix">
+                    
+                </div>
+                <!-- end tables-btmctrl -->
+            </div>
+            <!-- end tablesWrap -->
+
+        </div>
+        <!-- end content-right -->
+    </div>
+</div>
+<!-- end container -->
+<script>
+function search_m(){
+    var title=$('#title').val();
+    if(title != ''){
+        location.href="{:U('/Admin/Member/index')}/title/"+title;
+        }else{
+            location.href="{:U('/Admin/Member/index')}";
+            }
+    }
+</script>
+
+<include file="Public:foot"/>
